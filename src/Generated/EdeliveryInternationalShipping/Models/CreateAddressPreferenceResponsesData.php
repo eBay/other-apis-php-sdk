@@ -1,0 +1,93 @@
+<?php
+
+namespace EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * This type defines the unique identifier of a newly created address.
+*/
+class CreateAddressPreferenceResponsesData implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $addressId The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+    */
+    private ?string $addressId = null;
+    
+    /**
+     * Instantiates a new CreateAddressPreferenceResponsesData and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return CreateAddressPreferenceResponsesData
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): CreateAddressPreferenceResponsesData {
+        return new CreateAddressPreferenceResponsesData();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * Gets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+     * @return string|null
+    */
+    public function getAddressId(): ?string {
+        return $this->addressId;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'addressId' => fn(ParseNode $n) => $o->setAddressId($n->getStringValue()),
+        ];
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('addressId', $this->getAddressId());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+     * @param string|null $value Value to set for the addressId property.
+    */
+    public function setAddressId(?string $value): void {
+        $this->addressId = $value;
+    }
+
+}
