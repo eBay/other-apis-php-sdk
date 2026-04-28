@@ -1,9 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EBay\OtherApis\Configuration;
 
 final class OtherApisConfiguration
 {
+    public RequestOptions $defaultRequestOptions;
+
+    public function __construct()
+    {
+        $this->defaultRequestOptions = new RequestOptions();
+    }
+
     public string $identityBaseUrl                     = 'https://apiz.ebay.com';
     public string $translationBaseUrl                  = 'https://api.ebay.com';
     public string $veroBaseUrl                         = 'https://api.ebay.com';

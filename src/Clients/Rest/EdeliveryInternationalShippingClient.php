@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace EBay\OtherApis\Clients\Rest;
 
+use EBay\OtherApis\Configuration\OtherApisConfiguration;
+use EBay\OtherApis\Configuration\RequestOptions;
 use EBay\OtherApis\Configuration\TokenContext;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\EdeliveryInternationalShippingApiClient;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\AddComplaintRequest;
@@ -34,224 +38,428 @@ use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\GetLabelListR
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\GetPackageDetailResponses;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\GetServiceListResponses;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\GetTrackingDetailResponses;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Actual_costs\Actual_costsRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Address_preference\Address_preferenceRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Address_preference\Address_preferenceRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Agents\AgentsRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Battery_qualifications\Battery_qualificationsRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Bundle\BundleRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Bundle\Item\Cancel\CancelRequestBuilderPostRequestConfiguration as BundleCancelRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Bundle\Item\Label\LabelRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Bundle\Item\WithBundle_ItemRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Complaint\ComplaintRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Consign_preference\Consign_preferenceRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Consign_preference\Consign_preferenceRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Dropoff_sites\Dropoff_sitesRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Handover_sheet\Handover_sheetRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Labels\LabelsRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Bulk_cancel_packages\Bulk_cancel_packagesRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Bulk_confirm_packages\Bulk_confirm_packagesRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Bulk_delete_packages\Bulk_delete_packagesRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Cancel\CancelRequestBuilderPostRequestConfiguration as PackageCancelRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Confirm\ConfirmRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\EscapedClone\CloneRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Item_Escaped\Item_EscapedRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderDeleteRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\PackageRequestBuilderPostRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Services\ServicesRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Tracking\TrackingRequestBuilderGetRequestConfiguration;
 
 final class EdeliveryInternationalShippingClient
 {
-    public function __construct(private readonly EdeliveryInternationalShippingApiClient $kiota) {}
+    public function __construct(
+        private readonly EdeliveryInternationalShippingApiClient $kiota,
+        private readonly OtherApisConfiguration $config,
+    ) {}
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function bulkCancelPackages(CancelPackagesRequest $body, ?string $accessToken = null): ?CancelPackagesResponses
-    {
+    public function bulkCancelPackages(
+        CancelPackagesRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?CancelPackagesResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_cancel_packages()->post($body)->wait()
+            $this->kiota->package()->bulk_cancel_packages()->post(
+                $body,
+                new Bulk_cancel_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function bulkConfirmPackages(ConfirmPackagesRequest $body, ?string $accessToken = null): ?ConfirmPackagesResponses
-    {
+    public function bulkConfirmPackages(
+        ConfirmPackagesRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?ConfirmPackagesResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_confirm_packages()->post($body)->wait()
+            $this->kiota->package()->bulk_confirm_packages()->post(
+                $body,
+                new Bulk_confirm_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function bulkDeletePackages(DeletePackagesRequest $body, ?string $accessToken = null): ?DeletePackagesResponses
-    {
+    public function bulkDeletePackages(
+        DeletePackagesRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?DeletePackagesResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_delete_packages()->post($body)->wait()
+            $this->kiota->package()->bulk_delete_packages()->post(
+                $body,
+                new Bulk_delete_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function cancelBundle(string $bundleId, ?string $accessToken = null): void
-    {
+    public function cancelBundle(
+        string $bundleId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void {
+        $headers = $this->applyHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->cancel()->post()->wait()
+            $this->kiota->bundle()->byBundle_id($bundleId)->cancel()->post(
+                new BundleCancelRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function cancelPackage(string $orderLineItemId, ?string $accessToken = null): void
-    {
+    public function cancelPackage(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void {
+        $headers = $this->applyHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->cancel()->post()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->cancel()->post(
+                new PackageCancelRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function clonePackage(string $orderLineItemId, ?string $accessToken = null): ?ClonePackageResponses
-    {
+    public function clonePackage(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?ClonePackageResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->escapedClone()->post()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->escapedClone()->post(
+                new CloneRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function confirmPackage(string $orderLineItemId, ?string $accessToken = null): void
-    {
+    public function confirmPackage(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void {
+        $headers = $this->applyHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->confirm()->post()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->confirm()->post(
+                new ConfirmRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function createAddressPreference(CreateAddressPreferenceRequest $body, ?string $accessToken = null): ?CreateAddressPreferenceResponses
-    {
+    public function createAddressPreference(
+        CreateAddressPreferenceRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?CreateAddressPreferenceResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->address_preference()->post($body)->wait()
+            $this->kiota->address_preference()->post(
+                $body,
+                new Address_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function createBundle(CreateBundleRequest $body, ?string $accessToken = null): ?CreateBundleResponse
-    {
+    public function createBundle(
+        CreateBundleRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?CreateBundleResponse {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->post($body)->wait()
+            $this->kiota->bundle()->post(
+                $body,
+                new BundleRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function createComplaint(AddComplaintRequest $body, ?string $accessToken = null): void
-    {
+    public function createComplaint(
+        AddComplaintRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void {
+        $headers = $this->applyHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->complaint()->post($body)->wait()
+            $this->kiota->complaint()->post(
+                $body,
+                new ComplaintRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function createConsignPreference(CreateConsignPreferenceRequest $body, ?string $accessToken = null): ?CreateConsignPreferenceResponses
-    {
+    public function createConsignPreference(
+        CreateConsignPreferenceRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?CreateConsignPreferenceResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->consign_preference()->post($body)->wait()
+            $this->kiota->consign_preference()->post(
+                $body,
+                new Consign_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function createPackage(AddPackageRequest $body, ?string $accessToken = null): ?AddPackageResponses
-    {
+    public function createPackage(
+        AddPackageRequest $body,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?AddPackageResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->post($body)->wait()
+            $this->kiota->package()->post(
+                $body,
+                new PackageRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function deletePackage(string $orderLineItemId, ?string $accessToken = null): void
-    {
+    public function deletePackage(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): void {
+        $headers = $this->applyHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->delete()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->delete(
+                new Order_line_item_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getActualCosts(?string $accessToken = null): ?GetActualCostResponses
-    {
+    public function getActualCosts(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetActualCostResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->actual_costs()->get()->wait()
+            $this->kiota->actual_costs()->get(
+                new Actual_costsRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getAddressPreferences(?string $accessToken = null): ?GetAddressPreferenceListResponses
-    {
+    public function getAddressPreferences(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetAddressPreferenceListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->address_preference()->get()->wait()
+            $this->kiota->address_preference()->get(
+                new Address_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getAgents(?string $accessToken = null): ?GetAgentListResponses
-    {
+    public function getAgents(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetAgentListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->agents()->get()->wait()
+            $this->kiota->agents()->get(
+                new AgentsRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getBatteryQualifications(?string $accessToken = null): ?GetBatteryQualListResponses
-    {
+    public function getBatteryQualifications(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetBatteryQualListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->battery_qualifications()->get()->wait()
+            $this->kiota->battery_qualifications()->get(
+                new Battery_qualificationsRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getBundle(string $bundleId, ?string $accessToken = null): ?BundleDetailResponse
-    {
+    public function getBundle(
+        string $bundleId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BundleDetailResponse {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->get()->wait()
+            $this->kiota->bundle()->byBundle_id($bundleId)->get(
+                new WithBundle_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getBundleLabel(string $bundleId, ?string $accessToken = null): ?BundleLabelResponse
-    {
+    public function getBundleLabel(
+        string $bundleId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?BundleLabelResponse {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->label()->get()->wait()
+            $this->kiota->bundle()->byBundle_id($bundleId)->label()->get(
+                new LabelRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getConsignPreferences(?string $accessToken = null): ?GetConsignPreferenceListResponses
-    {
+    public function getConsignPreferences(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetConsignPreferenceListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->consign_preference()->get()->wait()
+            $this->kiota->consign_preference()->get(
+                new Consign_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getDropoffSites(?string $accessToken = null): ?GetDropoffSiteListResponses
-    {
+    public function getDropoffSites(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetDropoffSiteListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->dropoff_sites()->get()->wait()
+            $this->kiota->dropoff_sites()->get(
+                new Dropoff_sitesRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getHandoverSheet(?string $accessToken = null): ?GetHandoverSheetResponses
-    {
+    public function getHandoverSheet(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetHandoverSheetResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->handover_sheet()->get()->wait()
+            $this->kiota->handover_sheet()->get(
+                new Handover_sheetRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getLabels(?string $accessToken = null): ?GetLabelListResponses
-    {
+    public function getLabels(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetLabelListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->labels()->get()->wait()
+            $this->kiota->labels()->get(
+                new LabelsRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getPackage(string $orderLineItemId, ?string $accessToken = null): ?GetPackageDetailResponses
-    {
+    public function getPackage(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetPackageDetailResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->get()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->get(
+                new Order_line_item_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getPackagesByLineItemID(string $orderLineItemId, ?string $accessToken = null): ?GetItemPackageIdResponses
-    {
+    public function getPackagesByLineItemID(
+        string $orderLineItemId,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetItemPackageIdResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->item()->get()->wait()
+            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->item()->get(
+                new Item_EscapedRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getServices(?string $accessToken = null): ?GetServiceListResponses
-    {
+    public function getServices(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetServiceListResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->services()->get()->wait()
+            $this->kiota->services()->get(
+                new ServicesRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
-    public function getTracking(?string $accessToken = null): ?GetTrackingDetailResponses
-    {
+    public function getTracking(
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetTrackingDetailResponses {
+        $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->tracking()->get()->wait()
+            $this->kiota->tracking()->get(
+                new TrackingRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
         );
+    }
+
+    /** @return array<string,string> */
+    private function applyHeaders(?RequestOptions $requestOptions): array
+    {
+        $headers = $this->config->defaultRequestOptions->headers;
+        if ($requestOptions !== null) {
+            foreach ($requestOptions->headers as $key => $value) {
+                if (!array_key_exists($key, $headers)) {
+                    $headers[$key] = $value;
+                }
+            }
+        }
+        return $headers;
     }
 }
