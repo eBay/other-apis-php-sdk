@@ -1,0 +1,46 @@
+{
+  "rest": {
+    "sell_edelivery_international_shipping_oas3": [
+      "bulkCancelPackages",
+      "bulkConfirmPackages",
+      "bulkDeletePackages",
+      "cancelBundle",
+      "cancelPackage",
+      "clonePackage",
+      "confirmPackage",
+      "createAddressPreference",
+      "createBundle",
+      "createComplaint",
+      "createConsignPreference",
+      "createPackage",
+      "deletePackage",
+      "getActualCosts",
+      "getAddressPreferences",
+      "getAgents",
+      "getBatteryQualifications",
+      "getBundle",
+      "getBundleLabel",
+      "getConsignPreferences",
+      "getDropoffSites",
+      "getHandoverSheet",
+      "getLabels",
+      "getPackage",
+      "getPackagesByLineItemID",
+      "getServices",
+      "getTracking"
+    ],
+    "commerce_identity_v1_oas3": [
+      "getUser"
+    ],
+    "commerce_translation_v1_beta_oas3": [
+      "translate"
+    ],
+    "commerce_vero_v1_oas3": [
+      "createVeroReport",
+      "getVeroReasonCode",
+      "getVeroReasonCodes",
+      "getVeroReport",
+      "getVeroReportItems"
+    ]
+  }
+}
