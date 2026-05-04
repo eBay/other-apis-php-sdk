@@ -34,19 +34,19 @@ final class OtherApisClient
 
         $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
 
-        $identityAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $identityAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $identityAdapter->setBaseUrl($config->identityBaseUrl);
         $this->identity = new IdentityClient(new IdentityApiClient($identityAdapter), $config);
 
-        $translationAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $translationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $translationAdapter->setBaseUrl($config->translationBaseUrl);
         $this->translation = new TranslationClient(new TranslationApiClient($translationAdapter), $config);
 
-        $veroAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $veroAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $veroAdapter->setBaseUrl($config->veroBaseUrl);
         $this->vero = new VeroClient(new VeroApiClient($veroAdapter), $config);
 
-        $edisAdapter = new GuzzleRequestAdapter($auth, client: $guzzle);
+        $edisAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
         $edisAdapter->setBaseUrl($config->edeliveryInternationalShippingBaseUrl);
         $this->edeliveryInternationalShipping = new EdeliveryInternationalShippingClient(
             new EdeliveryInternationalShippingApiClient($edisAdapter),
