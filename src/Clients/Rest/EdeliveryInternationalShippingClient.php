@@ -265,13 +265,23 @@ final class EdeliveryInternationalShippingClient
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getActualCosts(
+        ?string $trackingNumbers = null,
+        ?string $transBeginTime = null,
+        ?string $transEndTime = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetActualCostResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->actual_costs()->get(
-                new Actual_costsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Actual_costsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Actual_costsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        tracking_numbers: $trackingNumbers,
+                        trans_begin_time: $transBeginTime,
+                        trans_end_time: $transEndTime,
+                    ),
+                )
             )->wait()
         );
     }
@@ -291,26 +301,42 @@ final class EdeliveryInternationalShippingClient
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getAgents(
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetAgentListResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->agents()->get(
-                new AgentsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new AgentsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: AgentsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getBatteryQualifications(
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetBatteryQualListResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->battery_qualifications()->get(
-                new Battery_qualificationsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Battery_qualificationsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Battery_qualificationsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
@@ -358,39 +384,63 @@ final class EdeliveryInternationalShippingClient
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getDropoffSites(
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetDropoffSiteListResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->dropoff_sites()->get(
-                new Dropoff_sitesRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Dropoff_sitesRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Dropoff_sitesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getHandoverSheet(
+        ?string $trackingNumbers = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetHandoverSheetResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->handover_sheet()->get(
-                new Handover_sheetRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Handover_sheetRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Handover_sheetRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        tracking_numbers: $trackingNumbers,
+                    ),
+                )
             )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getLabels(
+        ?string $trackingNumbers = null,
+        ?string $pageSize = null,
+        ?string $printPreference = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetLabelListResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->labels()->get(
-                new LabelsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new LabelsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: LabelsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        page_size: $pageSize,
+                        print_preference: $printPreference,
+                        tracking_numbers: $trackingNumbers,
+                    ),
+                )
             )->wait()
         );
     }
@@ -425,26 +475,40 @@ final class EdeliveryInternationalShippingClient
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getServices(
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetServiceListResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->services()->get(
-                new ServicesRequestBuilderGetRequestConfiguration(headers: $headers)
+                new ServicesRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: ServicesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
 
     /** @param string|null $accessToken Per-call token; overrides config fallback. */
     public function getTracking(
+        ?string $trackingNumber = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetTrackingDetailResponses {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->tracking()->get(
-                new TrackingRequestBuilderGetRequestConfiguration(headers: $headers)
+                new TrackingRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: TrackingRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        tracking_number: $trackingNumber,
+                    ),
+                )
             )->wait()
         );
     }

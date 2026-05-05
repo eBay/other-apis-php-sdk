@@ -92,13 +92,19 @@ final class VeroClient
      */
     public function getVeroReport(
         string $veroReportId,
+        ?string $includeItemDetails = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?ReportStatusResponse {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_report()->byVero_report_id($veroReportId)->get(
-                new WithVero_report_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new WithVero_report_ItemRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: WithVero_report_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        includeItemDetails: $includeItemDetails,
+                    ),
+                )
             )->wait()
         );
     }
@@ -110,13 +116,25 @@ final class VeroClient
      * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
      */
     public function getVeroReportItems(
+        ?string $filter = null,
+        ?string $itemId = null,
+        ?string $limit = null,
+        ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?VeroReportStatusResponse {
         $headers = $this->applyHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_report_items()->get(
-                new Vero_report_itemsRequestBuilderGetRequestConfiguration(headers: $headers)
+                new Vero_report_itemsRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: Vero_report_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        filter: $filter,
+                        itemId: $itemId,
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
