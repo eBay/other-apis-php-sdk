@@ -38,7 +38,7 @@ final class VeroClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?VeroReportItemsResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_report()->post(
                 $body,
@@ -58,7 +58,7 @@ final class VeroClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?VeroReasonCodeResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
                 new WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -76,7 +76,7 @@ final class VeroClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?VeroReasonCodeDetailResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_reason_code()->get(
                 new Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -96,7 +96,7 @@ final class VeroClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?ReportStatusResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_report()->byVero_report_id($veroReportId)->get(
                 new WithVero_report_ItemRequestBuilderGetRequestConfiguration(
@@ -123,7 +123,7 @@ final class VeroClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?VeroReportStatusResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->vero_report_items()->get(
                 new Vero_report_itemsRequestBuilderGetRequestConfiguration(
@@ -140,7 +140,7 @@ final class VeroClient
     }
 
     /** @return array<string,string> */
-    private function applyHeaders(?RequestOptions $requestOptions): array
+    private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         $headers = $this->config->defaultRequestOptions->headers;
         if ($requestOptions !== null) {

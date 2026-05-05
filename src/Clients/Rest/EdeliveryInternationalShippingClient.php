@@ -79,7 +79,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CancelPackagesResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->bulk_cancel_packages()->post(
                 $body,
@@ -94,7 +94,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?ConfirmPackagesResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->bulk_confirm_packages()->post(
                 $body,
@@ -109,7 +109,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?DeletePackagesResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->bulk_delete_packages()->post(
                 $body,
@@ -124,7 +124,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): void {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
             $this->kiota->bundle()->byBundle_id($bundleId)->cancel()->post(
                 new BundleCancelRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -138,7 +138,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): void {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->cancel()->post(
                 new PackageCancelRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -152,7 +152,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?ClonePackageResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->escapedClone()->post(
                 new CloneRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -166,7 +166,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): void {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->confirm()->post(
                 new ConfirmRequestBuilderPostRequestConfiguration(headers: $headers)
@@ -180,7 +180,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CreateAddressPreferenceResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->address_preference()->post(
                 $body,
@@ -195,7 +195,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CreateBundleResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->bundle()->post(
                 $body,
@@ -210,7 +210,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): void {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
             $this->kiota->complaint()->post(
                 $body,
@@ -225,7 +225,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?CreateConsignPreferenceResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->consign_preference()->post(
                 $body,
@@ -240,7 +240,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?AddPackageResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->post(
                 $body,
@@ -255,7 +255,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): void {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->delete(
                 new Order_line_item_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
@@ -271,7 +271,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetActualCostResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->actual_costs()->get(
                 new Actual_costsRequestBuilderGetRequestConfiguration(
@@ -291,7 +291,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetAddressPreferenceListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->address_preference()->get(
                 new Address_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -306,7 +306,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetAgentListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->agents()->get(
                 new AgentsRequestBuilderGetRequestConfiguration(
@@ -327,7 +327,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetBatteryQualListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->battery_qualifications()->get(
                 new Battery_qualificationsRequestBuilderGetRequestConfiguration(
@@ -347,7 +347,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?BundleDetailResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->bundle()->byBundle_id($bundleId)->get(
                 new WithBundle_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -361,7 +361,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?BundleLabelResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->bundle()->byBundle_id($bundleId)->label()->get(
                 new LabelRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -374,7 +374,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetConsignPreferenceListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->consign_preference()->get(
                 new Consign_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -389,7 +389,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetDropoffSiteListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->dropoff_sites()->get(
                 new Dropoff_sitesRequestBuilderGetRequestConfiguration(
@@ -409,7 +409,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetHandoverSheetResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->handover_sheet()->get(
                 new Handover_sheetRequestBuilderGetRequestConfiguration(
@@ -430,7 +430,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetLabelListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->labels()->get(
                 new LabelsRequestBuilderGetRequestConfiguration(
@@ -451,7 +451,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetPackageDetailResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->get(
                 new Order_line_item_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -465,7 +465,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetItemPackageIdResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->item()->get(
                 new Item_EscapedRequestBuilderGetRequestConfiguration(headers: $headers)
@@ -480,7 +480,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetServiceListResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->services()->get(
                 new ServicesRequestBuilderGetRequestConfiguration(
@@ -500,7 +500,7 @@ final class EdeliveryInternationalShippingClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?GetTrackingDetailResponses {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->tracking()->get(
                 new TrackingRequestBuilderGetRequestConfiguration(
@@ -514,7 +514,7 @@ final class EdeliveryInternationalShippingClient
     }
 
     /** @return array<string,string> */
-    private function applyHeaders(?RequestOptions $requestOptions): array
+    private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         $headers = $this->config->defaultRequestOptions->headers;
         if ($requestOptions !== null) {

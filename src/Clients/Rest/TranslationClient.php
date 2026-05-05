@@ -30,7 +30,7 @@ final class TranslationClient
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
     ): ?TranslateResponse {
-        $headers = $this->applyHeaders($requestOptions);
+        $headers = $this->mergedHeaders($requestOptions);
         return TokenContext::runWith($accessToken, fn() =>
             $this->kiota->translate()->post(
                 $body,
@@ -40,7 +40,7 @@ final class TranslationClient
     }
 
     /** @return array<string,string> */
-    private function applyHeaders(?RequestOptions $requestOptions): array
+    private function mergedHeaders(?RequestOptions $requestOptions): array
     {
         $headers = $this->config->defaultRequestOptions->headers;
         if ($requestOptions !== null) {
