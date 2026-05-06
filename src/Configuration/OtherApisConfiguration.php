@@ -13,10 +13,10 @@ final class OtherApisConfiguration
         $this->defaultRequestOptions = new RequestOptions();
     }
 
-    public string $identityBaseUrl                     = 'https://apiz.ebay.com';
-    public string $translationBaseUrl                  = 'https://api.ebay.com';
-    public string $veroBaseUrl                         = 'https://api.ebay.com';
-    public string $edeliveryInternationalShippingBaseUrl = 'https://api.ebay.com';
+    public string $identityBaseUrl                        = 'https://apiz.ebay.com/commerce/identity/v1';
+    public string $translationBaseUrl                     = 'https://api.ebay.com/commerce/translation/v1_beta';
+    public string $veroBaseUrl                            = 'https://api.ebay.com/commerce/vero/v1';
+    public string $edeliveryInternationalShippingBaseUrl  = 'https://api.ebay.com/sell/edelivery_international_shipping/v1';
 
     /** Static fallback; per-call token takes precedence. */
     public ?string $accessToken = null;
