@@ -156,14 +156,9 @@ final class VeroClient
     /** @return array<string,string> */
     private function mergedHeaders(?RequestOptions $requestOptions): array
     {
-        $headers = $this->config->defaultRequestOptions->headers;
-        if ($requestOptions !== null) {
-            foreach ($requestOptions->headers as $key => $value) {
-                if (!array_key_exists($key, $headers)) {
-                    $headers[$key] = $value;
-                }
-            }
-        }
-        return $headers;
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions?->headers ?? []
+        );
     }
 }
