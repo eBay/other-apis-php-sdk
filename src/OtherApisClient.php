@@ -87,7 +87,7 @@ final class OtherApisClient
                                 fwrite(STDERR, sprintf(
                                     "[OtherApisSDK] %s %s => HTTP %d\n%s\n",
                                     $request->getMethod(),
-                                    (string) $request->getUri(),
+                                    str_replace(["\r", "\n"], ' ', (string) $request->getUri()),
                                     $status,
                                     $body,
                                 ));
