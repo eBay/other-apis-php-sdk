@@ -37,6 +37,14 @@ final class OtherApisConfiguration
 
     public bool $diagnosticLogging = false;
 
+    /** Redact accessToken from var_dump / print_r output. */
+    public function __debugInfo(): array
+    {
+        return array_merge(get_object_vars($this), [
+            'accessToken' => $this->accessToken !== null ? '***' : null,
+        ]);
+    }
+
     /** Hostnames tokens may be sent to — passed to AllowedHostsValidator. */
     public function getAllowedHosts(): array
     {
