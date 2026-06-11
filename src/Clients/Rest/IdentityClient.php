@@ -53,8 +53,8 @@ final class IdentityClient
 
     private function call(?string $accessToken, callable $op): mixed
     {
-        $token = $accessToken ?? $this->config->accessToken
-            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
+        $token = ($accessToken ?? $this->config->accessToken)
+            ?: throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
         return $op($this->buildApiClient($token));
     }
 
