@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace EBay\OtherApis\Clients\Rest;
 
+use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
-use EBay\OtherApis\Configuration\TokenContext;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\EdeliveryInternationalShippingApiClient;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\AddComplaintRequest;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Models\AddPackageRequest;
@@ -79,11 +79,14 @@ use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\Item\Order_l
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Package\PackageRequestBuilderPostRequestConfiguration;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Services\ServicesRequestBuilderGetRequestConfiguration;
 use EBay\OtherApis\Generated\EdeliveryInternationalShipping\Tracking\TrackingRequestBuilderGetRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class EdeliveryInternationalShippingClient
 {
     public function __construct(
-        private readonly EdeliveryInternationalShippingApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly OtherApisConfiguration $config,
     ) {}
 
@@ -94,8 +97,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?CancelPackagesResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_cancel_packages()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->bulk_cancel_packages()->post(
                 $body,
                 new Bulk_cancel_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -109,8 +112,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?ConfirmPackagesResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_confirm_packages()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->bulk_confirm_packages()->post(
                 $body,
                 new Bulk_confirm_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -124,8 +127,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?DeletePackagesResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->bulk_delete_packages()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->bulk_delete_packages()->post(
                 $body,
                 new Bulk_delete_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -139,8 +142,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): void {
         $headers = $this->mergedHeaders($requestOptions);
-        TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->cancel()->post(
+        $this->call($accessToken, fn($api) =>
+            $api->bundle()->byBundle_id($bundleId)->cancel()->post(
                 new BundleCancelRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -153,8 +156,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): void {
         $headers = $this->mergedHeaders($requestOptions);
-        TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->cancel()->post(
+        $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->cancel()->post(
                 new PackageCancelRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -167,8 +170,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?ClonePackageResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->escapedClone()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->escapedClone()->post(
                 new CloneRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -181,8 +184,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): void {
         $headers = $this->mergedHeaders($requestOptions);
-        TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->confirm()->post(
+        $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->confirm()->post(
                 new ConfirmRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -195,8 +198,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?CreateAddressPreferenceResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->address_preference()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->address_preference()->post(
                 $body,
                 new Address_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -210,8 +213,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?CreateBundleResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->bundle()->post(
                 $body,
                 new BundleRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -225,8 +228,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): void {
         $headers = $this->mergedHeaders($requestOptions);
-        TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->complaint()->post(
+        $this->call($accessToken, fn($api) =>
+            $api->complaint()->post(
                 $body,
                 new ComplaintRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -240,8 +243,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?CreateConsignPreferenceResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->consign_preference()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->consign_preference()->post(
                 $body,
                 new Consign_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -255,8 +258,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?AddPackageResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->post(
                 $body,
                 new PackageRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -270,8 +273,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): void {
         $headers = $this->mergedHeaders($requestOptions);
-        TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->delete(
+        $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->delete(
                 new Order_line_item_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -286,8 +289,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetActualCostResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->actual_costs()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->actual_costs()->get(
                 new Actual_costsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: Actual_costsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -306,8 +309,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetAddressPreferenceListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->address_preference()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->address_preference()->get(
                 new Address_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -321,8 +324,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetAgentListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->agents()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->agents()->get(
                 new AgentsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: AgentsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -342,8 +345,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetBatteryQualListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->battery_qualifications()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->battery_qualifications()->get(
                 new Battery_qualificationsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: Battery_qualificationsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -362,8 +365,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?BundleDetailResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->bundle()->byBundle_id($bundleId)->get(
                 new WithBundle_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -376,8 +379,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?BundleLabelResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->bundle()->byBundle_id($bundleId)->label()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->bundle()->byBundle_id($bundleId)->label()->get(
                 new LabelRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -389,8 +392,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetConsignPreferenceListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->consign_preference()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->consign_preference()->get(
                 new Consign_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -404,8 +407,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetDropoffSiteListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->dropoff_sites()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->dropoff_sites()->get(
                 new Dropoff_sitesRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: Dropoff_sitesRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -424,8 +427,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetHandoverSheetResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->handover_sheet()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->handover_sheet()->get(
                 new Handover_sheetRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: Handover_sheetRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -445,8 +448,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetLabelListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->labels()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->labels()->get(
                 new LabelsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: LabelsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -466,8 +469,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetPackageDetailResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->get(
                 new Order_line_item_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -480,8 +483,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetItemPackageIdResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->package()->byOrder_line_item_Id($orderLineItemId)->item()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->package()->byOrder_line_item_Id($orderLineItemId)->item()->get(
                 new Item_EscapedRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -495,8 +498,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetServiceListResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->services()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->services()->get(
                 new ServicesRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: ServicesRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -515,8 +518,8 @@ final class EdeliveryInternationalShippingClient
         ?RequestOptions $requestOptions = null,
     ): ?GetTrackingDetailResponses {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->tracking()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->tracking()->get(
                 new TrackingRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: TrackingRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -525,6 +528,23 @@ final class EdeliveryInternationalShippingClient
                 )
             )->wait()
         );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): EdeliveryInternationalShippingApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->edeliveryInternationalShippingBaseUrl);
+        return new EdeliveryInternationalShippingApiClient($adapter);
     }
 
     /** @return array<string,string> */

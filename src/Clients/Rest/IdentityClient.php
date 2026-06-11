@@ -18,17 +18,20 @@ declare(strict_types=1);
 
 namespace EBay\OtherApis\Clients\Rest;
 
+use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
-use EBay\OtherApis\Configuration\TokenContext;
 use EBay\OtherApis\Generated\Identity\IdentityApiClient;
 use EBay\OtherApis\Generated\Identity\Models\UserResponse;
 use EBay\OtherApis\Generated\Identity\User\EmptyPathSegmentRequestBuilderGetRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class IdentityClient
 {
     public function __construct(
-        private readonly IdentityApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly OtherApisConfiguration $config,
     ) {}
 
@@ -41,11 +44,28 @@ final class IdentityClient
     public function getUser(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?UserResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->user()->emptyPathSegment()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->user()->emptyPathSegment()->get(
                 new EmptyPathSegmentRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): IdentityApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->identityBaseUrl);
+        return new IdentityApiClient($adapter);
     }
 
     /** @return array<string,string> */

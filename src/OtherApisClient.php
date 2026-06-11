@@ -22,16 +22,9 @@ use EBay\OtherApis\Clients\Rest\EdeliveryInternationalShippingClient;
 use EBay\OtherApis\Clients\Rest\IdentityClient;
 use EBay\OtherApis\Clients\Rest\TranslationClient;
 use EBay\OtherApis\Clients\Rest\VeroClient;
-use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
-use EBay\OtherApis\Generated\EdeliveryInternationalShipping\EdeliveryInternationalShippingApiClient;
-use EBay\OtherApis\Generated\Identity\IdentityApiClient;
-use EBay\OtherApis\Generated\Translation\TranslationApiClient;
-use EBay\OtherApis\Generated\Vero\VeroApiClient;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\HandlerStack;
-use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
-use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -45,27 +38,10 @@ final class OtherApisClient
     public function __construct(OtherApisConfiguration $config, ?GuzzleClient $guzzle = null)
     {
         $guzzle ??= $this->buildGuzzleClient($config);
-
-        $auth = new BaseBearerTokenAuthenticationProvider(new KiotaAuthProvider($config));
-
-        $identityAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $identityAdapter->setBaseUrl($config->identityBaseUrl);
-        $this->identity = new IdentityClient(new IdentityApiClient($identityAdapter), $config);
-
-        $translationAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $translationAdapter->setBaseUrl($config->translationBaseUrl);
-        $this->translation = new TranslationClient(new TranslationApiClient($translationAdapter), $config);
-
-        $veroAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $veroAdapter->setBaseUrl($config->veroBaseUrl);
-        $this->vero = new VeroClient(new VeroApiClient($veroAdapter), $config);
-
-        $edisAdapter = new GuzzleRequestAdapter($auth, guzzleClient: $guzzle);
-        $edisAdapter->setBaseUrl($config->edeliveryInternationalShippingBaseUrl);
-        $this->edeliveryInternationalShipping = new EdeliveryInternationalShippingClient(
-            new EdeliveryInternationalShippingApiClient($edisAdapter),
-            $config,
-        );
+        $this->identity = new IdentityClient($guzzle, $config);
+        $this->translation = new TranslationClient($guzzle, $config);
+        $this->vero = new VeroClient($guzzle, $config);
+        $this->edeliveryInternationalShipping = new EdeliveryInternationalShippingClient($guzzle, $config);
     }
 
     private function buildGuzzleClient(OtherApisConfiguration $config): GuzzleClient

@@ -18,18 +18,21 @@ declare(strict_types=1);
 
 namespace EBay\OtherApis\Clients\Rest;
 
+use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
-use EBay\OtherApis\Configuration\TokenContext;
 use EBay\OtherApis\Generated\Translation\TranslationApiClient;
 use EBay\OtherApis\Generated\Translation\Models\TranslateRequest;
 use EBay\OtherApis\Generated\Translation\Models\TranslateResponse;
 use EBay\OtherApis\Generated\Translation\Translate\TranslateRequestBuilderPostRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class TranslationClient
 {
     public function __construct(
-        private readonly TranslationApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly OtherApisConfiguration $config,
     ) {}
 
@@ -45,12 +48,29 @@ final class TranslationClient
         ?RequestOptions $requestOptions = null,
     ): ?TranslateResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->translate()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->translate()->post(
                 $body,
                 new TranslateRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): TranslationApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->translationBaseUrl);
+        return new TranslationApiClient($adapter);
     }
 
     /** @return array<string,string> */

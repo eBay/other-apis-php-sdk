@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace EBay\OtherApis\Clients\Rest;
 
+use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
-use EBay\OtherApis\Configuration\TokenContext;
 use EBay\OtherApis\Generated\Vero\VeroApiClient;
 use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeDetailResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeResponse;
@@ -33,11 +33,14 @@ use EBay\OtherApis\Generated\Vero\Vero_reason_code\Vero_reason_codeRequestBuilde
 use EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilderGetRequestConfiguration;
 use EBay\OtherApis\Generated\Vero\Vero_report\Vero_reportRequestBuilderPostRequestConfiguration;
 use EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration;
+use GuzzleHttp\Client as GuzzleClient;
+use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
+use Microsoft\Kiota\Http\GuzzleRequestAdapter;
 
 final class VeroClient
 {
     public function __construct(
-        private readonly VeroApiClient $kiota,
+        private readonly GuzzleClient $guzzle,
         private readonly OtherApisConfiguration $config,
     ) {}
 
@@ -53,8 +56,8 @@ final class VeroClient
         ?RequestOptions $requestOptions = null,
     ): ?VeroReportItemsResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->vero_report()->post(
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_report()->post(
                 $body,
                 new Vero_reportRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
@@ -73,8 +76,8 @@ final class VeroClient
         ?RequestOptions $requestOptions = null,
     ): ?VeroReasonCodeResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
                 new WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -91,8 +94,8 @@ final class VeroClient
         ?RequestOptions $requestOptions = null,
     ): ?VeroReasonCodeDetailResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->vero_reason_code()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_reason_code()->get(
                 new Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
@@ -111,8 +114,8 @@ final class VeroClient
         ?RequestOptions $requestOptions = null,
     ): ?ReportStatusResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->vero_report()->byVero_report_id($veroReportId)->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_report()->byVero_report_id($veroReportId)->get(
                 new WithVero_report_ItemRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: WithVero_report_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -138,8 +141,8 @@ final class VeroClient
         ?RequestOptions $requestOptions = null,
     ): ?VeroReportStatusResponse {
         $headers = $this->mergedHeaders($requestOptions);
-        return TokenContext::runWith($accessToken, fn() =>
-            $this->kiota->vero_report_items()->get(
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_report_items()->get(
                 new Vero_report_itemsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
                     queryParameters: Vero_report_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
@@ -151,6 +154,23 @@ final class VeroClient
                 )
             )->wait()
         );
+    }
+
+    private function call(?string $accessToken, callable $op): mixed
+    {
+        $token = $accessToken ?? $this->config->accessToken
+            ?? throw new \RuntimeException('No access token. Pass $accessToken per-call or set OtherApisConfiguration::$accessToken.');
+        return $op($this->buildApiClient($token));
+    }
+
+    private function buildApiClient(string $token): VeroApiClient
+    {
+        $auth = new BaseBearerTokenAuthenticationProvider(
+            new KiotaAuthProvider($token, $this->config->getAllowedHosts())
+        );
+        $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
+        $adapter->setBaseUrl($this->config->veroBaseUrl);
+        return new VeroApiClient($adapter);
     }
 
     /** @return array<string,string> */
