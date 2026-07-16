@@ -20,22 +20,18 @@ namespace EBay\OtherApis\Configuration;
 
 final class OtherApisConfiguration
 {
-    public RequestOptions $defaultRequestOptions;
+    public readonly RequestOptions $defaultRequestOptions;
 
-    public function __construct()
-    {
+    public function __construct(
+        public readonly string  $identityBaseUrl                       = 'https://apiz.ebay.com/commerce/identity/v1',
+        public readonly string  $translationBaseUrl                    = 'https://api.ebay.com/commerce/translation/v1_beta',
+        public readonly string  $veroBaseUrl                           = 'https://api.ebay.com/commerce/vero/v1',
+        public readonly string  $edeliveryInternationalShippingBaseUrl = 'https://api.ebay.com/sell/edelivery_international_shipping/v1',
+        public readonly ?string $accessToken                           = null,
+        public readonly bool    $diagnosticLogging                     = false,
+    ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
-
-    public string $identityBaseUrl                        = 'https://apiz.ebay.com/commerce/identity/v1';
-    public string $translationBaseUrl                     = 'https://api.ebay.com/commerce/translation/v1_beta';
-    public string $veroBaseUrl                            = 'https://api.ebay.com/commerce/vero/v1';
-    public string $edeliveryInternationalShippingBaseUrl  = 'https://api.ebay.com/sell/edelivery_international_shipping/v1';
-
-    /** Static fallback; per-call token takes precedence. */
-    public ?string $accessToken = null;
-
-    public bool $diagnosticLogging = false;
 
     /** Redact accessToken from var_dump / print_r output. */
     public function __debugInfo(): array
