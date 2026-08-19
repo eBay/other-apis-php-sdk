@@ -1,5 +1,6 @@
 {
     "name": "ebay/other-apis",
+    "version": "0.1.0",
     "description": "OtherApis PHP SDK",
     "type": "library",
     "require": {
