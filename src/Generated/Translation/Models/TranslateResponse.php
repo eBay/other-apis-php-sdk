@@ -32,17 +32,17 @@ class TranslateResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $from The enumeration value indicates the language of the input text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
+     * @var LanguageEnum|null $from The enumeration value indicates the language of the input text.
     */
-    private ?string $from = null;
+    private ?LanguageEnum $from = null;
     
     /**
-     * @var string|null $to The enumeration value indicates the language of the translated text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
+     * @var LanguageEnum|null $to The enumeration value indicates the language of the translated text.
     */
-    private ?string $to = null;
+    private ?LanguageEnum $to = null;
     
     /**
-     * @var array<Translation>|null $translations An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future.
+     * @var array<Translation>|null $translations An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings are expected in the future.
     */
     private ?array $translations = null;
     
@@ -77,30 +77,30 @@ class TranslateResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'from' => fn(ParseNode $n) => $o->setFrom($n->getStringValue()),
-            'to' => fn(ParseNode $n) => $o->setTo($n->getStringValue()),
+            'from' => fn(ParseNode $n) => $o->setFrom($n->getEnumValue(LanguageEnum::class)),
+            'to' => fn(ParseNode $n) => $o->setTo($n->getEnumValue(LanguageEnum::class)),
             'translations' => fn(ParseNode $n) => $o->setTranslations($n->getCollectionOfObjectValues([Translation::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the from property value. The enumeration value indicates the language of the input text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the from property value. The enumeration value indicates the language of the input text.
+     * @return LanguageEnum|null
     */
-    public function getFrom(): ?string {
+    public function getFrom(): ?LanguageEnum {
         return $this->from;
     }
 
     /**
-     * Gets the to property value. The enumeration value indicates the language of the translated text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the to property value. The enumeration value indicates the language of the translated text.
+     * @return LanguageEnum|null
     */
-    public function getTo(): ?string {
+    public function getTo(): ?LanguageEnum {
         return $this->to;
     }
 
     /**
-     * Gets the translations property value. An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future.
+     * Gets the translations property value. An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings are expected in the future.
      * @return array<Translation>|null
     */
     public function getTranslations(): ?array {
@@ -112,8 +112,8 @@ class TranslateResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('from', $this->getFrom());
-        $writer->writeStringValue('to', $this->getTo());
+        $writer->writeEnumValue('from', $this->getFrom());
+        $writer->writeEnumValue('to', $this->getTo());
         $writer->writeCollectionOfObjectValues('translations', $this->getTranslations());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -127,23 +127,23 @@ class TranslateResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the from property value. The enumeration value indicates the language of the input text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the from property.
+     * Sets the from property value. The enumeration value indicates the language of the input text.
+     * @param LanguageEnum|null $value Value to set for the from property.
     */
-    public function setFrom(?string $value): void {
+    public function setFrom(?LanguageEnum $value): void {
         $this->from = $value;
     }
 
     /**
-     * Sets the to property value. The enumeration value indicates the language of the translated text. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the to property.
+     * Sets the to property value. The enumeration value indicates the language of the translated text.
+     * @param LanguageEnum|null $value Value to set for the to property.
     */
-    public function setTo(?string $value): void {
+    public function setTo(?LanguageEnum $value): void {
         $this->to = $value;
     }
 
     /**
-     * Sets the translations property value. An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future.
+     * Sets the translations property value. An array showing the input and translated text. Only one input string can be translated at this time. Support for multiple continuous text strings are expected in the future.
      * @param array<Translation>|null $value Value to set for the translations property.
     */
     public function setTranslations(?array $value): void {

@@ -42,7 +42,7 @@ class ClonePackageResponsesData implements AdditionalDataHolder, Parsable
     private ?string $packageId = null;
     
     /**
-     * @var Amount|null $paymentCost This type defines the monetary value of an amount. 
+     * @var Amount|null $paymentCost The payment cost for the package.
     */
     private ?Amount $paymentCost = null;
     
@@ -106,7 +106,7 @@ class ClonePackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Gets the paymentCost property value. The payment cost for the package.
      * @return Amount|null
     */
     public function getPaymentCost(): ?Amount {
@@ -158,7 +158,7 @@ class ClonePackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Sets the paymentCost property value. The payment cost for the package.
      * @param Amount|null $value Value to set for the paymentCost property.
     */
     public function setPaymentCost(?Amount $value): void {

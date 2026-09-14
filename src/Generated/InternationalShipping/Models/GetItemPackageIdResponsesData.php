@@ -37,9 +37,9 @@ class GetItemPackageIdResponsesData implements AdditionalDataHolder, Parsable
     private ?string $packageId = null;
     
     /**
-     * @var string|null $packageStatus The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
+     * @var PackageStatusEnum|null $packageStatus The current status of the package.
     */
-    private ?string $packageStatus = null;
+    private ?PackageStatusEnum $packageStatus = null;
     
     /**
      * @var string|null $trackingNumber The tracking number of the package.
@@ -78,7 +78,7 @@ class GetItemPackageIdResponsesData implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'packageId' => fn(ParseNode $n) => $o->setPackageId($n->getStringValue()),
-            'packageStatus' => fn(ParseNode $n) => $o->setPackageStatus($n->getStringValue()),
+            'packageStatus' => fn(ParseNode $n) => $o->setPackageStatus($n->getEnumValue(PackageStatusEnum::class)),
             'trackingNumber' => fn(ParseNode $n) => $o->setTrackingNumber($n->getStringValue()),
         ];
     }
@@ -92,10 +92,10 @@ class GetItemPackageIdResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageStatus property value. The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the packageStatus property value. The current status of the package.
+     * @return PackageStatusEnum|null
     */
-    public function getPackageStatus(): ?string {
+    public function getPackageStatus(): ?PackageStatusEnum {
         return $this->packageStatus;
     }
 
@@ -113,7 +113,7 @@ class GetItemPackageIdResponsesData implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('packageId', $this->getPackageId());
-        $writer->writeStringValue('packageStatus', $this->getPackageStatus());
+        $writer->writeEnumValue('packageStatus', $this->getPackageStatus());
         $writer->writeStringValue('trackingNumber', $this->getTrackingNumber());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -135,10 +135,10 @@ class GetItemPackageIdResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageStatus property value. The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the packageStatus property.
+     * Sets the packageStatus property value. The current status of the package.
+     * @param PackageStatusEnum|null $value Value to set for the packageStatus property.
     */
-    public function setPackageStatus(?string $value): void {
+    public function setPackageStatus(?PackageStatusEnum $value): void {
         $this->packageStatus = $value;
     }
 

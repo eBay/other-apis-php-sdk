@@ -47,19 +47,19 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
     private ?string $dropoffSiteId = null;
     
     /**
-     * @var PickupAddressResponsesData|null $pickupAddress This type defines the fields used to specify location and contact information for a pickup-from consign address associated with a seller's eDIS account.
+     * @var PickupAddressResponsesData|null $pickupAddress This container returns the address and contact information for a pickup address.<br><br><span class="tablenote"><b>Note:</b> This container is always returned, but will show as null or have an empty value if not defined/applicable.</span>
     */
     private ?PickupAddressResponsesData $pickupAddress = null;
     
     /**
-     * @var string|null $pickupTime The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PickUpTimeTypeEnum'>eBay API documentation</a>
+     * @var PickUpTimeTypeEnum|null $pickupTime The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location
     */
-    private ?string $pickupTime = null;
+    private ?PickUpTimeTypeEnum $pickupTime = null;
     
     /**
-     * @var string|null $type The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ConsignTypeEnum'>eBay API documentation</a>
+     * @var ConsignTypeEnum|null $type The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul>
     */
-    private ?string $type = null;
+    private ?ConsignTypeEnum $type = null;
     
     /**
      * Instantiates a new ConsignPreferenceInfoResponses and sets the default values.
@@ -120,13 +120,13 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
             'consignPreferenceName' => fn(ParseNode $n) => $o->setConsignPreferenceName($n->getStringValue()),
             'dropoffSiteId' => fn(ParseNode $n) => $o->setDropoffSiteId($n->getStringValue()),
             'pickupAddress' => fn(ParseNode $n) => $o->setPickupAddress($n->getObjectValue([PickupAddressResponsesData::class, 'createFromDiscriminatorValue'])),
-            'pickupTime' => fn(ParseNode $n) => $o->setPickupTime($n->getStringValue()),
-            'type' => fn(ParseNode $n) => $o->setType($n->getStringValue()),
+            'pickupTime' => fn(ParseNode $n) => $o->setPickupTime($n->getEnumValue(PickUpTimeTypeEnum::class)),
+            'type' => fn(ParseNode $n) => $o->setType($n->getEnumValue(ConsignTypeEnum::class)),
         ];
     }
 
     /**
-     * Gets the pickupAddress property value. This type defines the fields used to specify location and contact information for a pickup-from consign address associated with a seller's eDIS account.
+     * Gets the pickupAddress property value. This container returns the address and contact information for a pickup address.<br><br><span class="tablenote"><b>Note:</b> This container is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @return PickupAddressResponsesData|null
     */
     public function getPickupAddress(): ?PickupAddressResponsesData {
@@ -134,18 +134,18 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the pickupTime property value. The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PickUpTimeTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the pickupTime property value. The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location
+     * @return PickUpTimeTypeEnum|null
     */
-    public function getPickupTime(): ?string {
+    public function getPickupTime(): ?PickUpTimeTypeEnum {
         return $this->pickupTime;
     }
 
     /**
-     * Gets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ConsignTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul>
+     * @return ConsignTypeEnum|null
     */
-    public function getType(): ?string {
+    public function getType(): ?ConsignTypeEnum {
         return $this->type;
     }
 
@@ -158,8 +158,8 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('consignPreferenceName', $this->getConsignPreferenceName());
         $writer->writeStringValue('dropoffSiteId', $this->getDropoffSiteId());
         $writer->writeObjectValue('pickupAddress', $this->getPickupAddress());
-        $writer->writeStringValue('pickupTime', $this->getPickupTime());
-        $writer->writeStringValue('type', $this->getType());
+        $writer->writeEnumValue('pickupTime', $this->getPickupTime());
+        $writer->writeEnumValue('type', $this->getType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -196,7 +196,7 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pickupAddress property value. This type defines the fields used to specify location and contact information for a pickup-from consign address associated with a seller's eDIS account.
+     * Sets the pickupAddress property value. This container returns the address and contact information for a pickup address.<br><br><span class="tablenote"><b>Note:</b> This container is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @param PickupAddressResponsesData|null $value Value to set for the pickupAddress property.
     */
     public function setPickupAddress(?PickupAddressResponsesData $value): void {
@@ -204,18 +204,18 @@ class ConsignPreferenceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the pickupTime property value. The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PickUpTimeTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the pickupTime property.
+     * Sets the pickupTime property value. The supported pickup window that the pickup location supports.<br><br>This field is only returned if the consign address is a pickup-from location
+     * @param PickUpTimeTypeEnum|null $value Value to set for the pickupTime property.
     */
-    public function setPickupTime(?string $value): void {
+    public function setPickupTime(?PickUpTimeTypeEnum $value): void {
         $this->pickupTime = $value;
     }
 
     /**
-     * Sets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ConsignTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the type property.
+     * Sets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></ul>
+     * @param ConsignTypeEnum|null $value Value to set for the type property.
     */
-    public function setType(?string $value): void {
+    public function setType(?ConsignTypeEnum $value): void {
         $this->type = $value;
     }
 

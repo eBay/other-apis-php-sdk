@@ -1,0 +1,153 @@
+<?php
+
+// Copyright 2026 eBay Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+namespace EBay\OtherApis\Generated\VeroApiV2\Models;
+
+use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
+use Microsoft\Kiota\Abstractions\Serialization\Parsable;
+use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
+use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
+
+/**
+ * This type defines the reported content, identifiers, and status of a VeRO report. If applicable, a reason for report failure is also returned.
+*/
+class ReportedViolation implements AdditionalDataHolder, Parsable 
+{
+    /**
+     * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    */
+    private ?array $additionalData = null;
+    
+    /**
+     * @var string|null $id The unique identifier of the listing, live event, or video that is being reported for copyright, trademark, or intellectual right infringement.
+    */
+    private ?string $id = null;
+    
+    /**
+     * @var string|null $reasonForFailure This text explanation is submitted by eBay when the submission of a VeRO Report has failed or was blocked.<br><br>This field is conditionally returned if the <b>status</b> value of the report is <code>CLARIFICATION_REQUIRED</code> or <code>SUBMISSION_FAILED</code>.
+    */
+    private ?string $reasonForFailure = null;
+    
+    /**
+     * @var VeroReportedViolationStatusEnum|null $status The current status of the VeRO reported item.
+    */
+    private ?VeroReportedViolationStatusEnum $status = null;
+    
+    /**
+     * Instantiates a new ReportedViolation and sets the default values.
+    */
+    public function __construct() {
+        $this->setAdditionalData([]);
+    }
+
+    /**
+     * Creates a new instance of the appropriate class based on discriminator value
+     * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
+     * @return ReportedViolation
+    */
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): ReportedViolation {
+        return new ReportedViolation();
+    }
+
+    /**
+     * Gets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @return array<string, mixed>|null
+    */
+    public function getAdditionalData(): ?array {
+        return $this->additionalData;
+    }
+
+    /**
+     * The deserialization information for the current model
+     * @return array<string, callable(ParseNode): void>
+    */
+    public function getFieldDeserializers(): array {
+        $o = $this;
+        return  [
+            'id' => fn(ParseNode $n) => $o->setId($n->getStringValue()),
+            'reasonForFailure' => fn(ParseNode $n) => $o->setReasonForFailure($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(VeroReportedViolationStatusEnum::class)),
+        ];
+    }
+
+    /**
+     * Gets the id property value. The unique identifier of the listing, live event, or video that is being reported for copyright, trademark, or intellectual right infringement.
+     * @return string|null
+    */
+    public function getId(): ?string {
+        return $this->id;
+    }
+
+    /**
+     * Gets the reasonForFailure property value. This text explanation is submitted by eBay when the submission of a VeRO Report has failed or was blocked.<br><br>This field is conditionally returned if the <b>status</b> value of the report is <code>CLARIFICATION_REQUIRED</code> or <code>SUBMISSION_FAILED</code>.
+     * @return string|null
+    */
+    public function getReasonForFailure(): ?string {
+        return $this->reasonForFailure;
+    }
+
+    /**
+     * Gets the status property value. The current status of the VeRO reported item.
+     * @return VeroReportedViolationStatusEnum|null
+    */
+    public function getStatus(): ?VeroReportedViolationStatusEnum {
+        return $this->status;
+    }
+
+    /**
+     * Serializes information the current object
+     * @param SerializationWriter $writer Serialization writer to use to serialize this model
+    */
+    public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('id', $this->getId());
+        $writer->writeStringValue('reasonForFailure', $this->getReasonForFailure());
+        $writer->writeEnumValue('status', $this->getStatus());
+        $writer->writeAdditionalData($this->getAdditionalData());
+    }
+
+    /**
+     * Sets the AdditionalData property value. Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+     * @param array<string,mixed> $value Value to set for the AdditionalData property.
+    */
+    public function setAdditionalData(?array $value): void {
+        $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the id property value. The unique identifier of the listing, live event, or video that is being reported for copyright, trademark, or intellectual right infringement.
+     * @param string|null $value Value to set for the id property.
+    */
+    public function setId(?string $value): void {
+        $this->id = $value;
+    }
+
+    /**
+     * Sets the reasonForFailure property value. This text explanation is submitted by eBay when the submission of a VeRO Report has failed or was blocked.<br><br>This field is conditionally returned if the <b>status</b> value of the report is <code>CLARIFICATION_REQUIRED</code> or <code>SUBMISSION_FAILED</code>.
+     * @param string|null $value Value to set for the reasonForFailure property.
+    */
+    public function setReasonForFailure(?string $value): void {
+        $this->reasonForFailure = $value;
+    }
+
+    /**
+     * Sets the status property value. The current status of the VeRO reported item.
+     * @param VeroReportedViolationStatusEnum|null $value Value to set for the status property.
+    */
+    public function setStatus(?VeroReportedViolationStatusEnum $value): void {
+        $this->status = $value;
+    }
+
+}

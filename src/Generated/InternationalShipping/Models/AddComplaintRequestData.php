@@ -33,7 +33,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $affectedPackages This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
+     * @var array<string>|null $affectedPackages This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
     */
     private ?array $affectedPackages = null;
     
@@ -48,9 +48,9 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     private ?string $complaintReason = null;
     
     /**
-     * @var string|null $complaintType The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ComplaintTypeEnum'>eBay API documentation</a>
+     * @var ComplaintTypeEnum|null $complaintType The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
     */
-    private ?string $complaintType = null;
+    private ?ComplaintTypeEnum $complaintType = null;
     
     /**
      * @var int|null $preferenceId The unique identifier of the address associated with the complaint.<br><br>This field is required if the complain being filed is associated with a specific address.
@@ -87,7 +87,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the affectedPackages property value. This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
+     * Gets the affectedPackages property value. This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
      * @return array<string>|null
     */
     public function getAffectedPackages(): ?array {
@@ -111,10 +111,10 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ComplaintTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
+     * @return ComplaintTypeEnum|null
     */
-    public function getComplaintType(): ?string {
+    public function getComplaintType(): ?ComplaintTypeEnum {
         return $this->complaintType;
     }
 
@@ -135,7 +135,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
             },
             'complaintDate' => fn(ParseNode $n) => $o->setComplaintDate($n->getStringValue()),
             'complaintReason' => fn(ParseNode $n) => $o->setComplaintReason($n->getStringValue()),
-            'complaintType' => fn(ParseNode $n) => $o->setComplaintType($n->getStringValue()),
+            'complaintType' => fn(ParseNode $n) => $o->setComplaintType($n->getEnumValue(ComplaintTypeEnum::class)),
             'preferenceId' => fn(ParseNode $n) => $o->setPreferenceId($n->getIntegerValue()),
             'remark' => fn(ParseNode $n) => $o->setRemark($n->getStringValue()),
         ];
@@ -165,7 +165,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
         $writer->writeCollectionOfPrimitiveValues('affectedPackages', $this->getAffectedPackages());
         $writer->writeStringValue('complaintDate', $this->getComplaintDate());
         $writer->writeStringValue('complaintReason', $this->getComplaintReason());
-        $writer->writeStringValue('complaintType', $this->getComplaintType());
+        $writer->writeEnumValue('complaintType', $this->getComplaintType());
         $writer->writeIntegerValue('preferenceId', $this->getPreferenceId());
         $writer->writeStringValue('remark', $this->getRemark());
         $writer->writeAdditionalData($this->getAdditionalData());
@@ -180,7 +180,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the affectedPackages property value. This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
+     * Sets the affectedPackages property value. This array specifies a list of packages, specified by their <b>packageId</b>, affected by the issue causing the complaint.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method<br><br>This array is required if the complaint being filed is for a missing package.
      * @param array<string>|null $value Value to set for the affectedPackages property.
     */
     public function setAffectedPackages(?array $value): void {
@@ -204,10 +204,10 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:ComplaintTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the complaintType property.
+     * Sets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
+     * @param ComplaintTypeEnum|null $value Value to set for the complaintType property.
     */
-    public function setComplaintType(?string $value): void {
+    public function setComplaintType(?ComplaintTypeEnum $value): void {
         $this->complaintType = $value;
     }
 

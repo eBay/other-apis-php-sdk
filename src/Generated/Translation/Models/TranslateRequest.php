@@ -33,24 +33,24 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $from The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
+     * @var LanguageEnum|null $from The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
     */
-    private ?string $from = null;
+    private ?LanguageEnum $from = null;
     
     /**
-     * @var array<string>|null $text The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings is expected in the future.</span>
+     * @var array<string>|null $text The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings are expected in the future.</span>
     */
     private ?array $text = null;
     
     /**
-     * @var string|null $to The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
+     * @var LanguageEnum|null $to The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
     */
-    private ?string $to = null;
+    private ?LanguageEnum $to = null;
     
     /**
-     * @var string|null $translationContext Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:TranslationContextEnum'>eBay API documentation</a>
+     * @var TranslationContextEnum|null $translationContext Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p>
     */
-    private ?string $translationContext = null;
+    private ?TranslationContextEnum $translationContext = null;
     
     /**
      * Instantiates a new TranslateRequest and sets the default values.
@@ -83,7 +83,7 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'from' => fn(ParseNode $n) => $o->setFrom($n->getStringValue()),
+            'from' => fn(ParseNode $n) => $o->setFrom($n->getEnumValue(LanguageEnum::class)),
             'text' => function (ParseNode $n) {
                 $val = $n->getCollectionOfPrimitiveValues();
                 if (is_array($val)) {
@@ -92,21 +92,21 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
                 /** @var array<string>|null $val */
                 $this->setText($val);
             },
-            'to' => fn(ParseNode $n) => $o->setTo($n->getStringValue()),
-            'translationContext' => fn(ParseNode $n) => $o->setTranslationContext($n->getStringValue()),
+            'to' => fn(ParseNode $n) => $o->setTo($n->getEnumValue(LanguageEnum::class)),
+            'translationContext' => fn(ParseNode $n) => $o->setTranslationContext($n->getEnumValue(TranslationContextEnum::class)),
         ];
     }
 
     /**
-     * Gets the from property value. The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the from property value. The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
+     * @return LanguageEnum|null
     */
-    public function getFrom(): ?string {
+    public function getFrom(): ?LanguageEnum {
         return $this->from;
     }
 
     /**
-     * Gets the text property value. The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings is expected in the future.</span>
+     * Gets the text property value. The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings are expected in the future.</span>
      * @return array<string>|null
     */
     public function getText(): ?array {
@@ -114,18 +114,18 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the to property value. The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the to property value. The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
+     * @return LanguageEnum|null
     */
-    public function getTo(): ?string {
+    public function getTo(): ?LanguageEnum {
         return $this->to;
     }
 
     /**
-     * Gets the translationContext property value. Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:TranslationContextEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the translationContext property value. Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p>
+     * @return TranslationContextEnum|null
     */
-    public function getTranslationContext(): ?string {
+    public function getTranslationContext(): ?TranslationContextEnum {
         return $this->translationContext;
     }
 
@@ -134,10 +134,10 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('from', $this->getFrom());
+        $writer->writeEnumValue('from', $this->getFrom());
         $writer->writeCollectionOfPrimitiveValues('text', $this->getText());
-        $writer->writeStringValue('to', $this->getTo());
-        $writer->writeStringValue('translationContext', $this->getTranslationContext());
+        $writer->writeEnumValue('to', $this->getTo());
+        $writer->writeEnumValue('translationContext', $this->getTranslationContext());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -150,15 +150,15 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the from property value. The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the from property.
+     * Sets the from property value. The language of the input text to be translated. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
+     * @param LanguageEnum|null $value Value to set for the from property.
     */
-    public function setFrom(?string $value): void {
+    public function setFrom(?LanguageEnum $value): void {
         $this->from = $value;
     }
 
     /**
-     * Sets the text property value. The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings is expected in the future.</span>
+     * Sets the text property value. The input text to translate. The maximum number of characters permitted is determined by the <b>translationContext</b> value:<ul><li><code>ITEM_TITLE</code>: 1000 characters maximum</li><li><code>ITEM_DESCRIPTION</code>: 20,000 characters maximum.<br><span class="tablenote"><b>Note:</b> When translating <code>ITEM_DESCRIPTION</code> text, HTML/CSS markup and links can be included and will not count toward this 20,000 character limit.</span></li></ul><span class="tablenote"><b>Note:</b> Currently, only one input string can be translated per API call. Support for multiple continuous text strings are expected in the future.</span>
      * @param array<string>|null $value Value to set for the text property.
     */
     public function setText(?array $value): void {
@@ -166,18 +166,18 @@ class TranslateRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the to property value. The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:LanguageEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the to property.
+     * Sets the to property value. The target language for the translation of the input text. Not all <b>LanguageEnum</b> values are supported in this field. For a full list of supported language pairings, see the Supported languages <a href="https://developer.ebay.com/develop/guides-v2/other-apis/other-apis-guide#supported-languages" target="_blank ">table</a>.
+     * @param LanguageEnum|null $value Value to set for the to property.
     */
-    public function setTo(?string $value): void {
+    public function setTo(?LanguageEnum $value): void {
         $this->to = $value;
     }
 
     /**
-     * Sets the translationContext property value. Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/translation/types/api:TranslationContextEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the translationContext property.
+     * Sets the translationContext property value. Input the listing entity to be translated.<br><br><b>Valid Values:</b> <code>ITEM_TITLE</code> and <code>ITEM_DESCRIPTION</code></p>
+     * @param TranslationContextEnum|null $value Value to set for the translationContext property.
     */
-    public function setTranslationContext(?string $value): void {
+    public function setTranslationContext(?TranslationContextEnum $value): void {
         $this->translationContext = $value;
     }
 

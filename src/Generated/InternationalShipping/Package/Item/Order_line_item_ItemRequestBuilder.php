@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Package\Item;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetPackageDetailResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Cancel\CancelRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Confirm\ConfirmRequestBuilder;
@@ -83,7 +84,13 @@ class Order_line_item_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function delete(?Order_line_item_ItemRequestBuilderDeleteRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toDeleteRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendNoContentAsync($requestInfo, null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendNoContentAsync($requestInfo, $errorMappings);
     }
 
     /**
@@ -94,7 +101,13 @@ class Order_line_item_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Order_line_item_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetPackageDetailResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetPackageDetailResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -111,6 +124,7 @@ class Order_line_item_ItemRequestBuilder extends BaseRequestBuilder
             $requestInfo->addHeaders($requestConfiguration->headers);
             $requestInfo->addRequestOptions(...$requestConfiguration->options);
         }
+        $requestInfo->tryAddHeader('Accept', "application/json");
         return $requestInfo;
     }
 

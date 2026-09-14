@@ -32,7 +32,7 @@ class CreateConsignPreferenceRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateConsignPreferenceRequestData|null $consignAddress This type is used to specify the address details used to create a consign address.
+     * @var CreateConsignPreferenceRequestData|null $consignAddress This container is used to specify the address details used to create a consign address.
     */
     private ?CreateConsignPreferenceRequestData $consignAddress = null;
     
@@ -61,7 +61,7 @@ class CreateConsignPreferenceRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the consignAddress property value. This type is used to specify the address details used to create a consign address.
+     * Gets the consignAddress property value. This container is used to specify the address details used to create a consign address.
      * @return CreateConsignPreferenceRequestData|null
     */
     public function getConsignAddress(): ?CreateConsignPreferenceRequestData {
@@ -97,7 +97,7 @@ class CreateConsignPreferenceRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the consignAddress property value. This type is used to specify the address details used to create a consign address.
+     * Sets the consignAddress property value. This container is used to specify the address details used to create a consign address.
      * @param CreateConsignPreferenceRequestData|null $value Value to set for the consignAddress property.
     */
     public function setConsignAddress(?CreateConsignPreferenceRequestData $value): void {

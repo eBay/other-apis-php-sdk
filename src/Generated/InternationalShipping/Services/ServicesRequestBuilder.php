@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Services;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetServiceListResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,13 @@ class ServicesRequestBuilder extends BaseRequestBuilder
     */
     public function get(?ServicesRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetServiceListResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetServiceListResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

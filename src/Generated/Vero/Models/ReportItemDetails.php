@@ -20,7 +20,6 @@ use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
-use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
  * This type defines the details of an item being reported for violating a product owner's copyright, trademark, or intellectual property rights.
@@ -38,12 +37,12 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
     private ?string $brand = null;
     
     /**
-     * @var bool|null $copyEmailToRightsOwner If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</b>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
+     * @var bool|null $copyEmailToRightsOwner If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</code>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
     */
     private ?bool $copyEmailToRightsOwner = null;
     
     /**
-     * @var array<string>|null $countries If the infringement type stated in the <b>VeroReasonCodeId</b> has anything to do with which country the item is being shipped to, each country that would trigger this infringement type should be specified in this comma-delimited array.<br><br>This field is required when the <b>veroReasonCodeId</b> is <code>9037</code> (Item(s) is unlawful importation of product bearing trademark).
+     * @var array<CountryCodeEnum>|null $countries If the infringement type stated in the <b>VeroReasonCodeId</b> has anything to do with which country the item is being shipped to, each country that would trigger this infringement type should be specified in this comma-delimited array.<br><br>This field is required when the <b>veroReasonCodeId</b> is <code>9037</code> (Item(s) is unlawful importation of product bearing trademark).
     */
     private ?array $countries = null;
     
@@ -68,12 +67,12 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
     private ?string $patent = null;
     
     /**
-     * @var array<string>|null $regions If the infringement type stated in the <b>veroReasonCodeId</b> has anything to do with which geographical region the item is being shipped to, each region that would trigger this infringement type should be specified in this comma-delimited array.
+     * @var array<WorldRegionEnum>|null $regions If the infringement type stated in the <b>veroReasonCodeId</b> has anything to do with which geographical region the item is being shipped to, each region that would trigger this infringement type should be specified in this comma-delimited array.
     */
     private ?array $regions = null;
     
     /**
-     * @var string|null $veroReasonCodeId The unique identifier for the type of claimed infringement.<br><br>Use <a href="/api-docs/commerce/vero/resources/vero_reason_code/methods/getVeroReasonCodes" target="_blank ">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
+     * @var string|null $veroReasonCodeId The unique identifier for the type of claimed infringement.<br><br>Use <a href="/develop/api/sell/vero_public_apis#sell-vero_public_apis-vero_reason_code-getveroreasoncodes">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
     */
     private ?string $veroReasonCodeId = null;
     
@@ -110,7 +109,7 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the copyEmailToRightsOwner property value. If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</b>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
+     * Gets the copyEmailToRightsOwner property value. If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</code>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
      * @return bool|null
     */
     public function getCopyEmailToRightsOwner(): ?bool {
@@ -119,7 +118,7 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the countries property value. If the infringement type stated in the <b>VeroReasonCodeId</b> has anything to do with which country the item is being shipped to, each country that would trigger this infringement type should be specified in this comma-delimited array.<br><br>This field is required when the <b>veroReasonCodeId</b> is <code>9037</code> (Item(s) is unlawful importation of product bearing trademark).
-     * @return array<string>|null
+     * @return array<CountryCodeEnum>|null
     */
     public function getCountries(): ?array {
         return $this->countries;
@@ -142,26 +141,12 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
         return  [
             'brand' => fn(ParseNode $n) => $o->setBrand($n->getStringValue()),
             'copyEmailToRightsOwner' => fn(ParseNode $n) => $o->setCopyEmailToRightsOwner($n->getBooleanValue()),
-            'countries' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setCountries($val);
-            },
+            'countries' => fn(ParseNode $n) => $o->setCountries($n->getCollectionOfEnumValues(CountryCodeEnum::class)),
             'detailedMessage' => fn(ParseNode $n) => $o->setDetailedMessage($n->getStringValue()),
             'itemId' => fn(ParseNode $n) => $o->setItemId($n->getStringValue()),
             'messageToSeller' => fn(ParseNode $n) => $o->setMessageToSeller($n->getStringValue()),
             'patent' => fn(ParseNode $n) => $o->setPatent($n->getStringValue()),
-            'regions' => function (ParseNode $n) {
-                $val = $n->getCollectionOfPrimitiveValues();
-                if (is_array($val)) {
-                    TypeUtils::validateCollectionValues($val, 'string');
-                }
-                /** @var array<string>|null $val */
-                $this->setRegions($val);
-            },
+            'regions' => fn(ParseNode $n) => $o->setRegions($n->getCollectionOfEnumValues(WorldRegionEnum::class)),
             'veroReasonCodeId' => fn(ParseNode $n) => $o->setVeroReasonCodeId($n->getStringValue()),
         ];
     }
@@ -192,14 +177,14 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
 
     /**
      * Gets the regions property value. If the infringement type stated in the <b>veroReasonCodeId</b> has anything to do with which geographical region the item is being shipped to, each region that would trigger this infringement type should be specified in this comma-delimited array.
-     * @return array<string>|null
+     * @return array<WorldRegionEnum>|null
     */
     public function getRegions(): ?array {
         return $this->regions;
     }
 
     /**
-     * Gets the veroReasonCodeId property value. The unique identifier for the type of claimed infringement.<br><br>Use <a href="/api-docs/commerce/vero/resources/vero_reason_code/methods/getVeroReasonCodes" target="_blank ">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
+     * Gets the veroReasonCodeId property value. The unique identifier for the type of claimed infringement.<br><br>Use <a href="/develop/api/sell/vero_public_apis#sell-vero_public_apis-vero_reason_code-getveroreasoncodes">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
      * @return string|null
     */
     public function getVeroReasonCodeId(): ?string {
@@ -213,12 +198,12 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('brand', $this->getBrand());
         $writer->writeBooleanValue('copyEmailToRightsOwner', $this->getCopyEmailToRightsOwner());
-        $writer->writeCollectionOfPrimitiveValues('countries', $this->getCountries());
+        $writer->writeCollectionOfEnumValues('countries', $this->getCountries());
         $writer->writeStringValue('detailedMessage', $this->getDetailedMessage());
         $writer->writeStringValue('itemId', $this->getItemId());
         $writer->writeStringValue('messageToSeller', $this->getMessageToSeller());
         $writer->writeStringValue('patent', $this->getPatent());
-        $writer->writeCollectionOfPrimitiveValues('regions', $this->getRegions());
+        $writer->writeCollectionOfEnumValues('regions', $this->getRegions());
         $writer->writeStringValue('veroReasonCodeId', $this->getVeroReasonCodeId());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -240,7 +225,7 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the copyEmailToRightsOwner property value. If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</b>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
+     * Sets the copyEmailToRightsOwner property value. If the VeRO Program member wants a copy of the Notice of Claimed Infringement (NOCI) document sent to their email address, this field should be included in the request and set to <code>true</code>. This same document is automatically sent to the seller of the reported item.<br><br>As this field defaults to <code>true</code>, the report will be automatically emailed if this field is omitted.<br><br><b>Default:</b> true
      * @param bool|null $value Value to set for the copyEmailToRightsOwner property.
     */
     public function setCopyEmailToRightsOwner(?bool $value): void {
@@ -249,7 +234,7 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the countries property value. If the infringement type stated in the <b>VeroReasonCodeId</b> has anything to do with which country the item is being shipped to, each country that would trigger this infringement type should be specified in this comma-delimited array.<br><br>This field is required when the <b>veroReasonCodeId</b> is <code>9037</code> (Item(s) is unlawful importation of product bearing trademark).
-     * @param array<string>|null $value Value to set for the countries property.
+     * @param array<CountryCodeEnum>|null $value Value to set for the countries property.
     */
     public function setCountries(?array $value): void {
         $this->countries = $value;
@@ -289,14 +274,14 @@ class ReportItemDetails implements AdditionalDataHolder, Parsable
 
     /**
      * Sets the regions property value. If the infringement type stated in the <b>veroReasonCodeId</b> has anything to do with which geographical region the item is being shipped to, each region that would trigger this infringement type should be specified in this comma-delimited array.
-     * @param array<string>|null $value Value to set for the regions property.
+     * @param array<WorldRegionEnum>|null $value Value to set for the regions property.
     */
     public function setRegions(?array $value): void {
         $this->regions = $value;
     }
 
     /**
-     * Sets the veroReasonCodeId property value. The unique identifier for the type of claimed infringement.<br><br>Use <a href="/api-docs/commerce/vero/resources/vero_reason_code/methods/getVeroReasonCodes" target="_blank ">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
+     * Sets the veroReasonCodeId property value. The unique identifier for the type of claimed infringement.<br><br>Use <a href="/develop/api/sell/vero_public_apis#sell-vero_public_apis-vero_reason_code-getveroreasoncodes">getVeroReasonCodes</a> to retrieve a list of valid reason codes for a given eBay site.
      * @param string|null $value Value to set for the veroReasonCodeId property.
     */
     public function setVeroReasonCodeId(?string $value): void {

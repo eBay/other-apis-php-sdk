@@ -32,7 +32,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $estimateCost This type defines the monetary value of an amount. 
+     * @var Amount|null $estimateCost The estimated shipping cost of the package.
     */
     private ?Amount $estimateCost = null;
     
@@ -47,7 +47,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     private ?string $packageId = null;
     
     /**
-     * @var Amount|null $paymentCost This type defines the monetary value of an amount. 
+     * @var Amount|null $paymentCost The actual payment cost of the package.
     */
     private ?Amount $paymentCost = null;
     
@@ -81,7 +81,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the estimateCost property value. This type defines the monetary value of an amount. 
+     * Gets the estimateCost property value. The estimated shipping cost of the package.
      * @return Amount|null
     */
     public function getEstimateCost(): ?Amount {
@@ -120,7 +120,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Gets the paymentCost property value. The actual payment cost of the package.
      * @return Amount|null
     */
     public function getPaymentCost(): ?Amount {
@@ -157,7 +157,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the estimateCost property value. This type defines the monetary value of an amount. 
+     * Sets the estimateCost property value. The estimated shipping cost of the package.
      * @param Amount|null $value Value to set for the estimateCost property.
     */
     public function setEstimateCost(?Amount $value): void {
@@ -181,7 +181,7 @@ class AddPackageResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Sets the paymentCost property value. The actual payment cost of the package.
      * @param Amount|null $value Value to set for the paymentCost property.
     */
     public function setPaymentCost(?Amount $value): void {

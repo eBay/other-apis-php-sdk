@@ -32,7 +32,7 @@ class CreateAddressPreferenceResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateAddressPreferenceResponsesData|null $shipFromAddressId This type defines the unique identifier of a newly created address.
+     * @var CreateAddressPreferenceResponsesData|null $shipFromAddressId This container specifies the unique identifier of the newly created address.
     */
     private ?CreateAddressPreferenceResponsesData $shipFromAddressId = null;
     
@@ -72,7 +72,7 @@ class CreateAddressPreferenceResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipFromAddressId property value. This type defines the unique identifier of a newly created address.
+     * Gets the shipFromAddressId property value. This container specifies the unique identifier of the newly created address.
      * @return CreateAddressPreferenceResponsesData|null
     */
     public function getShipFromAddressId(): ?CreateAddressPreferenceResponsesData {
@@ -97,7 +97,7 @@ class CreateAddressPreferenceResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipFromAddressId property value. This type defines the unique identifier of a newly created address.
+     * Sets the shipFromAddressId property value. This container specifies the unique identifier of the newly created address.
      * @param CreateAddressPreferenceResponsesData|null $value Value to set for the shipFromAddressId property.
     */
     public function setShipFromAddressId(?CreateAddressPreferenceResponsesData $value): void {

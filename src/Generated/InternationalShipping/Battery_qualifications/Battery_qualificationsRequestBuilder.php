@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Battery_qualifications;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetBatteryQualListResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,12 @@ class Battery_qualificationsRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Battery_qualificationsRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetBatteryQualListResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetBatteryQualListResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

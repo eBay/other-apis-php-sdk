@@ -23,7 +23,6 @@ use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
 use EBay\OtherApis\Generated\Identity\IdentityApiClient;
 use EBay\OtherApis\Generated\Identity\Models\UserResponse;
-use EBay\OtherApis\Generated\Identity\User\EmptyPathSegmentRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -49,7 +48,7 @@ final class IdentityClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->user()->emptyPathSegment()->get(
-                new EmptyPathSegmentRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\Identity\User\EmptyPathSegmentRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

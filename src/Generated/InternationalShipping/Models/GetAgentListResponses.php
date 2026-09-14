@@ -32,7 +32,7 @@ class GetAgentListResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var GetAgentListResponsesData|null $agentList This type defines the fields in a paginated result set of agents associated with a seller's eDIS account. The response consists of 0 or more sequenced pages that are returned from the complete result set, where each page consists of 0 or more items.
+     * @var GetAgentListResponsesData|null $agentList This container returns a list of all EU AR agents associated with your eDIS account and their information.
     */
     private ?GetAgentListResponsesData $agentList = null;
     
@@ -61,7 +61,7 @@ class GetAgentListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the agentList property value. This type defines the fields in a paginated result set of agents associated with a seller's eDIS account. The response consists of 0 or more sequenced pages that are returned from the complete result set, where each page consists of 0 or more items.
+     * Gets the agentList property value. This container returns a list of all EU AR agents associated with your eDIS account and their information.
      * @return GetAgentListResponsesData|null
     */
     public function getAgentList(): ?GetAgentListResponsesData {
@@ -97,7 +97,7 @@ class GetAgentListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the agentList property value. This type defines the fields in a paginated result set of agents associated with a seller's eDIS account. The response consists of 0 or more sequenced pages that are returned from the complete result set, where each page consists of 0 or more items.
+     * Sets the agentList property value. This container returns a list of all EU AR agents associated with your eDIS account and their information.
      * @param GetAgentListResponsesData|null $value Value to set for the agentList property.
     */
     public function setAgentList(?GetAgentListResponsesData $value): void {

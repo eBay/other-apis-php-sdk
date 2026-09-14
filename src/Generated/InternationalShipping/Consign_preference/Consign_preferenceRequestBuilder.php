@@ -18,6 +18,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Consign_preference;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateConsignPreferenceRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateConsignPreferenceResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetConsignPreferenceListResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -53,7 +54,12 @@ class Consign_preferenceRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Consign_preferenceRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetConsignPreferenceListResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetConsignPreferenceListResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -65,7 +71,12 @@ class Consign_preferenceRequestBuilder extends BaseRequestBuilder
     */
     public function post(CreateConsignPreferenceRequest $body, ?Consign_preferenceRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CreateConsignPreferenceResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CreateConsignPreferenceResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

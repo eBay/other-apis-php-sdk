@@ -32,37 +32,37 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Address|null $address The type that defines the fields for an address.
+     * @var Address|null $address The business address associated with the user's eBay business account.
     */
     private ?Address $address = null;
     
     /**
-     * @var string|null $doingBusinessAs An additional name that is used for their business on eBay. The business name is returned in the <b> name</b> field.
+     * @var string|null $doingBusinessAs An alternate business name or trade name used by the business on eBay.
     */
     private ?string $doingBusinessAs = null;
     
     /**
-     * @var string|null $email The email address of the business account.
+     * @var string|null $email The email address associated with the business account on eBay.
     */
     private ?string $email = null;
     
     /**
-     * @var string|null $name The business name associated with the user's eBay account.
+     * @var string|null $name The official name of the business associated with the eBay user's account.
     */
     private ?string $name = null;
     
     /**
-     * @var Contact|null $primaryContact The type that defines the fields for the information of the contact person for the account.
+     * @var Contact|null $primaryContact The container that returns the contact details of the person who is the primary contact for this account.
     */
     private ?Contact $primaryContact = null;
     
     /**
-     * @var Phone|null $primaryPhone The type that defines the fields for the details of a phone.
+     * @var Phone|null $primaryPhone The container that returns the primary phone number for the business account.
     */
     private ?Phone $primaryPhone = null;
     
     /**
-     * @var Phone|null $secondaryPhone The type that defines the fields for the details of a phone.
+     * @var Phone|null $secondaryPhone The container that returns the secondary phone number for the business account.
     */
     private ?Phone $secondaryPhone = null;
     
@@ -96,7 +96,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the address property value. The type that defines the fields for an address.
+     * Gets the address property value. The business address associated with the user's eBay business account.
      * @return Address|null
     */
     public function getAddress(): ?Address {
@@ -104,7 +104,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the doingBusinessAs property value. An additional name that is used for their business on eBay. The business name is returned in the <b> name</b> field.
+     * Gets the doingBusinessAs property value. An alternate business name or trade name used by the business on eBay.
      * @return string|null
     */
     public function getDoingBusinessAs(): ?string {
@@ -112,7 +112,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the email property value. The email address of the business account.
+     * Gets the email property value. The email address associated with the business account on eBay.
      * @return string|null
     */
     public function getEmail(): ?string {
@@ -138,7 +138,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the name property value. The business name associated with the user's eBay account.
+     * Gets the name property value. The official name of the business associated with the eBay user's account.
      * @return string|null
     */
     public function getName(): ?string {
@@ -146,7 +146,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the primaryContact property value. The type that defines the fields for the information of the contact person for the account.
+     * Gets the primaryContact property value. The container that returns the contact details of the person who is the primary contact for this account.
      * @return Contact|null
     */
     public function getPrimaryContact(): ?Contact {
@@ -154,7 +154,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the primaryPhone property value. The type that defines the fields for the details of a phone.
+     * Gets the primaryPhone property value. The container that returns the primary phone number for the business account.
      * @return Phone|null
     */
     public function getPrimaryPhone(): ?Phone {
@@ -162,7 +162,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the secondaryPhone property value. The type that defines the fields for the details of a phone.
+     * Gets the secondaryPhone property value. The container that returns the secondary phone number for the business account.
      * @return Phone|null
     */
     public function getSecondaryPhone(): ?Phone {
@@ -202,7 +202,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the address property value. The type that defines the fields for an address.
+     * Sets the address property value. The business address associated with the user's eBay business account.
      * @param Address|null $value Value to set for the address property.
     */
     public function setAddress(?Address $value): void {
@@ -210,7 +210,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the doingBusinessAs property value. An additional name that is used for their business on eBay. The business name is returned in the <b> name</b> field.
+     * Sets the doingBusinessAs property value. An alternate business name or trade name used by the business on eBay.
      * @param string|null $value Value to set for the doingBusinessAs property.
     */
     public function setDoingBusinessAs(?string $value): void {
@@ -218,7 +218,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the email property value. The email address of the business account.
+     * Sets the email property value. The email address associated with the business account on eBay.
      * @param string|null $value Value to set for the email property.
     */
     public function setEmail(?string $value): void {
@@ -226,7 +226,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the name property value. The business name associated with the user's eBay account.
+     * Sets the name property value. The official name of the business associated with the eBay user's account.
      * @param string|null $value Value to set for the name property.
     */
     public function setName(?string $value): void {
@@ -234,7 +234,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the primaryContact property value. The type that defines the fields for the information of the contact person for the account.
+     * Sets the primaryContact property value. The container that returns the contact details of the person who is the primary contact for this account.
      * @param Contact|null $value Value to set for the primaryContact property.
     */
     public function setPrimaryContact(?Contact $value): void {
@@ -242,7 +242,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the primaryPhone property value. The type that defines the fields for the details of a phone.
+     * Sets the primaryPhone property value. The container that returns the primary phone number for the business account.
      * @param Phone|null $value Value to set for the primaryPhone property.
     */
     public function setPrimaryPhone(?Phone $value): void {
@@ -250,7 +250,7 @@ class BusinessAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the secondaryPhone property value. The type that defines the fields for the details of a phone.
+     * Sets the secondaryPhone property value. The container that returns the secondary phone number for the business account.
      * @param Phone|null $value Value to set for the secondaryPhone property.
     */
     public function setSecondaryPhone(?Phone $value): void {

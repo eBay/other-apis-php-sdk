@@ -21,6 +21,9 @@ use Microsoft\Kiota\Abstractions\Serialization\Parsable;
 use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
+/**
+ * This type defines the response payload of the <b>getVeroReasonCode</b> method.
+*/
 class VeroReasonCodeResponse implements AdditionalDataHolder, Parsable 
 {
     /**
@@ -29,12 +32,12 @@ class VeroReasonCodeResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $marketplaceId The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The eBay site for which reason code details are returned.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
-     * @var ReasonCodeDetailType|null $reasonCodeDetails This type defines the brief and detailed description of a VeRO infringement, as well as the ID associated with the infringement.
+     * @var ReasonCodeDetailType|null $reasonCodeDetails This container includes both brief and detailed text descriptions for the VeRO program intellectual property right infringement reason, as well as the ID for the reason code
     */
     private ?ReasonCodeDetailType $reasonCodeDetails = null;
     
@@ -69,21 +72,21 @@ class VeroReasonCodeResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'reasonCodeDetails' => fn(ParseNode $n) => $o->setReasonCodeDetails($n->getObjectValue([ReasonCodeDetailType::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The eBay site for which reason code details are returned.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
     /**
-     * Gets the reasonCodeDetails property value. This type defines the brief and detailed description of a VeRO infringement, as well as the ID associated with the infringement.
+     * Gets the reasonCodeDetails property value. This container includes both brief and detailed text descriptions for the VeRO program intellectual property right infringement reason, as well as the ID for the reason code
      * @return ReasonCodeDetailType|null
     */
     public function getReasonCodeDetails(): ?ReasonCodeDetailType {
@@ -95,7 +98,7 @@ class VeroReasonCodeResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeObjectValue('reasonCodeDetails', $this->getReasonCodeDetails());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -109,15 +112,15 @@ class VeroReasonCodeResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The eBay site for which reason code details are returned.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 
     /**
-     * Sets the reasonCodeDetails property value. This type defines the brief and detailed description of a VeRO infringement, as well as the ID associated with the infringement.
+     * Sets the reasonCodeDetails property value. This container includes both brief and detailed text descriptions for the VeRO program intellectual property right infringement reason, as well as the ID for the reason code
      * @param ReasonCodeDetailType|null $value Value to set for the reasonCodeDetails property.
     */
     public function setReasonCodeDetails(?ReasonCodeDetailType $value): void {

@@ -18,6 +18,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_delete_pac
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\DeletePackagesRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\DeletePackagesResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -53,7 +54,13 @@ class Bulk_delete_packagesRequestBuilder extends BaseRequestBuilder
     */
     public function post(DeletePackagesRequest $body, ?Bulk_delete_packagesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [DeletePackagesResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [DeletePackagesResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

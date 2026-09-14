@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container defines the response container for the <b>getTracking</b> method.
+ * This type defines the response container for the <b>getTracking</b> method.
 */
 class GetTrackingDetailResponses implements AdditionalDataHolder, Parsable 
 {

@@ -17,6 +17,7 @@
 namespace EBay\OtherApis\Generated\InternationalShipping\Package\Item\EscapedClone;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\ClonePackageResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -51,7 +52,13 @@ class CloneRequestBuilder extends BaseRequestBuilder
     */
     public function post(?CloneRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ClonePackageResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ClonePackageResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

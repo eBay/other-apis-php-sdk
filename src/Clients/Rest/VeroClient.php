@@ -28,11 +28,6 @@ use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsRequest;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportStatusResponse;
-use EBay\OtherApis\Generated\Vero\Vero_reason_code\Item\WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\Vero\Vero_reason_code\Vero_reason_codeRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\Vero\Vero_report\Vero_reportRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -58,7 +53,7 @@ final class VeroClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
-                new WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\Vero\Vero_reason_code\Item\WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -71,7 +66,7 @@ final class VeroClient
         }
         return $this->call($accessToken, fn($api) =>
             $api->vero_reason_code()->get(
-                new Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\Vero\Vero_reason_code\Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -82,7 +77,7 @@ final class VeroClient
         return $this->call($accessToken, fn($api) =>
             $api->vero_report()->post(
                 $body,
-                new Vero_reportRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\Vero\Vero_report\Vero_reportRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -97,9 +92,9 @@ final class VeroClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_report()->byVero_report_id($veroReportId)->get(
-                new WithVero_report_ItemRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: WithVero_report_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilderGetRequestConfiguration::createQueryParameters(
                         includeItemDetails: $includeItemDetails,
                     ),
                 )
@@ -119,9 +114,9 @@ final class VeroClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_report_items()->get(
-                new Vero_report_itemsRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Vero_report_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         filter: $filter,
                         itemId: $itemId,
                         limit: $limit,

@@ -21,6 +21,7 @@ namespace EBay\OtherApis;
 use EBay\OtherApis\Clients\Rest\IdentityClient;
 use EBay\OtherApis\Clients\Rest\InternationalShippingClient;
 use EBay\OtherApis\Clients\Rest\TranslationClient;
+use EBay\OtherApis\Clients\Rest\VeroApiV2Client;
 use EBay\OtherApis\Clients\Rest\VeroClient;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
@@ -36,6 +37,7 @@ final class OtherApisClient
     public readonly IdentityClient $identity;
     public readonly InternationalShippingClient $internationalShipping;
     public readonly TranslationClient $translation;
+    public readonly VeroApiV2Client $veroApiV2;
     public readonly VeroClient $vero;
 
     public function __construct(
@@ -47,6 +49,7 @@ final class OtherApisClient
         $this->identity = new IdentityClient($guzzle, $config);
         $this->internationalShipping = new InternationalShippingClient($guzzle, $config);
         $this->translation = new TranslationClient($guzzle, $config);
+        $this->veroApiV2 = new VeroApiV2Client($guzzle, $config);
         $this->vero = new VeroClient($guzzle, $config);
     }
 

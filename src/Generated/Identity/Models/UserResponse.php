@@ -27,9 +27,9 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 class UserResponse implements AdditionalDataHolder, Parsable 
 {
     /**
-     * @var string|null $accountType Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in the following countries:   <br /><br />EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL <br /><br /><b> Valid Values:</b> BUSINESS or INDIVIDUAL <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:AccountTypeEnum'>eBay API documentation</a>
+     * @var AccountTypeEnum|null $accountType Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be <code>BUSINESS</code>. If they register for a private account, this value will be <code>INDIVIDUAL</code>. This designation is required by the tax laws in the following countries:   <ul><li>EBAY_AT</li><li>EBAY_BE</li><li>EBAY_CH</li><li>EBAY_DE</li><li>EBAY_ES</li><li>EBAY_FR</li><li>EBAY_GB</li><li>EBAY_IE</li><li>EBAY_IT</li><li>EBAY_PL</li></ul> <br /><b> Valid Values:</b> <code>BUSINESS</code> or <code>INDIVIDUAL</code> <br /><br />Code so that your app gracefully handles any future changes to this list.
     */
-    private ?string $accountType = null;
+    private ?AccountTypeEnum $accountType = null;
     
     /**
      * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
@@ -37,24 +37,24 @@ class UserResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BusinessAccount|null $businessAccount The type that defines the fields for the business account information.
+     * @var BusinessAccount|null $businessAccount The container that returns the business account information of the user.
     */
     private ?BusinessAccount $businessAccount = null;
     
     /**
-     * @var IndividualAccount|null $individualAccount The type that defines the fields for the information of an individual account.
+     * @var IndividualAccount|null $individualAccount The account information of the user.
     */
     private ?IndividualAccount $individualAccount = null;
     
     /**
-     * @var string|null $registrationMarketplaceId The eBay site on which the account is registered. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $registrationMarketplaceId The unique identifier for the eBay marketplace in which the user registered their account.
     */
-    private ?string $registrationMarketplaceId = null;
+    private ?MarketplaceIdEnum $registrationMarketplaceId = null;
     
     /**
-     * @var string|null $status Indicates the user's account status. Possible values: <code>CONFIRMED</code>, <code>UNCONFIRMED</code>, <code>ACCOUNTONHOLD</code> and <code>UNDETERMINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:UserStatusEnum'>eBay API documentation</a>
+     * @var UserStatusEnum|null $status The current status of the user's eBay account, such as whether it is confirmed, unconfirmed, on hold, or undetermined.
     */
-    private ?string $status = null;
+    private ?UserStatusEnum $status = null;
     
     /**
      * @var string|null $userId The eBay immutable user ID of the user's account and can always be used to identify the user.
@@ -62,7 +62,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     private ?string $userId = null;
     
     /**
-     * @var string|null $username The user name, which was specific by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span>
+     * @var string|null $username The user name, which was specified by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
     */
     private ?string $username = null;
     
@@ -83,10 +83,10 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the accountType property value. Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in the following countries:   <br /><br />EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL <br /><br /><b> Valid Values:</b> BUSINESS or INDIVIDUAL <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:AccountTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the accountType property value. Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be <code>BUSINESS</code>. If they register for a private account, this value will be <code>INDIVIDUAL</code>. This designation is required by the tax laws in the following countries:   <ul><li>EBAY_AT</li><li>EBAY_BE</li><li>EBAY_CH</li><li>EBAY_DE</li><li>EBAY_ES</li><li>EBAY_FR</li><li>EBAY_GB</li><li>EBAY_IE</li><li>EBAY_IT</li><li>EBAY_PL</li></ul> <br /><b> Valid Values:</b> <code>BUSINESS</code> or <code>INDIVIDUAL</code> <br /><br />Code so that your app gracefully handles any future changes to this list.
+     * @return AccountTypeEnum|null
     */
-    public function getAccountType(): ?string {
+    public function getAccountType(): ?AccountTypeEnum {
         return $this->accountType;
     }
 
@@ -99,7 +99,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the businessAccount property value. The type that defines the fields for the business account information.
+     * Gets the businessAccount property value. The container that returns the business account information of the user.
      * @return BusinessAccount|null
     */
     public function getBusinessAccount(): ?BusinessAccount {
@@ -113,18 +113,18 @@ class UserResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'accountType' => fn(ParseNode $n) => $o->setAccountType($n->getStringValue()),
+            'accountType' => fn(ParseNode $n) => $o->setAccountType($n->getEnumValue(AccountTypeEnum::class)),
             'businessAccount' => fn(ParseNode $n) => $o->setBusinessAccount($n->getObjectValue([BusinessAccount::class, 'createFromDiscriminatorValue'])),
             'individualAccount' => fn(ParseNode $n) => $o->setIndividualAccount($n->getObjectValue([IndividualAccount::class, 'createFromDiscriminatorValue'])),
-            'registrationMarketplaceId' => fn(ParseNode $n) => $o->setRegistrationMarketplaceId($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'registrationMarketplaceId' => fn(ParseNode $n) => $o->setRegistrationMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(UserStatusEnum::class)),
             'userId' => fn(ParseNode $n) => $o->setUserId($n->getStringValue()),
             'username' => fn(ParseNode $n) => $o->setUsername($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the individualAccount property value. The type that defines the fields for the information of an individual account.
+     * Gets the individualAccount property value. The account information of the user.
      * @return IndividualAccount|null
     */
     public function getIndividualAccount(): ?IndividualAccount {
@@ -132,18 +132,18 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the registrationMarketplaceId property value. The eBay site on which the account is registered. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the registrationMarketplaceId property value. The unique identifier for the eBay marketplace in which the user registered their account.
+     * @return MarketplaceIdEnum|null
     */
-    public function getRegistrationMarketplaceId(): ?string {
+    public function getRegistrationMarketplaceId(): ?MarketplaceIdEnum {
         return $this->registrationMarketplaceId;
     }
 
     /**
-     * Gets the status property value. Indicates the user's account status. Possible values: <code>CONFIRMED</code>, <code>UNCONFIRMED</code>, <code>ACCOUNTONHOLD</code> and <code>UNDETERMINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:UserStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The current status of the user's eBay account, such as whether it is confirmed, unconfirmed, on hold, or undetermined.
+     * @return UserStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?UserStatusEnum {
         return $this->status;
     }
 
@@ -156,7 +156,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the username property value. The user name, which was specific by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span>
+     * Gets the username property value. The user name, which was specified by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
      * @return string|null
     */
     public function getUsername(): ?string {
@@ -168,21 +168,21 @@ class UserResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('accountType', $this->getAccountType());
+        $writer->writeEnumValue('accountType', $this->getAccountType());
         $writer->writeObjectValue('businessAccount', $this->getBusinessAccount());
         $writer->writeObjectValue('individualAccount', $this->getIndividualAccount());
-        $writer->writeStringValue('registrationMarketplaceId', $this->getRegistrationMarketplaceId());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('registrationMarketplaceId', $this->getRegistrationMarketplaceId());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeStringValue('userId', $this->getUserId());
         $writer->writeStringValue('username', $this->getUsername());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
     /**
-     * Sets the accountType property value. Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be BUSINESS. If they register for a private account, this value will be INDIVIDUAL. This designation is required by the tax laws in the following countries:   <br /><br />EBAY_AT, EBAY_BE, EBAY_CH, EBAY_DE, EBAY_ES, EBAY_FR, EBAY_GB, EBAY_IE, EBAY_IT, EBAY_PL <br /><br /><b> Valid Values:</b> BUSINESS or INDIVIDUAL <br /><br />Code so that your app gracefully handles any future changes to this list. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:AccountTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the accountType property.
+     * Sets the accountType property value. Indicates the user account type. This is determined when the user registers with eBay. If they register for a business account, this value will be <code>BUSINESS</code>. If they register for a private account, this value will be <code>INDIVIDUAL</code>. This designation is required by the tax laws in the following countries:   <ul><li>EBAY_AT</li><li>EBAY_BE</li><li>EBAY_CH</li><li>EBAY_DE</li><li>EBAY_ES</li><li>EBAY_FR</li><li>EBAY_GB</li><li>EBAY_IE</li><li>EBAY_IT</li><li>EBAY_PL</li></ul> <br /><b> Valid Values:</b> <code>BUSINESS</code> or <code>INDIVIDUAL</code> <br /><br />Code so that your app gracefully handles any future changes to this list.
+     * @param AccountTypeEnum|null $value Value to set for the accountType property.
     */
-    public function setAccountType(?string $value): void {
+    public function setAccountType(?AccountTypeEnum $value): void {
         $this->accountType = $value;
     }
 
@@ -195,7 +195,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the businessAccount property value. The type that defines the fields for the business account information.
+     * Sets the businessAccount property value. The container that returns the business account information of the user.
      * @param BusinessAccount|null $value Value to set for the businessAccount property.
     */
     public function setBusinessAccount(?BusinessAccount $value): void {
@@ -203,7 +203,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the individualAccount property value. The type that defines the fields for the information of an individual account.
+     * Sets the individualAccount property value. The account information of the user.
      * @param IndividualAccount|null $value Value to set for the individualAccount property.
     */
     public function setIndividualAccount(?IndividualAccount $value): void {
@@ -211,18 +211,18 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the registrationMarketplaceId property value. The eBay site on which the account is registered. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the registrationMarketplaceId property.
+     * Sets the registrationMarketplaceId property value. The unique identifier for the eBay marketplace in which the user registered their account.
+     * @param MarketplaceIdEnum|null $value Value to set for the registrationMarketplaceId property.
     */
-    public function setRegistrationMarketplaceId(?string $value): void {
+    public function setRegistrationMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->registrationMarketplaceId = $value;
     }
 
     /**
-     * Sets the status property value. Indicates the user's account status. Possible values: <code>CONFIRMED</code>, <code>UNCONFIRMED</code>, <code>ACCOUNTONHOLD</code> and <code>UNDETERMINED</code>. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/api:UserStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The current status of the user's eBay account, such as whether it is confirmed, unconfirmed, on hold, or undetermined.
+     * @param UserStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?UserStatusEnum $value): void {
         $this->status = $value;
     }
 
@@ -235,7 +235,7 @@ class UserResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the username property value. The user name, which was specific by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span>
+     * Sets the username property value. The user name, which was specified by the user when they created the account. <br /><br /><span class="tablenote"><b>Note: </b> This value can be changed by the user.</span><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, select developers will no longer receive username data for U.S. users through this field. Instead, an immutable user ID will be returned in its place. For more information, please refer to <a href="/api-docs/static/data-handling-update.html">Data Handling Compliance</a>. </span>
      * @param string|null $value Value to set for the username property.
     */
     public function setUsername(?string $value): void {

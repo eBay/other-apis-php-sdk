@@ -17,6 +17,7 @@
 namespace EBay\OtherApis\Generated\InternationalShipping\Complaint;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\AddComplaintRequest;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -52,7 +53,12 @@ class ComplaintRequestBuilder extends BaseRequestBuilder
     */
     public function post(AddComplaintRequest $body, ?ComplaintRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [ComplaintPostResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [ComplaintPostResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

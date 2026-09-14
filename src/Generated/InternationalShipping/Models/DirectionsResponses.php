@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container specifies direction information for a shipping service.
+ * This type specifies direction information for a shipping service.
 */
 class DirectionsResponses implements AdditionalDataHolder, Parsable 
 {

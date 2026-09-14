@@ -19,6 +19,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Bundle;
 use EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\WithBundle_ItemRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateBundleRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateBundleResponse;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -33,7 +34,7 @@ class BundleRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/OtherApis/Generated/InternationalShipping.bundle.item collection
-     * @param string $bundle_id This path parameter specifies the unique identifier of the bundle being retrieved.<br><br>This ID value is returned when creating a bundle through the <a href="/api-docs/sell/edelivery_international_shipping/resources/bundle/methods/createBundle" target="_blank">createBundle</a> method.
+     * @param string $bundle_id This path parameter specifies the unique identifier of the bundle being retrieved.<br><br>This ID value is returned when creating a bundle through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-bundle-createbundle">createBundle</a> method.
      * @return WithBundle_ItemRequestBuilder
     */
     public function byBundle_id(string $bundle_id): WithBundle_ItemRequestBuilder {
@@ -65,7 +66,12 @@ class BundleRequestBuilder extends BaseRequestBuilder
     */
     public function post(CreateBundleRequest $body, ?BundleRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CreateBundleResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CreateBundleResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

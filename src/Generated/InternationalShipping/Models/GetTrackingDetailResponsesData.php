@@ -32,7 +32,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $city The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * @var string|null $city The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
     */
     private ?string $city = null;
     
@@ -52,7 +52,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?string $descriptionZh = null;
     
     /**
-     * @var string|null $district The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * @var string|null $district The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
     */
     private ?string $district = null;
     
@@ -67,7 +67,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?string $eventTime = null;
     
     /**
-     * @var string|null $province The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * @var string|null $province The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
     */
     private ?string $province = null;
     
@@ -106,7 +106,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the city property value. The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Gets the city property value. The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @return string|null
     */
     public function getCity(): ?string {
@@ -138,7 +138,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the district property value. The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Gets the district property value. The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @return string|null
     */
     public function getDistrict(): ?string {
@@ -182,7 +182,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the province property value. The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Gets the province property value. The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @return string|null
     */
     public function getProvince(): ?string {
@@ -232,7 +232,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the city property value. The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Sets the city property value. The city code in which the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @param string|null $value Value to set for the city property.
     */
     public function setCity(?string $value): void {
@@ -264,7 +264,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the district property value. The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Sets the district property value. The district code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @param string|null $value Value to set for the district property.
     */
     public function setDistrict(?string $value): void {
@@ -288,7 +288,7 @@ class GetTrackingDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the province property value. The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
+     * Sets the province property value. The province code where the tracking event occurred.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for province district codes.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @param string|null $value Value to set for the province property.
     */
     public function setProvince(?string $value): void {

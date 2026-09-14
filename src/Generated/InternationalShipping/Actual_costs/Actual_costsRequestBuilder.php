@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Actual_costs;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetActualCostResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,13 @@ class Actual_costsRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Actual_costsRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetActualCostResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetActualCostResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

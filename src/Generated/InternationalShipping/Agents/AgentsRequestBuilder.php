@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Agents;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetAgentListResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -51,7 +52,12 @@ class AgentsRequestBuilder extends BaseRequestBuilder
     */
     public function get(?AgentsRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetAgentListResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetAgentListResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

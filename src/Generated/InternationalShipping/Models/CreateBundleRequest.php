@@ -32,7 +32,7 @@ class CreateBundleRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateBundleRequestData|null $bundle This type defines the information used to create a bundle.
+     * @var CreateBundleRequestData|null $bundle This container is used to specify the information needed to create a bundle, such as the consign address associated with the bundle and the tracking numbers of the packages to be included in the bundle.
     */
     private ?CreateBundleRequestData $bundle = null;
     
@@ -61,7 +61,7 @@ class CreateBundleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bundle property value. This type defines the information used to create a bundle.
+     * Gets the bundle property value. This container is used to specify the information needed to create a bundle, such as the consign address associated with the bundle and the tracking numbers of the packages to be included in the bundle.
      * @return CreateBundleRequestData|null
     */
     public function getBundle(): ?CreateBundleRequestData {
@@ -97,7 +97,7 @@ class CreateBundleRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bundle property value. This type defines the information used to create a bundle.
+     * Sets the bundle property value. This container is used to specify the information needed to create a bundle, such as the consign address associated with the bundle and the tracking numbers of the packages to be included in the bundle.
      * @param CreateBundleRequestData|null $value Value to set for the bundle property.
     */
     public function setBundle(?CreateBundleRequestData $value): void {

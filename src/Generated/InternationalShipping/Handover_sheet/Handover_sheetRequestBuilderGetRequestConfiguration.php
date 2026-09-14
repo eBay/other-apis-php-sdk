@@ -42,7 +42,7 @@ class Handover_sheetRequestBuilderGetRequestConfiguration extends BaseRequestCon
 
     /**
      * Instantiates a new Handover_sheetRequestBuilderGetQueryParameters.
-     * @param string|null $tracking_numbers This query parameter specifies an array of tracking numbers for the packages for which to retrieve a handover sheet.<br><br>Tracking numbers are returned when creating packages through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.<br><br>Up to 200 tracking numbers can be provided. Multiple tracking numbers can be input as individual query parameters. For example,<br><br><code>tracking_numbers=E***********************N&tracking_numbers=E***********************Q</code>
+     * @param string|null $tracking_numbers This query parameter specifies an array of tracking numbers for the packages for which to retrieve a handover sheet.<br><br>Tracking numbers are returned when creating packages through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.<br><br>Up to 200 tracking numbers can be provided. Multiple tracking numbers can be input as individual query parameters. For example, <br><br><code>tracking_numbers=E***********************N&tracking_numbers=E***********************Q</code>
      * @return Handover_sheetRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $tracking_numbers = null): Handover_sheetRequestBuilderGetQueryParameters {

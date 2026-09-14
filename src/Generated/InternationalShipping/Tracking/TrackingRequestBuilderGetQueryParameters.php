@@ -23,13 +23,13 @@ class TrackingRequestBuilderGetQueryParameters
 {
     /**
      * @QueryParameter("tracking_number")
-     * @var string|null $trackingNumber This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @var string|null $trackingNumber This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
     */
     public ?string $trackingNumber = null;
     
     /**
      * Instantiates a new TrackingRequestBuilderGetQueryParameters and sets the default values.
-     * @param string|null $tracking_number This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @param string|null $tracking_number This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
     */
     public function __construct(?string $tracking_number = null) {
         $this->trackingNumber = $tracking_number;

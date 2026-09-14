@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * The type that defines the fields for the information of an individual account.
+ * The type that defines the fields for information about an individual eBay account.
 */
 class IndividualAccount implements AdditionalDataHolder, Parsable 
 {
@@ -47,17 +47,17 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     private ?string $lastName = null;
     
     /**
-     * @var Phone|null $primaryPhone The type that defines the fields for the details of a phone.
+     * @var Phone|null $primaryPhone The primary phone number associated with the individual account, if available.
     */
     private ?Phone $primaryPhone = null;
     
     /**
-     * @var Address|null $registrationAddress The type that defines the fields for an address.
+     * @var Address|null $registrationAddress The container that returns the eBay user's address information.
     */
     private ?Address $registrationAddress = null;
     
     /**
-     * @var Phone|null $secondaryPhone The type that defines the fields for the details of a phone.
+     * @var Phone|null $secondaryPhone A secondary phone number registered with the individual eBay account.
     */
     private ?Phone $secondaryPhone = null;
     
@@ -126,7 +126,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the primaryPhone property value. The type that defines the fields for the details of a phone.
+     * Gets the primaryPhone property value. The primary phone number associated with the individual account, if available.
      * @return Phone|null
     */
     public function getPrimaryPhone(): ?Phone {
@@ -134,7 +134,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the registrationAddress property value. The type that defines the fields for an address.
+     * Gets the registrationAddress property value. The container that returns the eBay user's address information.
      * @return Address|null
     */
     public function getRegistrationAddress(): ?Address {
@@ -142,7 +142,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the secondaryPhone property value. The type that defines the fields for the details of a phone.
+     * Gets the secondaryPhone property value. A secondary phone number registered with the individual eBay account.
      * @return Phone|null
     */
     public function getSecondaryPhone(): ?Phone {
@@ -196,7 +196,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the primaryPhone property value. The type that defines the fields for the details of a phone.
+     * Sets the primaryPhone property value. The primary phone number associated with the individual account, if available.
      * @param Phone|null $value Value to set for the primaryPhone property.
     */
     public function setPrimaryPhone(?Phone $value): void {
@@ -204,7 +204,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the registrationAddress property value. The type that defines the fields for an address.
+     * Sets the registrationAddress property value. The container that returns the eBay user's address information.
      * @param Address|null $value Value to set for the registrationAddress property.
     */
     public function setRegistrationAddress(?Address $value): void {
@@ -212,7 +212,7 @@ class IndividualAccount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the secondaryPhone property value. The type that defines the fields for the details of a phone.
+     * Sets the secondaryPhone property value. A secondary phone number registered with the individual eBay account.
      * @param Phone|null $value Value to set for the secondaryPhone property.
     */
     public function setSecondaryPhone(?Phone $value): void {

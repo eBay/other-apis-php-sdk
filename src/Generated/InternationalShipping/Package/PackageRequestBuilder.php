@@ -18,6 +18,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Package;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\AddPackageRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\AddPackageResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_cancel_packages\Bulk_cancel_packagesRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_confirm_packages\Bulk_confirm_packagesRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_delete_packages\Bulk_delete_packagesRequestBuilder;
@@ -57,7 +58,7 @@ class PackageRequestBuilder extends BaseRequestBuilder
     
     /**
      * Gets an item from the EBay/OtherApis/Generated/InternationalShipping.package.item collection
-     * @param string $order_line_item_Id This path parameter specifies the unique identifier of the package being retrieved.<br><br>This ID value is returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @param string $order_line_item_Id This path parameter specifies the unique identifier of the package being retrieved.<br><br>This ID value is returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @return Order_line_item_ItemRequestBuilder
     */
     public function byOrder_line_item_Id(string $order_line_item_Id): Order_line_item_ItemRequestBuilder {
@@ -89,7 +90,12 @@ class PackageRequestBuilder extends BaseRequestBuilder
     */
     public function post(AddPackageRequest $body, ?PackageRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [AddPackageResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [AddPackageResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

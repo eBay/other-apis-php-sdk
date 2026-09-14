@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\Identity\User;
 
+use EBay\OtherApis\Generated\Identity\Models\Error;
 use EBay\OtherApis\Generated\Identity\Models\UserResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,22 @@ class EmptyPathSegmentRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method retrieves the account profile information for an authenticated user, which requires a <a href="/api-docs/static/oauth-authorization-code-grant.html">User access token</a>. What is returned is controlled by the <a href="#scopes">scopes</a>. <p>For a business account you use the default scope <code>commerce.identity.readonly</code>, which returns all the fields in the <a href="/api-docs/commerce/identity/resources/user/methods/getUser#response.businessAccount">businessAccount</a> container. These are returned  because this is all public information.</p>  <p> For an individual account, the fields returned in the <a href="/api-docs/commerce/identity/resources/user/methods/getUser#response.individualAccount">individualAccount</a> container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the <a href="/api-docs/commerce/identity/overview.html">Identity API Overview</a>.</p> <p>In the Sandbox, this API returns mock data. <b>Note: </b> You must use the correct scope or scopes for the data you want returned.</p>
+     * This method retrieves the account profile information for an authenticated user, which requires a <strong>User access token</strong>. What is returned is controlled by the <strong>scopes</strong>. <p>For a business account you use the default scope <code>commerce.identity.readonly</code>, which returns all the fields in the <strong>businessAccount</strong> container. These are returned because this is all public information.</p>  <p> For an individual account, the fields returned in the <strong>individualAccount</strong> container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the <strong>Identity API scopes</strong>.</p>
      * @param EmptyPathSegmentRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<UserResponse|null>
      * @throws Exception
     */
     public function get(?EmptyPathSegmentRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [UserResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [UserResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method retrieves the account profile information for an authenticated user, which requires a <a href="/api-docs/static/oauth-authorization-code-grant.html">User access token</a>. What is returned is controlled by the <a href="#scopes">scopes</a>. <p>For a business account you use the default scope <code>commerce.identity.readonly</code>, which returns all the fields in the <a href="/api-docs/commerce/identity/resources/user/methods/getUser#response.businessAccount">businessAccount</a> container. These are returned  because this is all public information.</p>  <p> For an individual account, the fields returned in the <a href="/api-docs/commerce/identity/resources/user/methods/getUser#response.individualAccount">individualAccount</a> container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the <a href="/api-docs/commerce/identity/overview.html">Identity API Overview</a>.</p> <p>In the Sandbox, this API returns mock data. <b>Note: </b> You must use the correct scope or scopes for the data you want returned.</p>
+     * This method retrieves the account profile information for an authenticated user, which requires a <strong>User access token</strong>. What is returned is controlled by the <strong>scopes</strong>. <p>For a business account you use the default scope <code>commerce.identity.readonly</code>, which returns all the fields in the <strong>businessAccount</strong> container. These are returned because this is all public information.</p>  <p> For an individual account, the fields returned in the <strong>individualAccount</strong> container are based on the scope you use. Using the default scope, only public information, such as eBay user ID, are returned. For details about what each scope returns, see the <strong>Identity API scopes</strong>.</p>
      * @param EmptyPathSegmentRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

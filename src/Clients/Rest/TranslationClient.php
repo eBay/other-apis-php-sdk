@@ -24,7 +24,6 @@ use EBay\OtherApis\Configuration\RequestOptions;
 use EBay\OtherApis\Generated\Translation\TranslationApiClient;
 use EBay\OtherApis\Generated\Translation\Models\TranslateRequest;
 use EBay\OtherApis\Generated\Translation\Models\TranslateResponse;
-use EBay\OtherApis\Generated\Translation\Translate\TranslateRequestBuilderPostRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -51,7 +50,7 @@ final class TranslationClient
         return $this->call($accessToken, fn($api) =>
             $api->translate()->post(
                 $body,
-                new TranslateRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\Translation\Translate\TranslateRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }

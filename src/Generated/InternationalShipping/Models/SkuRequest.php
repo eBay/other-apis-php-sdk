@@ -32,9 +32,19 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $elecQualificationId The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/api-docs/sell/edelivery_international_shipping/resources/battery_qualifications/methods/getBatteryQualifications" target="_blank">getBatteryQualifications</a> method.
+     * @var string|null $cpscProfileId The unique identifier of a CPSC profile.
+    */
+    private ?string $cpscProfileId = null;
+    
+    /**
+     * @var string|null $elecQualificationId The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-battery_qualifications-getbatteryqualifications">getBatteryQualifications</a> method.
     */
     private ?string $elecQualificationId = null;
+    
+    /**
+     * @var ExemptionTypeEnum|null $exemptionType The exemption type associated with the CPSC profile.
+    */
+    private ?ExemptionTypeEnum $exemptionType = null;
     
     /**
      * @var array<FDCSkuRequest>|null $fdcSkus This array lists the FDC SKUs associated with the item. An FDC SKU is the SKU label in a forward deployment center.<div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> Please contact customer service before using these fields.</p></div>
@@ -57,9 +67,9 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     private ?float $length = null;
     
     /**
-     * @var string|null $liBatteryType If the item contains a battery, this field indicates the type of battery the item contains. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
+     * @var LiBatteryTypeEnum|null $liBatteryType If the item contains a battery, this field indicates the type of battery the item contains.
     */
-    private ?string $liBatteryType = null;
+    private ?LiBatteryTypeEnum $liBatteryType = null;
     
     /**
      * @var string|null $nameEn The English name of the item.
@@ -77,7 +87,7 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     private ?string $origin = null;
     
     /**
-     * @var Amount|null $price This type defines the monetary value of an amount. 
+     * @var Amount|null $price The declared price of the item.
     */
     private ?Amount $price = null;
     
@@ -131,11 +141,27 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the elecQualificationId property value. The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/api-docs/sell/edelivery_international_shipping/resources/battery_qualifications/methods/getBatteryQualifications" target="_blank">getBatteryQualifications</a> method.
+     * Gets the cpscProfileId property value. The unique identifier of a CPSC profile.
+     * @return string|null
+    */
+    public function getCpscProfileId(): ?string {
+        return $this->cpscProfileId;
+    }
+
+    /**
+     * Gets the elecQualificationId property value. The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-battery_qualifications-getbatteryqualifications">getBatteryQualifications</a> method.
      * @return string|null
     */
     public function getElecQualificationId(): ?string {
         return $this->elecQualificationId;
+    }
+
+    /**
+     * Gets the exemptionType property value. The exemption type associated with the CPSC profile.
+     * @return ExemptionTypeEnum|null
+    */
+    public function getExemptionType(): ?ExemptionTypeEnum {
+        return $this->exemptionType;
     }
 
     /**
@@ -153,12 +179,14 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
+            'cpscProfileId' => fn(ParseNode $n) => $o->setCpscProfileId($n->getStringValue()),
             'elecQualificationId' => fn(ParseNode $n) => $o->setElecQualificationId($n->getStringValue()),
+            'exemptionType' => fn(ParseNode $n) => $o->setExemptionType($n->getEnumValue(ExemptionTypeEnum::class)),
             'fdcSkus' => fn(ParseNode $n) => $o->setFdcSkus($n->getCollectionOfObjectValues([FDCSkuRequest::class, 'createFromDiscriminatorValue'])),
             'height' => fn(ParseNode $n) => $o->setHeight($n->getFloatValue()),
             'isLiBattery' => fn(ParseNode $n) => $o->setIsLiBattery($n->getBooleanValue()),
             'length' => fn(ParseNode $n) => $o->setLength($n->getFloatValue()),
-            'liBatteryType' => fn(ParseNode $n) => $o->setLiBatteryType($n->getStringValue()),
+            'liBatteryType' => fn(ParseNode $n) => $o->setLiBatteryType($n->getEnumValue(LiBatteryTypeEnum::class)),
             'nameEn' => fn(ParseNode $n) => $o->setNameEn($n->getStringValue()),
             'nameZh' => fn(ParseNode $n) => $o->setNameZh($n->getStringValue()),
             'origin' => fn(ParseNode $n) => $o->setOrigin($n->getStringValue()),
@@ -196,10 +224,10 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the liBatteryType property value. If the item contains a battery, this field indicates the type of battery the item contains. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the liBatteryType property value. If the item contains a battery, this field indicates the type of battery the item contains.
+     * @return LiBatteryTypeEnum|null
     */
-    public function getLiBatteryType(): ?string {
+    public function getLiBatteryType(): ?LiBatteryTypeEnum {
         return $this->liBatteryType;
     }
 
@@ -228,7 +256,7 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the price property value. This type defines the monetary value of an amount. 
+     * Gets the price property value. The declared price of the item.
      * @return Amount|null
     */
     public function getPrice(): ?Amount {
@@ -280,12 +308,14 @@ class SkuRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
+        $writer->writeStringValue('cpscProfileId', $this->getCpscProfileId());
         $writer->writeStringValue('elecQualificationId', $this->getElecQualificationId());
+        $writer->writeEnumValue('exemptionType', $this->getExemptionType());
         $writer->writeCollectionOfObjectValues('fdcSkus', $this->getFdcSkus());
         $writer->writeFloatValue('height', $this->getHeight());
         $writer->writeBooleanValue('isLiBattery', $this->getIsLiBattery());
         $writer->writeFloatValue('length', $this->getLength());
-        $writer->writeStringValue('liBatteryType', $this->getLiBatteryType());
+        $writer->writeEnumValue('liBatteryType', $this->getLiBatteryType());
         $writer->writeStringValue('nameEn', $this->getNameEn());
         $writer->writeStringValue('nameZh', $this->getNameZh());
         $writer->writeStringValue('origin', $this->getOrigin());
@@ -307,11 +337,27 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the elecQualificationId property value. The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/api-docs/sell/edelivery_international_shipping/resources/battery_qualifications/methods/getBatteryQualifications" target="_blank">getBatteryQualifications</a> method.
+     * Sets the cpscProfileId property value. The unique identifier of a CPSC profile.
+     * @param string|null $value Value to set for the cpscProfileId property.
+    */
+    public function setCpscProfileId(?string $value): void {
+        $this->cpscProfileId = $value;
+    }
+
+    /**
+     * Sets the elecQualificationId property value. The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.<br><br>This value is returned in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-battery_qualifications-getbatteryqualifications">getBatteryQualifications</a> method.
      * @param string|null $value Value to set for the elecQualificationId property.
     */
     public function setElecQualificationId(?string $value): void {
         $this->elecQualificationId = $value;
+    }
+
+    /**
+     * Sets the exemptionType property value. The exemption type associated with the CPSC profile.
+     * @param ExemptionTypeEnum|null $value Value to set for the exemptionType property.
+    */
+    public function setExemptionType(?ExemptionTypeEnum $value): void {
+        $this->exemptionType = $value;
     }
 
     /**
@@ -347,10 +393,10 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the liBatteryType property value. If the item contains a battery, this field indicates the type of battery the item contains. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the liBatteryType property.
+     * Sets the liBatteryType property value. If the item contains a battery, this field indicates the type of battery the item contains.
+     * @param LiBatteryTypeEnum|null $value Value to set for the liBatteryType property.
     */
-    public function setLiBatteryType(?string $value): void {
+    public function setLiBatteryType(?LiBatteryTypeEnum $value): void {
         $this->liBatteryType = $value;
     }
 
@@ -379,7 +425,7 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the price property value. This type defines the monetary value of an amount. 
+     * Sets the price property value. The declared price of the item.
      * @param Amount|null $value Value to set for the price property.
     */
     public function setPrice(?Amount $value): void {

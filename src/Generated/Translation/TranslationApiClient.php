@@ -34,7 +34,7 @@ use Microsoft\Kiota\Serialization\Text\TextSerializationWriterFactory;
 class TranslationApiClient extends BaseRequestBuilder 
 {
     /**
-     * The translate property
+     * Translate listing content
     */
     public function translate(): TranslateRequestBuilder {
         return new TranslateRequestBuilder($this->pathParameters, $this->requestAdapter);

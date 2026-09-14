@@ -18,6 +18,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_cancel_pac
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\CancelPackagesRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\CancelPackagesResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -53,7 +54,13 @@ class Bulk_cancel_packagesRequestBuilder extends BaseRequestBuilder
     */
     public function post(CancelPackagesRequest $body, ?Bulk_cancel_packagesRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CancelPackagesResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CancelPackagesResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

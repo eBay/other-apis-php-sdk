@@ -42,7 +42,7 @@ class TrackingRequestBuilderGetRequestConfiguration extends BaseRequestConfigura
 
     /**
      * Instantiates a new TrackingRequestBuilderGetQueryParameters.
-     * @param string|null $tracking_number This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @param string|null $tracking_number This query parameter specifies the tracking number for which to retrieve current tracking event details.<br><br>This value is returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @return TrackingRequestBuilderGetQueryParameters
     */
     public static function createQueryParameters(?string $tracking_number = null): TrackingRequestBuilderGetQueryParameters {

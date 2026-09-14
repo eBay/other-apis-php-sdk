@@ -42,9 +42,9 @@ class ReportedItem implements AdditionalDataHolder, Parsable
     private ?string $reasonForFailure = null;
     
     /**
-     * @var string|null $status The current status of the VeRO reported item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportedItemStatusEnum'>eBay API documentation</a>
+     * @var VeroReportedItemStatusEnum|null $status The current status of the VeRO reported item.
     */
-    private ?string $status = null;
+    private ?VeroReportedItemStatusEnum $status = null;
     
     /**
      * Instantiates a new ReportedItem and sets the default values.
@@ -79,7 +79,7 @@ class ReportedItem implements AdditionalDataHolder, Parsable
         return  [
             'itemId' => fn(ParseNode $n) => $o->setItemId($n->getStringValue()),
             'reasonForFailure' => fn(ParseNode $n) => $o->setReasonForFailure($n->getStringValue()),
-            'status' => fn(ParseNode $n) => $o->setStatus($n->getStringValue()),
+            'status' => fn(ParseNode $n) => $o->setStatus($n->getEnumValue(VeroReportedItemStatusEnum::class)),
         ];
     }
 
@@ -100,10 +100,10 @@ class ReportedItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the status property value. The current status of the VeRO reported item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportedItemStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the status property value. The current status of the VeRO reported item.
+     * @return VeroReportedItemStatusEnum|null
     */
-    public function getStatus(): ?string {
+    public function getStatus(): ?VeroReportedItemStatusEnum {
         return $this->status;
     }
 
@@ -114,7 +114,7 @@ class ReportedItem implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('itemId', $this->getItemId());
         $writer->writeStringValue('reasonForFailure', $this->getReasonForFailure());
-        $writer->writeStringValue('status', $this->getStatus());
+        $writer->writeEnumValue('status', $this->getStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -143,10 +143,10 @@ class ReportedItem implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the status property value. The current status of the VeRO reported item. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportedItemStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the status property.
+     * Sets the status property value. The current status of the VeRO reported item.
+     * @param VeroReportedItemStatusEnum|null $value Value to set for the status property.
     */
-    public function setStatus(?string $value): void {
+    public function setStatus(?VeroReportedItemStatusEnum $value): void {
         $this->status = $value;
     }
 

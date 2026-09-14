@@ -32,7 +32,7 @@ class GetHandoverSheetResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var GetHandoverSheetResponsesData|null $handoverSheet This type specifies the base64 string value for a handover sheet.
+     * @var GetHandoverSheetResponsesData|null $handoverSheet This container returns the base64 string value for a handover sheet.
     */
     private ?GetHandoverSheetResponsesData $handoverSheet = null;
     
@@ -72,7 +72,7 @@ class GetHandoverSheetResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the handoverSheet property value. This type specifies the base64 string value for a handover sheet.
+     * Gets the handoverSheet property value. This container returns the base64 string value for a handover sheet.
      * @return GetHandoverSheetResponsesData|null
     */
     public function getHandoverSheet(): ?GetHandoverSheetResponsesData {
@@ -97,7 +97,7 @@ class GetHandoverSheetResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the handoverSheet property value. This type specifies the base64 string value for a handover sheet.
+     * Sets the handoverSheet property value. This container returns the base64 string value for a handover sheet.
      * @param GetHandoverSheetResponsesData|null $value Value to set for the handoverSheet property.
     */
     public function setHandoverSheet(?GetHandoverSheetResponsesData $value): void {

@@ -17,6 +17,7 @@
 namespace EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Label;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\BundleLabelResponse;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -51,7 +52,12 @@ class LabelRequestBuilder extends BaseRequestBuilder
     */
     public function get(?LabelRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [BundleLabelResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [BundleLabelResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

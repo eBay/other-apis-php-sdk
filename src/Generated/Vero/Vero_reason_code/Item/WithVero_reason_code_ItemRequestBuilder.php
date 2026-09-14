@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\Vero\Vero_reason_code\Item;
 
+use EBay\OtherApis\Generated\Vero\Models\Error;
 use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeResponse;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,22 @@ class WithVero_reason_code_ItemRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method is used to retrieve the details of a specific VeRO reason code, including a description of the code and the marketplace associated with the code.<br><br>The <b>vero_reason_code_id</b> of the VeRO reason code for which to retrieve details is required as a path parameter.
+     * <span class="tablenote"><b>Note:</b> All methods of the <b>VeRO API</b> have been deprecated, and will be decommissioned on September 30th, 2026.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method is used to retrieve the details of a specific VeRO reason code, including a description of the code and the marketplace associated with the code.<br><br>The <b>vero_reason_code_id</b> of the VeRO reason code for which to retrieve details is required as a path parameter.
      * @param WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<VeroReasonCodeResponse|null>
      * @throws Exception
     */
     public function get(?WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [VeroReasonCodeResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [VeroReasonCodeResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method is used to retrieve the details of a specific VeRO reason code, including a description of the code and the marketplace associated with the code.<br><br>The <b>vero_reason_code_id</b> of the VeRO reason code for which to retrieve details is required as a path parameter.
+     * <span class="tablenote"><b>Note:</b> All methods of the <b>VeRO API</b> have been deprecated, and will be decommissioned on September 30th, 2026.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method is used to retrieve the details of a specific VeRO reason code, including a description of the code and the marketplace associated with the code.<br><br>The <b>vero_reason_code_id</b> of the VeRO reason code for which to retrieve details is required as a path parameter.
      * @param WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

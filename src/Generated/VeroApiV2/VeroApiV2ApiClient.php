@@ -1,0 +1,86 @@
+<?php
+
+// Copyright 2026 eBay Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+namespace EBay\OtherApis\Generated\VeroApiV2;
+
+use EBay\OtherApis\Generated\VeroApiV2\Report_vero_violations\Report_vero_violationsRequestBuilder;
+use EBay\OtherApis\Generated\VeroApiV2\Vero_reason_code\Vero_reason_codeRequestBuilder;
+use EBay\OtherApis\Generated\VeroApiV2\Vero_report_items\Vero_report_itemsRequestBuilder;
+use EBay\OtherApis\Generated\VeroApiV2\Vero_report\Vero_reportRequestBuilder;
+use Microsoft\Kiota\Abstractions\ApiClientBuilder;
+use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
+use Microsoft\Kiota\Abstractions\RequestAdapter;
+use Microsoft\Kiota\Serialization\Form\FormParseNodeFactory;
+use Microsoft\Kiota\Serialization\Form\FormSerializationWriterFactory;
+use Microsoft\Kiota\Serialization\Json\JsonParseNodeFactory;
+use Microsoft\Kiota\Serialization\Json\JsonSerializationWriterFactory;
+use Microsoft\Kiota\Serialization\Multipart\MultipartSerializationWriterFactory;
+use Microsoft\Kiota\Serialization\Text\TextParseNodeFactory;
+use Microsoft\Kiota\Serialization\Text\TextSerializationWriterFactory;
+
+/**
+ * The main entry point of the SDK, exposes the configuration and the fluent API.
+*/
+class VeroApiV2ApiClient extends BaseRequestBuilder 
+{
+    /**
+     * The report_vero_violations property
+    */
+    public function report_vero_violations(): Report_vero_violationsRequestBuilder {
+        return new Report_vero_violationsRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * The vero_reason_code property
+    */
+    public function vero_reason_code(): Vero_reason_codeRequestBuilder {
+        return new Vero_reason_codeRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * The vero_report property
+    */
+    public function vero_report(): Vero_reportRequestBuilder {
+        return new Vero_reportRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * The vero_report_items property
+    */
+    public function vero_report_items(): Vero_report_itemsRequestBuilder {
+        return new Vero_report_itemsRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * Instantiates a new VeroApiV2ApiClient and sets the default values.
+     * @param RequestAdapter $requestAdapter The request adapter to use to execute the requests.
+    */
+    public function __construct(RequestAdapter $requestAdapter) {
+        parent::__construct($requestAdapter, [], '{+baseurl}');
+        ApiClientBuilder::registerDefaultSerializer(JsonSerializationWriterFactory::class);
+        ApiClientBuilder::registerDefaultSerializer(TextSerializationWriterFactory::class);
+        ApiClientBuilder::registerDefaultSerializer(FormSerializationWriterFactory::class);
+        ApiClientBuilder::registerDefaultSerializer(MultipartSerializationWriterFactory::class);
+        ApiClientBuilder::registerDefaultDeserializer(JsonParseNodeFactory::class);
+        ApiClientBuilder::registerDefaultDeserializer(TextParseNodeFactory::class);
+        ApiClientBuilder::registerDefaultDeserializer(FormParseNodeFactory::class);
+        if (empty($this->requestAdapter->getBaseUrl())) {
+            $this->requestAdapter->setBaseUrl('https://api.ebay.com{basePath}');
+        }
+        $this->pathParameters['baseurl'] = $this->requestAdapter->getBaseUrl();
+    }
+
+}

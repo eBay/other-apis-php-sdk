@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type is used by the <b>translations</b> array, which shows the original text supplied by the user in the request payload, and the text translated by eBay.<br><br>Only one input string can be translated at this time. Support for multiple continuous text strings is expected in the future.
+ * This type is used by the <b>translations</b> array, which shows the original text supplied by the user in the request payload, and the text translated by eBay.<br><br>Only one input string can be translated at this time. Support for multiple continuous text strings are expected in the future.
 */
 class Translation implements AdditionalDataHolder, Parsable 
 {

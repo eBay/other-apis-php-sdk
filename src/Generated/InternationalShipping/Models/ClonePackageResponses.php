@@ -32,7 +32,7 @@ class ClonePackageResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ClonePackageResponsesData|null $clonePackageResult This type specifies the package ID, payment cost, tracking number, and last-mile tracking number (if applicable) for the cloned package.
+     * @var ClonePackageResponsesData|null $clonePackageResult This container returns the package ID, payment cost, and tracking number for the cloned package.
     */
     private ?ClonePackageResponsesData $clonePackageResult = null;
     
@@ -61,7 +61,7 @@ class ClonePackageResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the clonePackageResult property value. This type specifies the package ID, payment cost, tracking number, and last-mile tracking number (if applicable) for the cloned package.
+     * Gets the clonePackageResult property value. This container returns the package ID, payment cost, and tracking number for the cloned package.
      * @return ClonePackageResponsesData|null
     */
     public function getClonePackageResult(): ?ClonePackageResponsesData {
@@ -97,7 +97,7 @@ class ClonePackageResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the clonePackageResult property value. This type specifies the package ID, payment cost, tracking number, and last-mile tracking number (if applicable) for the cloned package.
+     * Sets the clonePackageResult property value. This container returns the package ID, payment cost, and tracking number for the cloned package.
      * @param ClonePackageResponsesData|null $value Value to set for the clonePackageResult property.
     */
     public function setClonePackageResult(?ClonePackageResponsesData $value): void {

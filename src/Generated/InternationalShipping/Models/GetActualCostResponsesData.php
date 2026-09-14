@@ -37,7 +37,7 @@ class GetActualCostResponsesData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var Amount|null $amount This type defines the monetary value of an amount. 
+     * @var Amount|null $amount This container specifies the total monetary amount of the actual cost of the package. 
     */
     private ?Amount $amount = null;
     
@@ -119,7 +119,7 @@ class GetActualCostResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the amount property value. This type defines the monetary value of an amount. 
+     * Gets the amount property value. This container specifies the total monetary amount of the actual cost of the package. 
      * @return Amount|null
     */
     public function getAmount(): ?Amount {
@@ -255,7 +255,7 @@ class GetActualCostResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the amount property value. This type defines the monetary value of an amount. 
+     * Sets the amount property value. This container specifies the total monetary amount of the actual cost of the package. 
      * @param Amount|null $value Value to set for the amount property.
     */
     public function setAmount(?Amount $value): void {

@@ -32,7 +32,7 @@ class CancelPackagesRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CancelPackagesRequestData|null $requests This type indicates the IDs of the packages being canceled.
+     * @var CancelPackagesRequestData|null $requests This container is used to specify the package ID values for the packages being canceled.
     */
     private ?CancelPackagesRequestData $requests = null;
     
@@ -72,7 +72,7 @@ class CancelPackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the requests property value. This type indicates the IDs of the packages being canceled.
+     * Gets the requests property value. This container is used to specify the package ID values for the packages being canceled.
      * @return CancelPackagesRequestData|null
     */
     public function getRequests(): ?CancelPackagesRequestData {
@@ -97,7 +97,7 @@ class CancelPackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the requests property value. This type indicates the IDs of the packages being canceled.
+     * Sets the requests property value. This container is used to specify the package ID values for the packages being canceled.
      * @param CancelPackagesRequestData|null $value Value to set for the requests property.
     */
     public function setRequests(?CancelPackagesRequestData $value): void {

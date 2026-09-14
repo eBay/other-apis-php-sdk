@@ -32,9 +32,9 @@ class VeroReasonCode implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $marketplaceId The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
+     * @var MarketplaceIdEnum|null $marketplaceId The eBay site for which reason code details are returned.
     */
-    private ?string $marketplaceId = null;
+    private ?MarketplaceIdEnum $marketplaceId = null;
     
     /**
      * @var array<ReasonCodeDetailType>|null $reasonCodeDetails This container includes both brief and detailed text descriptions for the VeRO program intellectual property right infringement reason, as well as the ID for the reason code.
@@ -72,16 +72,16 @@ class VeroReasonCode implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getStringValue()),
+            'marketplaceId' => fn(ParseNode $n) => $o->setMarketplaceId($n->getEnumValue(MarketplaceIdEnum::class)),
             'reasonCodeDetails' => fn(ParseNode $n) => $o->setReasonCodeDetails($n->getCollectionOfObjectValues([ReasonCodeDetailType::class, 'createFromDiscriminatorValue'])),
         ];
     }
 
     /**
-     * Gets the marketplaceId property value. The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the marketplaceId property value. The eBay site for which reason code details are returned.
+     * @return MarketplaceIdEnum|null
     */
-    public function getMarketplaceId(): ?string {
+    public function getMarketplaceId(): ?MarketplaceIdEnum {
         return $this->marketplaceId;
     }
 
@@ -98,7 +98,7 @@ class VeroReasonCode implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('marketplaceId', $this->getMarketplaceId());
+        $writer->writeEnumValue('marketplaceId', $this->getMarketplaceId());
         $writer->writeCollectionOfObjectValues('reasonCodeDetails', $this->getReasonCodeDetails());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class VeroReasonCode implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the marketplaceId property value. The eBay site for which reason code details are returned. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/br:MarketplaceIdEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the marketplaceId property.
+     * Sets the marketplaceId property value. The eBay site for which reason code details are returned.
+     * @param MarketplaceIdEnum|null $value Value to set for the marketplaceId property.
     */
-    public function setMarketplaceId(?string $value): void {
+    public function setMarketplaceId(?MarketplaceIdEnum $value): void {
         $this->marketplaceId = $value;
     }
 

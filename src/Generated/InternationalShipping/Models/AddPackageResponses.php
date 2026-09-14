@@ -32,7 +32,7 @@ class AddPackageResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var AddPackageResponsesData|null $createPackageResult This type specifies information about the newly created package, such as its estimated costs, tracking number, and package ID value.
+     * @var AddPackageResponsesData|null $createPackageResult This container returns information about the newly created package, including its tracking number and <b>packageId</b> value.
     */
     private ?AddPackageResponsesData $createPackageResult = null;
     
@@ -61,7 +61,7 @@ class AddPackageResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the createPackageResult property value. This type specifies information about the newly created package, such as its estimated costs, tracking number, and package ID value.
+     * Gets the createPackageResult property value. This container returns information about the newly created package, including its tracking number and <b>packageId</b> value.
      * @return AddPackageResponsesData|null
     */
     public function getCreatePackageResult(): ?AddPackageResponsesData {
@@ -97,7 +97,7 @@ class AddPackageResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the createPackageResult property value. This type specifies information about the newly created package, such as its estimated costs, tracking number, and package ID value.
+     * Sets the createPackageResult property value. This container returns information about the newly created package, including its tracking number and <b>packageId</b> value.
      * @param AddPackageResponsesData|null $value Value to set for the createPackageResult property.
     */
     public function setCreatePackageResult(?AddPackageResponsesData $value): void {

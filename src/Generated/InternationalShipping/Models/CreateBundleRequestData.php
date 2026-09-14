@@ -33,12 +33,12 @@ class CreateBundleRequestData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $consignPreferenceId The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * @var string|null $consignPreferenceId The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
     */
     private ?string $consignPreferenceId = null;
     
     /**
-     * @var array<string>|null $trackingNumbers This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @var array<string>|null $trackingNumbers This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
     */
     private ?array $trackingNumbers = null;
     
@@ -67,7 +67,7 @@ class CreateBundleRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * Gets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
      * @return string|null
     */
     public function getConsignPreferenceId(): ?string {
@@ -94,7 +94,7 @@ class CreateBundleRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the trackingNumbers property value. This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * Gets the trackingNumbers property value. This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @return array<string>|null
     */
     public function getTrackingNumbers(): ?array {
@@ -120,7 +120,7 @@ class CreateBundleRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * Sets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the bundle.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
      * @param string|null $value Value to set for the consignPreferenceId property.
     */
     public function setConsignPreferenceId(?string $value): void {
@@ -128,7 +128,7 @@ class CreateBundleRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the trackingNumbers property value. This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * Sets the trackingNumbers property value. This array specifies the tracking numbers of the packages to be included in the bundle.<br><br>Tracking numbers are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @param array<string>|null $value Value to set for the trackingNumbers property.
     */
     public function setTrackingNumbers(?array $value): void {
