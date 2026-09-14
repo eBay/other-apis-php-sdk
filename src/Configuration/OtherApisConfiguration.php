@@ -23,17 +23,16 @@ final class OtherApisConfiguration
     public readonly RequestOptions $defaultRequestOptions;
 
     public function __construct(
-        public readonly string  $identityBaseUrl                       = 'https://apiz.ebay.com/commerce/identity/v1',
-        public readonly string  $translationBaseUrl                    = 'https://api.ebay.com/commerce/translation/v1_beta',
-        public readonly string  $veroBaseUrl                           = 'https://api.ebay.com/commerce/vero/v1',
-        public readonly string  $edeliveryInternationalShippingBaseUrl = 'https://api.ebay.com/sell/edelivery_international_shipping/v1',
-        public readonly ?string $accessToken                           = null,
-        public readonly bool    $diagnosticLogging                     = false,
+        public readonly string $identityBaseUrl = 'https://apiz.ebay.com/commerce/identity/v1',
+        public readonly string $internationalShippingBaseUrl = 'https://api.ebay.com/sell/edelivery_international_shipping/v1',
+        public readonly string $translationBaseUrl = 'https://api.ebay.com/commerce/translation/v1_beta',
+        public readonly string $veroBaseUrl = 'https://api.ebay.com/commerce/vero/v1',
+        public readonly ?string $accessToken = null,
+        public readonly bool $diagnosticLogging = false,
     ) {
         $this->defaultRequestOptions = new RequestOptions();
     }
 
-    /** Redact accessToken from var_dump / print_r output. */
     public function __debugInfo(): array
     {
         return array_merge(get_object_vars($this), [
@@ -42,7 +41,7 @@ final class OtherApisConfiguration
     }
 
     /**
-     * Hostnames tokens may be sent to — passed to AllowedHostsValidator.
+     * Hostnames tokens may be sent to. Passed to AllowedHostsValidator.
      *
      * @return string[]
      */
@@ -52,9 +51,9 @@ final class OtherApisConfiguration
             fn(string $url) => parse_url($url, PHP_URL_HOST),
             [
                 $this->identityBaseUrl,
+                $this->internationalShippingBaseUrl,
                 $this->translationBaseUrl,
                 $this->veroBaseUrl,
-                $this->edeliveryInternationalShippingBaseUrl,
             ]
         ), 'is_string')));
     }

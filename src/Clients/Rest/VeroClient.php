@@ -22,17 +22,17 @@ use EBay\OtherApis\Configuration\KiotaAuthProvider;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
 use EBay\OtherApis\Configuration\RequestOptions;
 use EBay\OtherApis\Generated\Vero\VeroApiClient;
+use EBay\OtherApis\Generated\Vero\Models\ReportStatusResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeDetailResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReasonCodeResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsRequest;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsResponse;
-use EBay\OtherApis\Generated\Vero\Models\ReportStatusResponse;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportStatusResponse;
 use EBay\OtherApis\Generated\Vero\Vero_reason_code\Item\WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration;
 use EBay\OtherApis\Generated\Vero\Vero_reason_code\Vero_reason_codeRequestBuilderGetRequestConfiguration;
+use EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration;
 use EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilderGetRequestConfiguration;
 use EBay\OtherApis\Generated\Vero\Vero_report\Vero_reportRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\Vero\Vero_report_items\Vero_report_itemsRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -44,17 +44,40 @@ final class VeroClient
         private readonly OtherApisConfiguration $config,
     ) {}
 
-    /**
-     * Create a VeRO report for one or more listings (max 150 items).
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
-    public function createVeroReport(
-        VeroReportItemsRequest $body,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): ?VeroReportItemsResponse {
+    /** @return array<string, string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions !== null ? $requestOptions->headers : []
+        );
+    }
+
+    public function getVeroReasonCode(string $veroReasonCodeId, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?VeroReasonCodeResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
+                new WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getVeroReasonCodes(?string $xEBAYCMARKETPLACEID = null, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?VeroReasonCodeDetailResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        if ($xEBAYCMARKETPLACEID !== null) {
+            $headers["X-EBAY-C-MARKETPLACE-ID"] = $xEBAYCMARKETPLACEID;
+        }
+        return $this->call($accessToken, fn($api) =>
+            $api->vero_reason_code()->get(
+                new Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function createVeroReport(VeroReportItemsRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?VeroReportItemsResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_report()->post(
@@ -64,55 +87,13 @@ final class VeroClient
         );
     }
 
-    /**
-     * Retrieve details of a specific VeRO reason code.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
-    public function getVeroReasonCode(
-        string $veroReasonCodeId,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): ?VeroReasonCodeResponse {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->vero_reason_code()->byVero_reason_code_id($veroReasonCodeId)->get(
-                new WithVero_reason_code_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    /**
-     * Retrieve details of all VeRO reason codes.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
-    public function getVeroReasonCodes(
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): ?VeroReasonCodeDetailResponse {
-        $headers = $this->mergedHeaders($requestOptions);
-        return $this->call($accessToken, fn($api) =>
-            $api->vero_reason_code()->get(
-                new Vero_reason_codeRequestBuilderGetRequestConfiguration(headers: $headers)
-            )->wait()
-        );
-    }
-
-    /**
-     * Retrieve status information about a submitted VeRO report.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
     public function getVeroReport(
         string $veroReportId,
         ?string $includeItemDetails = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?ReportStatusResponse {
+    ): ?ReportStatusResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_report()->byVero_report_id($veroReportId)->get(
@@ -126,12 +107,6 @@ final class VeroClient
         );
     }
 
-    /**
-     * Retrieve status information about VeRO reported items.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
     public function getVeroReportItems(
         ?string $filter = null,
         ?string $itemId = null,
@@ -139,7 +114,8 @@ final class VeroClient
         ?string $offset = null,
         ?string $accessToken = null,
         ?RequestOptions $requestOptions = null,
-    ): ?VeroReportStatusResponse {
+    ): ?VeroReportStatusResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->vero_report_items()->get(
@@ -171,14 +147,5 @@ final class VeroClient
         $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
         $adapter->setBaseUrl($this->config->veroBaseUrl);
         return new VeroApiClient($adapter);
-    }
-
-    /** @return array<string,string> */
-    private function mergedHeaders(?RequestOptions $requestOptions): array
-    {
-        return array_merge(
-            $this->config->defaultRequestOptions->headers,
-            $requestOptions !== null ? $requestOptions->headers : []
-        );
     }
 }

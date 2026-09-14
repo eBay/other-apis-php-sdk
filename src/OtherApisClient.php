@@ -18,8 +18,8 @@ declare(strict_types=1);
 
 namespace EBay\OtherApis;
 
-use EBay\OtherApis\Clients\Rest\EdeliveryInternationalShippingClient;
 use EBay\OtherApis\Clients\Rest\IdentityClient;
+use EBay\OtherApis\Clients\Rest\InternationalShippingClient;
 use EBay\OtherApis\Clients\Rest\TranslationClient;
 use EBay\OtherApis\Clients\Rest\VeroClient;
 use EBay\OtherApis\Configuration\OtherApisConfiguration;
@@ -28,56 +28,67 @@ use GuzzleHttp\HandlerStack;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Main entry point for the eBay Other APIs PHP SDK.
+ */
 final class OtherApisClient
 {
     public readonly IdentityClient $identity;
+    public readonly InternationalShippingClient $internationalShipping;
     public readonly TranslationClient $translation;
     public readonly VeroClient $vero;
-    public readonly EdeliveryInternationalShippingClient $edeliveryInternationalShipping;
 
-    public function __construct(OtherApisConfiguration $config, ?GuzzleClient $guzzle = null)
-    {
-        $guzzle ??= $this->buildGuzzleClient($config);
+    public function __construct(
+        OtherApisConfiguration $config,
+        ?GuzzleClient $guzzle = null,
+    ) {
+        $guzzle ??= $this->buildGuzzle($config);
+
         $this->identity = new IdentityClient($guzzle, $config);
+        $this->internationalShipping = new InternationalShippingClient($guzzle, $config);
         $this->translation = new TranslationClient($guzzle, $config);
         $this->vero = new VeroClient($guzzle, $config);
-        $this->edeliveryInternationalShipping = new EdeliveryInternationalShippingClient($guzzle, $config);
     }
 
-    private function buildGuzzleClient(OtherApisConfiguration $config): GuzzleClient
+    /**
+     * Build a Guzzle client with optional diagnostic logging middleware.
+     * When $config->diagnosticLogging is true, all non-2xx responses are
+     * logged to STDERR with method, URI, status code, and response body.
+     */
+    private function buildGuzzle(OtherApisConfiguration $config): GuzzleClient
     {
-        $options = [
-            'timeout'         => 30,
-            'connect_timeout' => 5,
-        ];
+        $stack = HandlerStack::create();
 
         if ($config->diagnosticLogging) {
-            $stack = HandlerStack::create();
             $stack->push(static function (callable $handler): callable {
-                return static function (RequestInterface $request, array $options) use ($handler) {
+                return static function (RequestInterface $request, array $options) use ($handler): mixed {
                     return $handler($request, $options)->then(
                         static function (ResponseInterface $response) use ($request): ResponseInterface {
                             $status = $response->getStatusCode();
                             if ($status < 200 || $status >= 300) {
                                 $body = (string) $response->getBody();
-                                fwrite(STDERR, sprintf(
-                                    "[OtherApisSDK] %s %s => HTTP %d\n%s\n",
-                                    $request->getMethod(),
-                                    str_replace(["\r", "\n"], ' ', (string) $request->getUri()),
-                                    $status,
-                                    $body,
-                                ));
-                                // Rewind so downstream can still read the body.
-                                $response->getBody()->rewind();
+                                fwrite(
+                                    STDERR,
+                                    sprintf(
+                                        "[OtherApisSDK] %s %s -> HTTP %d\n%s\n",
+                                        $request->getMethod(),
+                                        str_replace(["\r", "\n"], ' ', (string) $request->getUri()),
+                                        $status,
+                                        $body
+                                    )
+                                );
                             }
                             return $response;
                         }
                     );
                 };
-            }, 'diagnostic_logging');
-            $options['handler'] = $stack;
+            });
         }
 
-        return new GuzzleClient($options);
+        return new GuzzleClient([
+            'handler'         => $stack,
+            'timeout'         => 30,
+            'connect_timeout' => 5,
+        ]);
     }
 }

@@ -36,17 +36,17 @@ final class TranslationClient
         private readonly OtherApisConfiguration $config,
     ) {}
 
-    /**
-     * Translate listing title and description text from one language to another.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
-    public function translate(
-        TranslateRequest $body,
-        ?string $accessToken = null,
-        ?RequestOptions $requestOptions = null,
-    ): ?TranslateResponse {
+    /** @return array<string, string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions !== null ? $requestOptions->headers : []
+        );
+    }
+
+    public function translate(TranslateRequest $body, ?string $accessToken = null, ?RequestOptions $requestOptions = null): ?TranslateResponse
+    {
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->translate()->post(
@@ -71,14 +71,5 @@ final class TranslationClient
         $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
         $adapter->setBaseUrl($this->config->translationBaseUrl);
         return new TranslationApiClient($adapter);
-    }
-
-    /** @return array<string,string> */
-    private function mergedHeaders(?RequestOptions $requestOptions): array
-    {
-        return array_merge(
-            $this->config->defaultRequestOptions->headers,
-            $requestOptions !== null ? $requestOptions->headers : []
-        );
     }
 }
