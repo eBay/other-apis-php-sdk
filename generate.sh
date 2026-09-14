@@ -19,33 +19,34 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "Regenerating REST clients via Kiota..."
+rm -rf src/Generated
 
 kiota generate -l php \
-  -d "$SCRIPT_DIR/specs/openapi/identity.yaml" \
+  -d specs/openapi/identity.yaml \
   -c IdentityApiClient \
   -n 'EBay\OtherApis\Generated\Identity' \
-  -o "$SCRIPT_DIR/src/Generated/Identity" \
+  -o src/Generated/Identity \
   --ebc --co
 
 kiota generate -l php \
-  -d "$SCRIPT_DIR/specs/openapi/translation.yaml" \
+  -d specs/openapi/international-shipping.yaml \
+  -c InternationalShippingApiClient \
+  -n 'EBay\OtherApis\Generated\InternationalShipping' \
+  -o src/Generated/InternationalShipping \
+  --ebc --co
+
+kiota generate -l php \
+  -d specs/openapi/translation.yaml \
   -c TranslationApiClient \
   -n 'EBay\OtherApis\Generated\Translation' \
-  -o "$SCRIPT_DIR/src/Generated/Translation" \
+  -o src/Generated/Translation \
   --ebc --co
 
 kiota generate -l php \
-  -d "$SCRIPT_DIR/specs/openapi/vero.yaml" \
+  -d specs/openapi/vero.yaml \
   -c VeroApiClient \
   -n 'EBay\OtherApis\Generated\Vero' \
-  -o "$SCRIPT_DIR/src/Generated/Vero" \
-  --ebc --co
-
-kiota generate -l php \
-  -d "$SCRIPT_DIR/specs/openapi/international-shipping.yaml" \
-  -c EdeliveryInternationalShippingApiClient \
-  -n 'EBay\OtherApis\Generated\EdeliveryInternationalShipping' \
-  -o "$SCRIPT_DIR/src/Generated/EdeliveryInternationalShipping" \
+  -o src/Generated/Vero \
   --ebc --co
 
 echo "Adding license headers to generated files..."

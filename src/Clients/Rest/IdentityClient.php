@@ -35,12 +35,15 @@ final class IdentityClient
         private readonly OtherApisConfiguration $config,
     ) {}
 
-    /**
-     * Retrieve the authenticated user's account profile information.
-     *
-     * @param string|null $accessToken Per-call token; overrides config fallback.
-     * @param RequestOptions|null $requestOptions Per-call headers; merged over config defaults.
-     */
+    /** @return array<string, string> */
+    private function mergedHeaders(?RequestOptions $requestOptions): array
+    {
+        return array_merge(
+            $this->config->defaultRequestOptions->headers,
+            $requestOptions !== null ? $requestOptions->headers : []
+        );
+    }
+
     public function getUser(?string $accessToken = null, ?RequestOptions $requestOptions = null): ?UserResponse
     {
         $headers = $this->mergedHeaders($requestOptions);
@@ -66,14 +69,5 @@ final class IdentityClient
         $adapter = new GuzzleRequestAdapter($auth, guzzleClient: $this->guzzle);
         $adapter->setBaseUrl($this->config->identityBaseUrl);
         return new IdentityApiClient($adapter);
-    }
-
-    /** @return array<string,string> */
-    private function mergedHeaders(?RequestOptions $requestOptions): array
-    {
-        return array_merge(
-            $this->config->defaultRequestOptions->headers,
-            $requestOptions !== null ? $requestOptions->headers : []
-        );
     }
 }
