@@ -23,7 +23,7 @@ use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 use Microsoft\Kiota\Abstractions\Types\TypeUtils;
 
 /**
- * DeletePackagesRequestData
+ * This type is used to specify the package ID values for the packages being deleted.
 */
 class DeletePackagesRequestData implements AdditionalDataHolder, Parsable 
 {
@@ -33,7 +33,7 @@ class DeletePackagesRequestData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<string>|null $packageIds This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * @var array<string>|null $packageIds This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
     */
     private ?array $packageIds = null;
     
@@ -80,7 +80,7 @@ class DeletePackagesRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageIds property value. This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * Gets the packageIds property value. This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @return array<string>|null
     */
     public function getPackageIds(): ?array {
@@ -105,7 +105,7 @@ class DeletePackagesRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageIds property value. This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method.
+     * Sets the packageIds property value. This comma-delimited array lists the unique identifiers of the packages being deleted. These values must be for packages that have been cancelled and do not have tracking numbers associated with them.<br><br>Package ID values are returned when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method.
      * @param array<string>|null $value Value to set for the packageIds property.
     */
     public function setPackageIds(?array $value): void {

@@ -32,7 +32,7 @@ class CreateAddressPreferenceRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateAddressPreferenceRequestData|null $shipFromAddress This type is used to specify the address details used to create an address.
+     * @var CreateAddressPreferenceRequestData|null $shipFromAddress This container is used to specify the address details used to create an address.
     */
     private ?CreateAddressPreferenceRequestData $shipFromAddress = null;
     
@@ -72,7 +72,7 @@ class CreateAddressPreferenceRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipFromAddress property value. This type is used to specify the address details used to create an address.
+     * Gets the shipFromAddress property value. This container is used to specify the address details used to create an address.
      * @return CreateAddressPreferenceRequestData|null
     */
     public function getShipFromAddress(): ?CreateAddressPreferenceRequestData {
@@ -97,7 +97,7 @@ class CreateAddressPreferenceRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipFromAddress property value. This type is used to specify the address details used to create an address.
+     * Sets the shipFromAddress property value. This container is used to specify the address details used to create an address.
      * @param CreateAddressPreferenceRequestData|null $value Value to set for the shipFromAddress property.
     */
     public function setShipFromAddress(?CreateAddressPreferenceRequestData $value): void {

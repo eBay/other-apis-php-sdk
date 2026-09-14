@@ -32,7 +32,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var AgentInfoData|null $agentInfoResponse This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * @var AgentInfoData|null $agentInfoResponse This container returns EU AR agent information associated with the package.
     */
     private ?AgentInfoData $agentInfoResponse = null;
     
@@ -42,9 +42,9 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?string $consignPreferenceId = null;
     
     /**
-     * @var string|null $incoterm The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
+     * @var IncotermEnum|null $incoterm The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
     */
-    private ?string $incoterm = null;
+    private ?IncotermEnum $incoterm = null;
     
     /**
      * @var array<ItemResponses>|null $items This array returns information about the eBay line item(s) that are included in the package.
@@ -77,9 +77,9 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?float $packageLength = null;
     
     /**
-     * @var string|null $packageStatus The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
+     * @var PackageStatusEnum|null $packageStatus The current status of the package.
     */
-    private ?string $packageStatus = null;
+    private ?PackageStatusEnum $packageStatus = null;
     
     /**
      * @var float|null $packageWeight The weight of the package in grams.
@@ -92,7 +92,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?float $packageWidth = null;
     
     /**
-     * @var Amount|null $paymentCost This type defines the monetary value of an amount. 
+     * @var Amount|null $paymentCost The actual payment cost of the package.
     */
     private ?Amount $paymentCost = null;
     
@@ -107,12 +107,12 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     private ?string $shippingServiceId = null;
     
     /**
-     * @var ShipToAddressResponsesData|null $shipToAddress This type specifies the ship-to address information for a retrieved package.
+     * @var ShipToAddressResponsesData|null $shipToAddress This container returns information about the address the package is being shipped to.
     */
     private ?ShipToAddressResponsesData $shipToAddress = null;
     
     /**
-     * @var SpecialServiceDetail|null $specialServiceDetail This type defines the special service details available for a package.
+     * @var SpecialServiceDetail|null $specialServiceDetail This container returns any special services associated with this package.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
     */
     private ?SpecialServiceDetail $specialServiceDetail = null;
     
@@ -146,7 +146,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the agentInfoResponse property value. This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * Gets the agentInfoResponse property value. This container returns EU AR agent information associated with the package.
      * @return AgentInfoData|null
     */
     public function getAgentInfoResponse(): ?AgentInfoData {
@@ -170,14 +170,14 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
         return  [
             'agentInfoResponse' => fn(ParseNode $n) => $o->setAgentInfoResponse($n->getObjectValue([AgentInfoData::class, 'createFromDiscriminatorValue'])),
             'consignPreferenceId' => fn(ParseNode $n) => $o->setConsignPreferenceId($n->getStringValue()),
-            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getStringValue()),
+            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getEnumValue(IncotermEnum::class)),
             'items' => fn(ParseNode $n) => $o->setItems($n->getCollectionOfObjectValues([ItemResponses::class, 'createFromDiscriminatorValue'])),
             'lastMileTrackingNumber' => fn(ParseNode $n) => $o->setLastMileTrackingNumber($n->getStringValue()),
             'packageComment' => fn(ParseNode $n) => $o->setPackageComment($n->getStringValue()),
             'packageHeight' => fn(ParseNode $n) => $o->setPackageHeight($n->getFloatValue()),
             'packageId' => fn(ParseNode $n) => $o->setPackageId($n->getStringValue()),
             'packageLength' => fn(ParseNode $n) => $o->setPackageLength($n->getFloatValue()),
-            'packageStatus' => fn(ParseNode $n) => $o->setPackageStatus($n->getStringValue()),
+            'packageStatus' => fn(ParseNode $n) => $o->setPackageStatus($n->getEnumValue(PackageStatusEnum::class)),
             'packageWeight' => fn(ParseNode $n) => $o->setPackageWeight($n->getFloatValue()),
             'packageWidth' => fn(ParseNode $n) => $o->setPackageWidth($n->getFloatValue()),
             'paymentCost' => fn(ParseNode $n) => $o->setPaymentCost($n->getObjectValue([Amount::class, 'createFromDiscriminatorValue'])),
@@ -190,10 +190,10 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @return IncotermEnum|null
     */
-    public function getIncoterm(): ?string {
+    public function getIncoterm(): ?IncotermEnum {
         return $this->incoterm;
     }
 
@@ -246,10 +246,10 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageStatus property value. The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the packageStatus property value. The current status of the package.
+     * @return PackageStatusEnum|null
     */
-    public function getPackageStatus(): ?string {
+    public function getPackageStatus(): ?PackageStatusEnum {
         return $this->packageStatus;
     }
 
@@ -270,7 +270,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Gets the paymentCost property value. The actual payment cost of the package.
      * @return Amount|null
     */
     public function getPaymentCost(): ?Amount {
@@ -294,7 +294,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipToAddress property value. This type specifies the ship-to address information for a retrieved package.
+     * Gets the shipToAddress property value. This container returns information about the address the package is being shipped to.
      * @return ShipToAddressResponsesData|null
     */
     public function getShipToAddress(): ?ShipToAddressResponsesData {
@@ -302,7 +302,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the specialServiceDetail property value. This type defines the special service details available for a package.
+     * Gets the specialServiceDetail property value. This container returns any special services associated with this package.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @return SpecialServiceDetail|null
     */
     public function getSpecialServiceDetail(): ?SpecialServiceDetail {
@@ -324,14 +324,14 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('agentInfoResponse', $this->getAgentInfoResponse());
         $writer->writeStringValue('consignPreferenceId', $this->getConsignPreferenceId());
-        $writer->writeStringValue('incoterm', $this->getIncoterm());
+        $writer->writeEnumValue('incoterm', $this->getIncoterm());
         $writer->writeCollectionOfObjectValues('items', $this->getItems());
         $writer->writeStringValue('lastMileTrackingNumber', $this->getLastMileTrackingNumber());
         $writer->writeStringValue('packageComment', $this->getPackageComment());
         $writer->writeFloatValue('packageHeight', $this->getPackageHeight());
         $writer->writeStringValue('packageId', $this->getPackageId());
         $writer->writeFloatValue('packageLength', $this->getPackageLength());
-        $writer->writeStringValue('packageStatus', $this->getPackageStatus());
+        $writer->writeEnumValue('packageStatus', $this->getPackageStatus());
         $writer->writeFloatValue('packageWeight', $this->getPackageWeight());
         $writer->writeFloatValue('packageWidth', $this->getPackageWidth());
         $writer->writeObjectValue('paymentCost', $this->getPaymentCost());
@@ -352,7 +352,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the agentInfoResponse property value. This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * Sets the agentInfoResponse property value. This container returns EU AR agent information associated with the package.
      * @param AgentInfoData|null $value Value to set for the agentInfoResponse property.
     */
     public function setAgentInfoResponse(?AgentInfoData $value): void {
@@ -368,10 +368,10 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the incoterm property.
+     * Sets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @param IncotermEnum|null $value Value to set for the incoterm property.
     */
-    public function setIncoterm(?string $value): void {
+    public function setIncoterm(?IncotermEnum $value): void {
         $this->incoterm = $value;
     }
 
@@ -424,10 +424,10 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageStatus property value. The current status of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:PackageStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the packageStatus property.
+     * Sets the packageStatus property value. The current status of the package.
+     * @param PackageStatusEnum|null $value Value to set for the packageStatus property.
     */
-    public function setPackageStatus(?string $value): void {
+    public function setPackageStatus(?PackageStatusEnum $value): void {
         $this->packageStatus = $value;
     }
 
@@ -448,7 +448,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the paymentCost property value. This type defines the monetary value of an amount. 
+     * Sets the paymentCost property value. The actual payment cost of the package.
      * @param Amount|null $value Value to set for the paymentCost property.
     */
     public function setPaymentCost(?Amount $value): void {
@@ -472,7 +472,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipToAddress property value. This type specifies the ship-to address information for a retrieved package.
+     * Sets the shipToAddress property value. This container returns information about the address the package is being shipped to.
      * @param ShipToAddressResponsesData|null $value Value to set for the shipToAddress property.
     */
     public function setShipToAddress(?ShipToAddressResponsesData $value): void {
@@ -480,7 +480,7 @@ class GetPackageDetailResponsesData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the specialServiceDetail property value. This type defines the special service details available for a package.
+     * Sets the specialServiceDetail property value. This container returns any special services associated with this package.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
      * @param SpecialServiceDetail|null $value Value to set for the specialServiceDetail property.
     */
     public function setSpecialServiceDetail(?SpecialServiceDetail $value): void {

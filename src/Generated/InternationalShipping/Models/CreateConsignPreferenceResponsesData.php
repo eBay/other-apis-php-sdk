@@ -32,7 +32,7 @@ class CreateConsignPreferenceResponsesData implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $consignPreferenceId The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
+     * @var string|null $consignPreferenceId The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
     */
     private ?string $consignPreferenceId = null;
     
@@ -61,7 +61,7 @@ class CreateConsignPreferenceResponsesData implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the consignPreferenceId property value. The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
+     * Gets the consignPreferenceId property value. The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
      * @return string|null
     */
     public function getConsignPreferenceId(): ?string {
@@ -97,7 +97,7 @@ class CreateConsignPreferenceResponsesData implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the consignPreferenceId property value. The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
+     * Sets the consignPreferenceId property value. The unique identifier of the newly-created consign address.<br><br>This ID can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the pickup, drop-off, or forward deployment address associated with the package.
      * @param string|null $value Value to set for the consignPreferenceId property.
     */
     public function setConsignPreferenceId(?string $value): void {

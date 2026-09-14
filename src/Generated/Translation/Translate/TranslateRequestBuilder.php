@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\Translation\Translate;
 
+use EBay\OtherApis\Generated\Translation\Models\Error;
 use EBay\OtherApis\Generated\Translation\Models\TranslateRequest;
 use EBay\OtherApis\Generated\Translation\Models\TranslateResponse;
 use Exception;
@@ -26,7 +27,7 @@ use Microsoft\Kiota\Abstractions\RequestAdapter;
 use Microsoft\Kiota\Abstractions\RequestInformation;
 
 /**
- * Builds and executes requests for operations under /translate
+ * Translate listing content
 */
 class TranslateRequestBuilder extends BaseRequestBuilder 
 {
@@ -45,7 +46,7 @@ class TranslateRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>.
+     * This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the <a href="/develop/guides-v2/other-apis-guide#supported-languages" target="_blank">table</a>.
      * @param TranslateRequest $body This is the base type of the <b>translate</b> method request payload.
      * @param TranslateRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<TranslateResponse|null>
@@ -53,11 +54,15 @@ class TranslateRequestBuilder extends BaseRequestBuilder
     */
     public function post(TranslateRequest $body, ?TranslateRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [TranslateResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [TranslateResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the <a href="/develop/guides-v2/other-apis/other-apis-guide#supported-languages"target="_blank ">table</a>.
+     * This method translates listing title and listing description text from one language into another. For a full list of supported language translations, see the <a href="/develop/guides-v2/other-apis-guide#supported-languages" target="_blank">table</a>.
      * @param TranslateRequest $body This is the base type of the <b>translate</b> method request payload.
      * @param TranslateRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation

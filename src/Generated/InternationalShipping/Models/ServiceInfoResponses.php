@@ -57,9 +57,9 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     private ?array $directions = null;
     
     /**
-     * @var string|null $incoterm The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
+     * @var IncotermEnum|null $incoterm The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
     */
-    private ?string $incoterm = null;
+    private ?IncotermEnum $incoterm = null;
     
     /**
      * @var float|null $maxLength This value indicates the maximum length (in centimeters) of the shipping package that the shipping service allows.<br><br><span class="tablenote"><b>Note:</b> This field is always returned, but will show as null or have an empty value if not defined/applicable.</span>
@@ -97,7 +97,7 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     private ?string $nameZh = null;
     
     /**
-     * @var string|null $shippingServiceId The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage#request.packageInfo.shippingServiceId" target="_blank">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
+     * @var string|null $shippingServiceId The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage.packageinforequest.shippingserviceid">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
     */
     private ?string $shippingServiceId = null;
     
@@ -177,7 +177,7 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
             'descriptionJp' => fn(ParseNode $n) => $o->setDescriptionJp($n->getStringValue()),
             'descriptionZh' => fn(ParseNode $n) => $o->setDescriptionZh($n->getStringValue()),
             'directions' => fn(ParseNode $n) => $o->setDirections($n->getCollectionOfObjectValues([DirectionsResponses::class, 'createFromDiscriminatorValue'])),
-            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getStringValue()),
+            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getEnumValue(IncotermEnum::class)),
             'maxLength' => fn(ParseNode $n) => $o->setMaxLength($n->getFloatValue()),
             'maxTotalLength' => fn(ParseNode $n) => $o->setMaxTotalLength($n->getFloatValue()),
             'maxWeight' => fn(ParseNode $n) => $o->setMaxWeight($n->getFloatValue()),
@@ -190,10 +190,10 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the incoterm property value. The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the incoterm property value. The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @return IncotermEnum|null
     */
-    public function getIncoterm(): ?string {
+    public function getIncoterm(): ?IncotermEnum {
         return $this->incoterm;
     }
 
@@ -254,7 +254,7 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingServiceId property value. The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage#request.packageInfo.shippingServiceId" target="_blank">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
+     * Gets the shippingServiceId property value. The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage.packageinforequest.shippingserviceid">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
      * @return string|null
     */
     public function getShippingServiceId(): ?string {
@@ -271,7 +271,7 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('descriptionJp', $this->getDescriptionJp());
         $writer->writeStringValue('descriptionZh', $this->getDescriptionZh());
         $writer->writeCollectionOfObjectValues('directions', $this->getDirections());
-        $writer->writeStringValue('incoterm', $this->getIncoterm());
+        $writer->writeEnumValue('incoterm', $this->getIncoterm());
         $writer->writeFloatValue('maxLength', $this->getMaxLength());
         $writer->writeFloatValue('maxTotalLength', $this->getMaxTotalLength());
         $writer->writeFloatValue('maxWeight', $this->getMaxWeight());
@@ -332,10 +332,10 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the incoterm property value. The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the incoterm property.
+     * Sets the incoterm property value. The incoterm information associated with the the shipping service.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @param IncotermEnum|null $value Value to set for the incoterm property.
     */
-    public function setIncoterm(?string $value): void {
+    public function setIncoterm(?IncotermEnum $value): void {
         $this->incoterm = $value;
     }
 
@@ -396,7 +396,7 @@ class ServiceInfoResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingServiceId property value. The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage#request.packageInfo.shippingServiceId" target="_blank">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
+     * Sets the shippingServiceId property value. The unique identifier of the shipping service being retrieved.<br><br>This value can be input in the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage.packageinforequest.shippingserviceid">shippingServiceId</a> field when creating a package through the the <b>createPackage</b> method.
      * @param string|null $value Value to set for the shippingServiceId property.
     */
     public function setShippingServiceId(?string $value): void {

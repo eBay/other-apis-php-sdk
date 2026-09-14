@@ -22,28 +22,35 @@ echo "Regenerating REST clients via Kiota..."
 rm -rf src/Generated
 
 kiota generate -l php \
-  -d specs/openapi/identity.yaml \
+  -d specs/openapi/identity.json \
   -c IdentityApiClient \
   -n 'EBay\OtherApis\Generated\Identity' \
   -o src/Generated/Identity \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/international-shipping.yaml \
+  -d specs/openapi/international-shipping.json \
   -c InternationalShippingApiClient \
   -n 'EBay\OtherApis\Generated\InternationalShipping' \
   -o src/Generated/InternationalShipping \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/translation.yaml \
+  -d specs/openapi/translation.json \
   -c TranslationApiClient \
   -n 'EBay\OtherApis\Generated\Translation' \
   -o src/Generated/Translation \
   --ebc --co
 
 kiota generate -l php \
-  -d specs/openapi/vero.yaml \
+  -d specs/openapi/vero-api-v2.json \
+  -c VeroApiV2ApiClient \
+  -n 'EBay\OtherApis\Generated\VeroApiV2' \
+  -o src/Generated/VeroApiV2 \
+  --ebc --co
+
+kiota generate -l php \
+  -d specs/openapi/vero.json \
   -c VeroApiClient \
   -n 'EBay\OtherApis\Generated\Vero' \
   -o src/Generated/Vero \

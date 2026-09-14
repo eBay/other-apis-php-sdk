@@ -32,7 +32,7 @@ class AddPackageRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var PackageInfoRequest|null $packageInfo This type is used to specify the package information needed to create a package.
+     * @var PackageInfoRequest|null $packageInfo This container is used to specify the information needed to create a package.
     */
     private ?PackageInfoRequest $packageInfo = null;
     
@@ -72,7 +72,7 @@ class AddPackageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageInfo property value. This type is used to specify the package information needed to create a package.
+     * Gets the packageInfo property value. This container is used to specify the information needed to create a package.
      * @return PackageInfoRequest|null
     */
     public function getPackageInfo(): ?PackageInfoRequest {
@@ -97,7 +97,7 @@ class AddPackageRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageInfo property value. This type is used to specify the package information needed to create a package.
+     * Sets the packageInfo property value. This container is used to specify the information needed to create a package.
      * @param PackageInfoRequest|null $value Value to set for the packageInfo property.
     */
     public function setPackageInfo(?PackageInfoRequest $value): void {

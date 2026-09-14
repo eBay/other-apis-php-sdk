@@ -23,6 +23,7 @@ use EBay\OtherApis\Generated\InternationalShipping\Battery_qualifications\Batter
 use EBay\OtherApis\Generated\InternationalShipping\Bundle\BundleRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Complaint\ComplaintRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Consign_preference\Consign_preferenceRequestBuilder;
+use EBay\OtherApis\Generated\InternationalShipping\Cpsc_profiles\Cpsc_profilesRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Dropoff_sites\Dropoff_sitesRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Handover_sheet\Handover_sheetRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Labels\LabelsRequestBuilder;
@@ -92,6 +93,13 @@ class InternationalShippingApiClient extends BaseRequestBuilder
     */
     public function consign_preference(): Consign_preferenceRequestBuilder {
         return new Consign_preferenceRequestBuilder($this->pathParameters, $this->requestAdapter);
+    }
+    
+    /**
+     * The cpsc_profiles property
+    */
+    public function cpsc_profiles(): Cpsc_profilesRequestBuilder {
+        return new Cpsc_profilesRequestBuilder($this->pathParameters, $this->requestAdapter);
     }
     
     /**

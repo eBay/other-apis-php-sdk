@@ -32,7 +32,7 @@ class CreateAddressPreferenceResponsesData implements AdditionalDataHolder, Pars
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $addressId The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+     * @var string|null $addressId The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the ship-from or return address associated with the package.
     */
     private ?string $addressId = null;
     
@@ -61,7 +61,7 @@ class CreateAddressPreferenceResponsesData implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Gets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+     * Gets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the ship-from or return address associated with the package.
      * @return string|null
     */
     public function getAddressId(): ?string {
@@ -97,7 +97,7 @@ class CreateAddressPreferenceResponsesData implements AdditionalDataHolder, Pars
     }
 
     /**
-     * Sets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/createPackage" target="_blank">createPackage</a> method to specify the ship-from or return address associated with the package.
+     * Sets the addressId property value. The unique identifier of the newly-created address.<br><br>This ID value can be used when creating a package through the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-createpackage">createPackage</a> method to specify the ship-from or return address associated with the package.
      * @param string|null $value Value to set for the addressId property.
     */
     public function setAddressId(?string $value): void {

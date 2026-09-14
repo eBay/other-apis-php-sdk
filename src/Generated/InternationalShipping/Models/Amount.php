@@ -32,9 +32,9 @@ class Amount implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $currency This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <a href="/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
+     * @var CurrencyCodeEnum|null $currency This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <b>CurrencyCodeEnum</b> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost.
     */
-    private ?string $currency = null;
+    private ?CurrencyCodeEnum $currency = null;
     
     /**
      * @var string|null $value The monetary amount, in the currency specified by the <b>currency</b> field.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost.
@@ -66,10 +66,10 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the currency property value. This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <a href="/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the currency property value. This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <b>CurrencyCodeEnum</b> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost.
+     * @return CurrencyCodeEnum|null
     */
-    public function getCurrency(): ?string {
+    public function getCurrency(): ?CurrencyCodeEnum {
         return $this->currency;
     }
 
@@ -80,7 +80,7 @@ class Amount implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getStringValue()),
+            'currency' => fn(ParseNode $n) => $o->setCurrency($n->getEnumValue(CurrencyCodeEnum::class)),
             'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
@@ -98,7 +98,7 @@ class Amount implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('currency', $this->getCurrency());
+        $writer->writeEnumValue('currency', $this->getCurrency());
         $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
@@ -112,10 +112,10 @@ class Amount implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the currency property value. This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <a href="/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum" target="_blank">CurrencyCodeEnum</a> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/bas:CurrencyCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the currency property.
+     * Sets the currency property value. This enum value represents the type of currency being used. Both the <b>value</b> and <b>currency fields</b> are required/always returned when expressing cost.<br><br> See the <b>CurrencyCodeEnum</b> type for the full list of supported values.<br><br>Both the <b>value</b> and <b>currency</b> fields are required/always returned when expressing cost.
+     * @param CurrencyCodeEnum|null $value Value to set for the currency property.
     */
-    public function setCurrency(?string $value): void {
+    public function setCurrency(?CurrencyCodeEnum $value): void {
         $this->currency = $value;
     }
 

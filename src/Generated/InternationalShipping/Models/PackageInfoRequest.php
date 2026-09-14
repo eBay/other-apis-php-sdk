@@ -32,19 +32,19 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var AgentInfoData|null $agentInfoRequest This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * @var AgentInfoData|null $agentInfoRequest This container specifies the EU AR agent information associated with the package.<br><br>This information can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-agents-getagents">getAgents</a>  method.
     */
     private ?AgentInfoData $agentInfoRequest = null;
     
     /**
-     * @var string|null $consignPreferenceId The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * @var string|null $consignPreferenceId The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
     */
     private ?string $consignPreferenceId = null;
     
     /**
-     * @var string|null $incoterm The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
+     * @var IncotermEnum|null $incoterm The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
     */
-    private ?string $incoterm = null;
+    private ?IncotermEnum $incoterm = null;
     
     /**
      * @var array<ItemRequest>|null $items This array is used to specify applicable information about the eBay line item(s) that will be included in the package.
@@ -82,22 +82,22 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     private ?float $packageWidth = null;
     
     /**
-     * @var string|null $shipFromAddressId The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/api-docs/sell/edelivery_international_shipping/resources/address_preference/methods/getAddressPreferences" target="_blank">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
+     * @var string|null $shipFromAddressId The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-address_preference-getaddresspreferences">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
     */
     private ?string $shipFromAddressId = null;
     
     /**
-     * @var string|null $shippingServiceId The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/services/methods/getServices" target="_blank">getServices</a> method.
+     * @var string|null $shippingServiceId The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-services-getservices">getServices</a> method.
     */
     private ?string $shippingServiceId = null;
     
     /**
-     * @var ShipToAddressRequestData|null $shipToAddress This type is used to specify the address fields of the ship-to address location.
+     * @var ShipToAddressRequestData|null $shipToAddress This container specifies the address details of the address ship-to address.
     */
     private ?ShipToAddressRequestData $shipToAddress = null;
     
     /**
-     * @var SpecialServiceDetail|null $specialServiceDetail This type defines the special service details available for a package.
+     * @var SpecialServiceDetail|null $specialServiceDetail This container specifies any special service details about the package, such as any insurance fee, required signatures, or delivery exceptions.
     */
     private ?SpecialServiceDetail $specialServiceDetail = null;
     
@@ -131,7 +131,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the agentInfoRequest property value. This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * Gets the agentInfoRequest property value. This container specifies the EU AR agent information associated with the package.<br><br>This information can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-agents-getagents">getAgents</a>  method.
      * @return AgentInfoData|null
     */
     public function getAgentInfoRequest(): ?AgentInfoData {
@@ -139,7 +139,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * Gets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
      * @return string|null
     */
     public function getConsignPreferenceId(): ?string {
@@ -155,7 +155,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
         return  [
             'agentInfoRequest' => fn(ParseNode $n) => $o->setAgentInfoRequest($n->getObjectValue([AgentInfoData::class, 'createFromDiscriminatorValue'])),
             'consignPreferenceId' => fn(ParseNode $n) => $o->setConsignPreferenceId($n->getStringValue()),
-            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getStringValue()),
+            'incoterm' => fn(ParseNode $n) => $o->setIncoterm($n->getEnumValue(IncotermEnum::class)),
             'items' => fn(ParseNode $n) => $o->setItems($n->getCollectionOfObjectValues([ItemRequest::class, 'createFromDiscriminatorValue'])),
             'maxQuantityLimit' => fn(ParseNode $n) => $o->setMaxQuantityLimit($n->getIntegerValue()),
             'packageComment' => fn(ParseNode $n) => $o->setPackageComment($n->getStringValue()),
@@ -172,10 +172,10 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @return IncotermEnum|null
     */
-    public function getIncoterm(): ?string {
+    public function getIncoterm(): ?IncotermEnum {
         return $this->incoterm;
     }
 
@@ -236,7 +236,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipFromAddressId property value. The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/api-docs/sell/edelivery_international_shipping/resources/address_preference/methods/getAddressPreferences" target="_blank">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
+     * Gets the shipFromAddressId property value. The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-address_preference-getaddresspreferences">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
      * @return string|null
     */
     public function getShipFromAddressId(): ?string {
@@ -244,7 +244,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shippingServiceId property value. The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/services/methods/getServices" target="_blank">getServices</a> method.
+     * Gets the shippingServiceId property value. The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-services-getservices">getServices</a> method.
      * @return string|null
     */
     public function getShippingServiceId(): ?string {
@@ -252,7 +252,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the shipToAddress property value. This type is used to specify the address fields of the ship-to address location.
+     * Gets the shipToAddress property value. This container specifies the address details of the address ship-to address.
      * @return ShipToAddressRequestData|null
     */
     public function getShipToAddress(): ?ShipToAddressRequestData {
@@ -260,7 +260,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the specialServiceDetail property value. This type defines the special service details available for a package.
+     * Gets the specialServiceDetail property value. This container specifies any special service details about the package, such as any insurance fee, required signatures, or delivery exceptions.
      * @return SpecialServiceDetail|null
     */
     public function getSpecialServiceDetail(): ?SpecialServiceDetail {
@@ -282,7 +282,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     public function serialize(SerializationWriter $writer): void {
         $writer->writeObjectValue('agentInfoRequest', $this->getAgentInfoRequest());
         $writer->writeStringValue('consignPreferenceId', $this->getConsignPreferenceId());
-        $writer->writeStringValue('incoterm', $this->getIncoterm());
+        $writer->writeEnumValue('incoterm', $this->getIncoterm());
         $writer->writeCollectionOfObjectValues('items', $this->getItems());
         $writer->writeIntegerValue('maxQuantityLimit', $this->getMaxQuantityLimit());
         $writer->writeStringValue('packageComment', $this->getPackageComment());
@@ -307,7 +307,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the agentInfoRequest property value. This type defines information about an EU AR agent, such as their address, name, and phone number.
+     * Sets the agentInfoRequest property value. This container specifies the EU AR agent information associated with the package.<br><br>This information can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-agents-getagents">getAgents</a>  method.
      * @param AgentInfoData|null $value Value to set for the agentInfoRequest property.
     */
     public function setAgentInfoRequest(?AgentInfoData $value): void {
@@ -315,7 +315,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/consign_preference/methods/getConsignPreferences" target="_blank">getConsignPreferences</a> method.
+     * Sets the consignPreferenceId property value. The unique identifier of the consign address to be associated with the package.<br><br>This ID can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-consign_preference-getconsignpreferences">getConsignPreferences</a> method.
      * @param string|null $value Value to set for the consignPreferenceId property.
     */
     public function setConsignPreferenceId(?string $value): void {
@@ -323,10 +323,10 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:IncotermEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the incoterm property.
+     * Sets the incoterm property value. The incoterm information associated with the package.<br><br><b>Supported values</b>:<ul><li><code>DDP</code></li><li><code>DDU</code></li></ul>
+     * @param IncotermEnum|null $value Value to set for the incoterm property.
     */
-    public function setIncoterm(?string $value): void {
+    public function setIncoterm(?IncotermEnum $value): void {
         $this->incoterm = $value;
     }
 
@@ -387,7 +387,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipFromAddressId property value. The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/api-docs/sell/edelivery_international_shipping/resources/address_preference/methods/getAddressPreferences" target="_blank">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
+     * Sets the shipFromAddressId property value. The unique identifier of the ship-from address used for the package.<br><br>Use the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-address_preference-getaddresspreferences">getAddressPreferences</a> method to retrieve valid ship-from <b>addressId</b> values associated with your account.
      * @param string|null $value Value to set for the shipFromAddressId property.
     */
     public function setShipFromAddressId(?string $value): void {
@@ -395,7 +395,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shippingServiceId property value. The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/api-docs/sell/edelivery_international_shipping/resources/services/methods/getServices" target="_blank">getServices</a> method.
+     * Sets the shippingServiceId property value. The unique identifier of the shipping service being used for the package.<br><br>This value can be retrieved using the <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-services-getservices">getServices</a> method.
      * @param string|null $value Value to set for the shippingServiceId property.
     */
     public function setShippingServiceId(?string $value): void {
@@ -403,7 +403,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the shipToAddress property value. This type is used to specify the address fields of the ship-to address location.
+     * Sets the shipToAddress property value. This container specifies the address details of the address ship-to address.
      * @param ShipToAddressRequestData|null $value Value to set for the shipToAddress property.
     */
     public function setShipToAddress(?ShipToAddressRequestData $value): void {
@@ -411,7 +411,7 @@ class PackageInfoRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the specialServiceDetail property value. This type defines the special service details available for a package.
+     * Sets the specialServiceDetail property value. This container specifies any special service details about the package, such as any insurance fee, required signatures, or delivery exceptions.
      * @param SpecialServiceDetail|null $value Value to set for the specialServiceDetail property.
     */
     public function setSpecialServiceDetail(?SpecialServiceDetail $value): void {

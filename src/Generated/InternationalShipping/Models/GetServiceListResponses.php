@@ -32,7 +32,7 @@ class GetServiceListResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var GetServiceListResponsesData|null $serviceList This type defines the details returned for the retrieved shipping service(s).
+     * @var GetServiceListResponsesData|null $serviceList This container returns shipping service metadata associated with a seller's eDIS account.
     */
     private ?GetServiceListResponsesData $serviceList = null;
     
@@ -72,7 +72,7 @@ class GetServiceListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the serviceList property value. This type defines the details returned for the retrieved shipping service(s).
+     * Gets the serviceList property value. This container returns shipping service metadata associated with a seller's eDIS account.
      * @return GetServiceListResponsesData|null
     */
     public function getServiceList(): ?GetServiceListResponsesData {
@@ -97,7 +97,7 @@ class GetServiceListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the serviceList property value. This type defines the details returned for the retrieved shipping service(s).
+     * Sets the serviceList property value. This container returns shipping service metadata associated with a seller's eDIS account.
      * @param GetServiceListResponsesData|null $value Value to set for the serviceList property.
     */
     public function setServiceList(?GetServiceListResponsesData $value): void {

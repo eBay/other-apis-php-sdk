@@ -32,7 +32,7 @@ class BundleLabelResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BundleLabelResponseData|null $label This type defines the base64 string value used to download a bundle label PDF file.
+     * @var BundleLabelResponseData|null $label This container returns the bundle label information, such as the base64 string value, for the specified bundle.
     */
     private ?BundleLabelResponseData $label = null;
     
@@ -72,7 +72,7 @@ class BundleLabelResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the label property value. This type defines the base64 string value used to download a bundle label PDF file.
+     * Gets the label property value. This container returns the bundle label information, such as the base64 string value, for the specified bundle.
      * @return BundleLabelResponseData|null
     */
     public function getLabel(): ?BundleLabelResponseData {
@@ -97,7 +97,7 @@ class BundleLabelResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the label property value. This type defines the base64 string value used to download a bundle label PDF file.
+     * Sets the label property value. This container returns the bundle label information, such as the base64 string value, for the specified bundle.
      * @param BundleLabelResponseData|null $value Value to set for the label property.
     */
     public function setLabel(?BundleLabelResponseData $value): void {

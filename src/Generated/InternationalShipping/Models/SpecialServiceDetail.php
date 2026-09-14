@@ -38,7 +38,7 @@ class SpecialServiceDetail implements AdditionalDataHolder, Parsable
     private ?string $insuranceFee = null;
     
     /**
-     * @var string|null $packagingType The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight ≤ 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
+     * @var string|null $packagingType The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight <= 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
     */
     private ?string $packagingType = null;
     
@@ -106,7 +106,7 @@ class SpecialServiceDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packagingType property value. The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight ≤ 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
+     * Gets the packagingType property value. The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight <= 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
      * @return string|null
     */
     public function getPackagingType(): ?string {
@@ -158,7 +158,7 @@ class SpecialServiceDetail implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packagingType property value. The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight ≤ 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
+     * Sets the packagingType property value. The package type.<br><br><b>Valid values</b>:<ul><li><code>PAK</code> (limited weight <= 2.5KG)</li><li><code>PACKAGE</code> (limited weight 68KG)</li></ul>
      * @param string|null $value Value to set for the packagingType property.
     */
     public function setPackagingType(?string $value): void {

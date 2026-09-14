@@ -37,9 +37,9 @@ class VeroReportItemsResponse implements AdditionalDataHolder, Parsable
     private ?string $veroReportId = null;
     
     /**
-     * @var string|null $veroReportStatus The processing status of the VeRO report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportStatusEnum'>eBay API documentation</a>
+     * @var VeroReportStatusEnum|null $veroReportStatus The processing status of the VeRO report.
     */
-    private ?string $veroReportStatus = null;
+    private ?VeroReportStatusEnum $veroReportStatus = null;
     
     /**
      * Instantiates a new VeroReportItemsResponse and sets the default values.
@@ -73,7 +73,7 @@ class VeroReportItemsResponse implements AdditionalDataHolder, Parsable
         $o = $this;
         return  [
             'veroReportId' => fn(ParseNode $n) => $o->setVeroReportId($n->getStringValue()),
-            'veroReportStatus' => fn(ParseNode $n) => $o->setVeroReportStatus($n->getStringValue()),
+            'veroReportStatus' => fn(ParseNode $n) => $o->setVeroReportStatus($n->getEnumValue(VeroReportStatusEnum::class)),
         ];
     }
 
@@ -86,10 +86,10 @@ class VeroReportItemsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the veroReportStatus property value. The processing status of the VeRO report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportStatusEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the veroReportStatus property value. The processing status of the VeRO report.
+     * @return VeroReportStatusEnum|null
     */
-    public function getVeroReportStatus(): ?string {
+    public function getVeroReportStatus(): ?VeroReportStatusEnum {
         return $this->veroReportStatus;
     }
 
@@ -99,7 +99,7 @@ class VeroReportItemsResponse implements AdditionalDataHolder, Parsable
     */
     public function serialize(SerializationWriter $writer): void {
         $writer->writeStringValue('veroReportId', $this->getVeroReportId());
-        $writer->writeStringValue('veroReportStatus', $this->getVeroReportStatus());
+        $writer->writeEnumValue('veroReportStatus', $this->getVeroReportStatus());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -120,10 +120,10 @@ class VeroReportItemsResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the veroReportStatus property value. The processing status of the VeRO report. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/vero/types/VeroReportStatusEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the veroReportStatus property.
+     * Sets the veroReportStatus property value. The processing status of the VeRO report.
+     * @param VeroReportStatusEnum|null $value Value to set for the veroReportStatus property.
     */
-    public function setVeroReportStatus(?string $value): void {
+    public function setVeroReportStatus(?VeroReportStatusEnum $value): void {
         $this->veroReportStatus = $value;
     }
 

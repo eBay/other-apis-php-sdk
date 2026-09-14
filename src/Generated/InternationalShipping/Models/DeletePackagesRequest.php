@@ -32,7 +32,7 @@ class DeletePackagesRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var DeletePackagesRequestData|null $requests DeletePackagesRequestData
+     * @var DeletePackagesRequestData|null $requests This container is used to specify the package ID values for the packages being deleted.
     */
     private ?DeletePackagesRequestData $requests = null;
     
@@ -72,7 +72,7 @@ class DeletePackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the requests property value. DeletePackagesRequestData
+     * Gets the requests property value. This container is used to specify the package ID values for the packages being deleted.
      * @return DeletePackagesRequestData|null
     */
     public function getRequests(): ?DeletePackagesRequestData {
@@ -97,7 +97,7 @@ class DeletePackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the requests property value. DeletePackagesRequestData
+     * Sets the requests property value. This container is used to specify the package ID values for the packages being deleted.
      * @param DeletePackagesRequestData|null $value Value to set for the requests property.
     */
     public function setRequests(?DeletePackagesRequestData $value): void {

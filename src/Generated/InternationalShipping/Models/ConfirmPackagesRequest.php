@@ -32,7 +32,7 @@ class ConfirmPackagesRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var ConfirmPackagesRequestData|null $requests This type specifies the IDs of the packages being confirmed.
+     * @var ConfirmPackagesRequestData|null $requests This container is used to specify the package ID values of the packages being confirmed.
     */
     private ?ConfirmPackagesRequestData $requests = null;
     
@@ -72,7 +72,7 @@ class ConfirmPackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the requests property value. This type specifies the IDs of the packages being confirmed.
+     * Gets the requests property value. This container is used to specify the package ID values of the packages being confirmed.
      * @return ConfirmPackagesRequestData|null
     */
     public function getRequests(): ?ConfirmPackagesRequestData {
@@ -97,7 +97,7 @@ class ConfirmPackagesRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the requests property value. This type specifies the IDs of the packages being confirmed.
+     * Sets the requests property value. This container is used to specify the package ID values of the packages being confirmed.
      * @param ConfirmPackagesRequestData|null $value Value to set for the requests property.
     */
     public function setRequests(?ConfirmPackagesRequestData $value): void {

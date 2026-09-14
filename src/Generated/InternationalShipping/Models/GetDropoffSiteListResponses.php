@@ -32,7 +32,7 @@ class GetDropoffSiteListResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var GetDropoffSitesResponsesData|null $dropoffSiteList This type defines the list of drop-off site locations associated with an eDIS account.
+     * @var GetDropoffSitesResponsesData|null $dropoffSiteList This container returns a list of all of the drop-off site locations associated with an eDIS account.
     */
     private ?GetDropoffSitesResponsesData $dropoffSiteList = null;
     
@@ -61,7 +61,7 @@ class GetDropoffSiteListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the dropoffSiteList property value. This type defines the list of drop-off site locations associated with an eDIS account.
+     * Gets the dropoffSiteList property value. This container returns a list of all of the drop-off site locations associated with an eDIS account.
      * @return GetDropoffSitesResponsesData|null
     */
     public function getDropoffSiteList(): ?GetDropoffSitesResponsesData {
@@ -97,7 +97,7 @@ class GetDropoffSiteListResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the dropoffSiteList property value. This type defines the list of drop-off site locations associated with an eDIS account.
+     * Sets the dropoffSiteList property value. This container returns a list of all of the drop-off site locations associated with an eDIS account.
      * @param GetDropoffSitesResponsesData|null $value Value to set for the dropoffSiteList property.
     */
     public function setDropoffSiteList(?GetDropoffSitesResponsesData $value): void {

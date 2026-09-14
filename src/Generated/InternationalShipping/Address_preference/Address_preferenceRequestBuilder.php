@@ -18,6 +18,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Address_preference;
 
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateAddressPreferenceRequest;
 use EBay\OtherApis\Generated\InternationalShipping\Models\CreateAddressPreferenceResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetAddressPreferenceListResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -53,7 +54,12 @@ class Address_preferenceRequestBuilder extends BaseRequestBuilder
     */
     public function get(?Address_preferenceRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetAddressPreferenceListResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetAddressPreferenceListResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
@@ -65,7 +71,13 @@ class Address_preferenceRequestBuilder extends BaseRequestBuilder
     */
     public function post(CreateAddressPreferenceRequest $body, ?Address_preferenceRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [CreateAddressPreferenceResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [CreateAddressPreferenceResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

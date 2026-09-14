@@ -32,7 +32,7 @@ class Address implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $addressLine1 The first line of the street address.
+     * @var string|null $addressLine1 The first line of the street address for the user's location.
     */
     private ?string $addressLine1 = null;
     
@@ -47,9 +47,9 @@ class Address implements AdditionalDataHolder, Parsable
     private ?string $city = null;
     
     /**
-     * @var string|null $country The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:CountryCodeEnum'>eBay API documentation</a>
+     * @var CountryCodeEnum|null $country The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address.
     */
-    private ?string $country = null;
+    private ?CountryCodeEnum $country = null;
     
     /**
      * @var string|null $county The county of the address.
@@ -91,7 +91,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the addressLine1 property value. The first line of the street address.
+     * Gets the addressLine1 property value. The first line of the street address for the user's location.
      * @return string|null
     */
     public function getAddressLine1(): ?string {
@@ -115,10 +115,10 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:CountryCodeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address.
+     * @return CountryCodeEnum|null
     */
-    public function getCountry(): ?string {
+    public function getCountry(): ?CountryCodeEnum {
         return $this->country;
     }
 
@@ -140,7 +140,7 @@ class Address implements AdditionalDataHolder, Parsable
             'addressLine1' => fn(ParseNode $n) => $o->setAddressLine1($n->getStringValue()),
             'addressLine2' => fn(ParseNode $n) => $o->setAddressLine2($n->getStringValue()),
             'city' => fn(ParseNode $n) => $o->setCity($n->getStringValue()),
-            'country' => fn(ParseNode $n) => $o->setCountry($n->getStringValue()),
+            'country' => fn(ParseNode $n) => $o->setCountry($n->getEnumValue(CountryCodeEnum::class)),
             'county' => fn(ParseNode $n) => $o->setCounty($n->getStringValue()),
             'postalCode' => fn(ParseNode $n) => $o->setPostalCode($n->getStringValue()),
             'stateOrProvince' => fn(ParseNode $n) => $o->setStateOrProvince($n->getStringValue()),
@@ -171,7 +171,7 @@ class Address implements AdditionalDataHolder, Parsable
         $writer->writeStringValue('addressLine1', $this->getAddressLine1());
         $writer->writeStringValue('addressLine2', $this->getAddressLine2());
         $writer->writeStringValue('city', $this->getCity());
-        $writer->writeStringValue('country', $this->getCountry());
+        $writer->writeEnumValue('country', $this->getCountry());
         $writer->writeStringValue('county', $this->getCounty());
         $writer->writeStringValue('postalCode', $this->getPostalCode());
         $writer->writeStringValue('stateOrProvince', $this->getStateOrProvince());
@@ -187,7 +187,7 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the addressLine1 property value. The first line of the street address.
+     * Sets the addressLine1 property value. The first line of the street address for the user's location.
      * @param string|null $value Value to set for the addressLine1 property.
     */
     public function setAddressLine1(?string $value): void {
@@ -211,10 +211,10 @@ class Address implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/commerce/identity/types/bas:CountryCodeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the country property.
+     * Sets the country property value. The two-letter <a href="https://www.iso.org/iso-3166-country-codes.html">ISO 3166</a> standard of the country of the address.
+     * @param CountryCodeEnum|null $value Value to set for the country property.
     */
-    public function setCountry(?string $value): void {
+    public function setCountry(?CountryCodeEnum $value): void {
         $this->country = $value;
     }
 

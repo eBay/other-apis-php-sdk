@@ -45,6 +45,7 @@ use EBay\OtherApis\Generated\InternationalShipping\Models\GetAddressPreferenceLi
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetAgentListResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetBatteryQualListResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetConsignPreferenceListResponses;
+use EBay\OtherApis\Generated\InternationalShipping\Models\GetCpscProfilesResponse;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetDropoffSiteListResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetHandoverSheetResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetItemPackageIdResponses;
@@ -52,32 +53,6 @@ use EBay\OtherApis\Generated\InternationalShipping\Models\GetLabelListResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetPackageDetailResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetServiceListResponses;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetTrackingDetailResponses;
-use EBay\OtherApis\Generated\InternationalShipping\Actual_costs\Actual_costsRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Address_preference\Address_preferenceRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Address_preference\Address_preferenceRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Agents\AgentsRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Battery_qualifications\Battery_qualificationsRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Bundle\BundleRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Label\LabelRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\WithBundle_ItemRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Complaint\ComplaintRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Consign_preference\Consign_preferenceRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Consign_preference\Consign_preferenceRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Dropoff_sites\Dropoff_sitesRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Handover_sheet\Handover_sheetRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Labels\LabelsRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_cancel_packages\Bulk_cancel_packagesRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_confirm_packages\Bulk_confirm_packagesRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_delete_packages\Bulk_delete_packagesRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Cancel\CancelRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Confirm\ConfirmRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\EscapedClone\CloneRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Item_Escaped\Item_EscapedRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderDeleteRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Package\PackageRequestBuilderPostRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Services\ServicesRequestBuilderGetRequestConfiguration;
-use EBay\OtherApis\Generated\InternationalShipping\Tracking\TrackingRequestBuilderGetRequestConfiguration;
 use GuzzleHttp\Client as GuzzleClient;
 use Microsoft\Kiota\Abstractions\Authentication\BaseBearerTokenAuthenticationProvider;
 use Microsoft\Kiota\Http\GuzzleRequestAdapter;
@@ -109,9 +84,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->actual_costs()->get(
-                new Actual_costsRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Actual_costs\Actual_costsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Actual_costsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Actual_costs\Actual_costsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         tracking_numbers: $trackingNumbers,
                         trans_begin_time: $transBeginTime,
                         trans_end_time: $transEndTime,
@@ -126,7 +101,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->address_preference()->get(
-                new Address_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Address_preference\Address_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -137,7 +112,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->address_preference()->post(
                 $body,
-                new Address_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Address_preference\Address_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -152,9 +127,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->agents()->get(
-                new AgentsRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Agents\AgentsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: AgentsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Agents\AgentsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -173,9 +148,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->battery_qualifications()->get(
-                new Battery_qualificationsRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Battery_qualifications\Battery_qualificationsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Battery_qualificationsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Battery_qualifications\Battery_qualificationsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -189,7 +164,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->bundle()->byBundle_id($bundleId)->cancel()->post(
-                new CancelRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Cancel\CancelRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -200,7 +175,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->bundle()->post(
                 $body,
-                new BundleRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Bundle\BundleRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -210,7 +185,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->bundle()->byBundle_id($bundleId)->get(
-                new WithBundle_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\WithBundle_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -220,7 +195,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->bundle()->byBundle_id($bundleId)->label()->get(
-                new LabelRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Label\LabelRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -231,7 +206,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->complaint()->post(
                 $body,
-                new ComplaintRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Complaint\ComplaintRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -241,7 +216,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->consign_preference()->get(
-                new Consign_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Consign_preference\Consign_preferenceRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -252,7 +227,28 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->consign_preference()->post(
                 $body,
-                new Consign_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Consign_preference\Consign_preferenceRequestBuilderPostRequestConfiguration(headers: $headers)
+            )->wait()
+        );
+    }
+
+    public function getCpscProfiles(
+        ?string $limit = null,
+        ?string $offset = null,
+        ?string $accessToken = null,
+        ?RequestOptions $requestOptions = null,
+    ): ?GetCpscProfilesResponse
+    {
+        $headers = $this->mergedHeaders($requestOptions);
+        return $this->call($accessToken, fn($api) =>
+            $api->cpsc_profiles()->get(
+                new \EBay\OtherApis\Generated\InternationalShipping\Cpsc_profiles\Cpsc_profilesRequestBuilderGetRequestConfiguration(
+                    headers: $headers,
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Cpsc_profiles\Cpsc_profilesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                        limit: $limit,
+                        offset: $offset,
+                    ),
+                )
             )->wait()
         );
     }
@@ -267,9 +263,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->dropoff_sites()->get(
-                new Dropoff_sitesRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Dropoff_sites\Dropoff_sitesRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Dropoff_sitesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Dropoff_sites\Dropoff_sitesRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -283,9 +279,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->handover_sheet()->get(
-                new Handover_sheetRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Handover_sheet\Handover_sheetRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: Handover_sheetRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Handover_sheet\Handover_sheetRequestBuilderGetRequestConfiguration::createQueryParameters(
                         tracking_numbers: $trackingNumbers,
                     ),
                 )
@@ -304,9 +300,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->labels()->get(
-                new LabelsRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Labels\LabelsRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: LabelsRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Labels\LabelsRequestBuilderGetRequestConfiguration::createQueryParameters(
                         page_size: $pageSize,
                         print_preference: $printPreference,
                         tracking_numbers: $trackingNumbers,
@@ -322,7 +318,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->package()->bulk_cancel_packages()->post(
                 $body,
-                new Bulk_cancel_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_cancel_packages\Bulk_cancel_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -333,7 +329,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->package()->bulk_confirm_packages()->post(
                 $body,
-                new Bulk_confirm_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_confirm_packages\Bulk_confirm_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -344,7 +340,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->package()->bulk_delete_packages()->post(
                 $body,
-                new Bulk_delete_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Bulk_delete_packages\Bulk_delete_packagesRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -354,7 +350,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($packageId)->cancel()->post(
-                new CancelRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\Cancel\CancelRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -364,7 +360,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($packageId)->escapedClone()->post(
-                new CloneRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\EscapedClone\CloneRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -374,7 +370,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($packageId)->confirm()->post(
-                new ConfirmRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\Confirm\ConfirmRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -385,7 +381,7 @@ final class InternationalShippingClient
         return $this->call($accessToken, fn($api) =>
             $api->package()->post(
                 $body,
-                new PackageRequestBuilderPostRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\PackageRequestBuilderPostRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -395,7 +391,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($packageId)->get(
-                new Order_line_item_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -405,7 +401,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($packageId)->delete(
-                new Order_line_item_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\Order_line_item_ItemRequestBuilderDeleteRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -415,7 +411,7 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->package()->byOrder_line_item_Id($orderLineItemId)->item()->get(
-                new Item_EscapedRequestBuilderGetRequestConfiguration(headers: $headers)
+                new \EBay\OtherApis\Generated\InternationalShipping\Package\Item\Item_Escaped\Item_EscapedRequestBuilderGetRequestConfiguration(headers: $headers)
             )->wait()
         );
     }
@@ -430,9 +426,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->services()->get(
-                new ServicesRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Services\ServicesRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: ServicesRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Services\ServicesRequestBuilderGetRequestConfiguration::createQueryParameters(
                         limit: $limit,
                         offset: $offset,
                     ),
@@ -446,9 +442,9 @@ final class InternationalShippingClient
         $headers = $this->mergedHeaders($requestOptions);
         return $this->call($accessToken, fn($api) =>
             $api->tracking()->get(
-                new TrackingRequestBuilderGetRequestConfiguration(
+                new \EBay\OtherApis\Generated\InternationalShipping\Tracking\TrackingRequestBuilderGetRequestConfiguration(
                     headers: $headers,
-                    queryParameters: TrackingRequestBuilderGetRequestConfiguration::createQueryParameters(
+                    queryParameters: \EBay\OtherApis\Generated\InternationalShipping\Tracking\TrackingRequestBuilderGetRequestConfiguration::createQueryParameters(
                         tracking_number: $trackingNumber,
                     ),
                 )

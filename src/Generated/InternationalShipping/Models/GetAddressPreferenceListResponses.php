@@ -32,7 +32,7 @@ class GetAddressPreferenceListResponses implements AdditionalDataHolder, Parsabl
     private ?array $additionalData = null;
     
     /**
-     * @var GetAddressPreferenceListResponsesData|null $addressPreferenceList This type defines the list of addresses associated with a eDIS account.
+     * @var GetAddressPreferenceListResponsesData|null $addressPreferenceList This container returns all ship-from and/or return addresses associated with a seller's eDIS account.
     */
     private ?GetAddressPreferenceListResponsesData $addressPreferenceList = null;
     
@@ -61,7 +61,7 @@ class GetAddressPreferenceListResponses implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Gets the addressPreferenceList property value. This type defines the list of addresses associated with a eDIS account.
+     * Gets the addressPreferenceList property value. This container returns all ship-from and/or return addresses associated with a seller's eDIS account.
      * @return GetAddressPreferenceListResponsesData|null
     */
     public function getAddressPreferenceList(): ?GetAddressPreferenceListResponsesData {
@@ -97,7 +97,7 @@ class GetAddressPreferenceListResponses implements AdditionalDataHolder, Parsabl
     }
 
     /**
-     * Sets the addressPreferenceList property value. This type defines the list of addresses associated with a eDIS account.
+     * Sets the addressPreferenceList property value. This container returns all ship-from and/or return addresses associated with a seller's eDIS account.
      * @param GetAddressPreferenceListResponsesData|null $value Value to set for the addressPreferenceList property.
     */
     public function setAddressPreferenceList(?GetAddressPreferenceListResponsesData $value): void {

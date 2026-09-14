@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * GetLabelListResponsesData
+ * This type defines the response payload for the <b>getLabels</b> method.
 */
 class GetLabelListResponsesData implements AdditionalDataHolder, Parsable 
 {

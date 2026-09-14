@@ -32,7 +32,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $city The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * @var string|null $city The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
     */
     private ?string $city = null;
     
@@ -47,7 +47,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     private ?string $country = null;
     
     /**
-     * @var string|null $district The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * @var string|null $district The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
     */
     private ?string $district = null;
     
@@ -67,7 +67,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     private ?string $phone = null;
     
     /**
-     * @var string|null $province The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * @var string|null $province The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
     */
     private ?string $province = null;
     
@@ -116,7 +116,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the city property value. The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * Gets the city property value. The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
      * @return string|null
     */
     public function getCity(): ?string {
@@ -140,7 +140,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the district property value. The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * Gets the district property value. The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
      * @return string|null
     */
     public function getDistrict(): ?string {
@@ -194,7 +194,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the province property value. The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * Gets the province property value. The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
      * @return string|null
     */
     public function getProvince(): ?string {
@@ -262,7 +262,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the city property value. The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * Sets the city property value. The city code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
      * @param string|null $value Value to set for the city property.
     */
     public function setCity(?string $value): void {
@@ -286,7 +286,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the district property value. The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * Sets the district property value. The district code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
      * @param string|null $value Value to set for the district property.
     */
     public function setDistrict(?string $value): void {
@@ -318,7 +318,7 @@ class GetDropoffSitesResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the province property value. The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * Sets the province property value. The province code of the drop-off site location.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
      * @param string|null $value Value to set for the province property.
     */
     public function setProvince(?string $value): void {

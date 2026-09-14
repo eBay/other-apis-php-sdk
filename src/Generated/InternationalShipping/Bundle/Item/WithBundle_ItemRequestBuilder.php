@@ -19,6 +19,7 @@ namespace EBay\OtherApis\Generated\InternationalShipping\Bundle\Item;
 use EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Cancel\CancelRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Bundle\Item\Label\LabelRequestBuilder;
 use EBay\OtherApis\Generated\InternationalShipping\Models\BundleDetailResponse;
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use Exception;
 use Http\Promise\Promise;
 use Microsoft\Kiota\Abstractions\BaseRequestBuilder;
@@ -67,7 +68,12 @@ class WithBundle_ItemRequestBuilder extends BaseRequestBuilder
     */
     public function get(?WithBundle_ItemRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [BundleDetailResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [BundleDetailResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**

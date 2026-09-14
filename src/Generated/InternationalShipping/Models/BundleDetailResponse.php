@@ -32,7 +32,7 @@ class BundleDetailResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var BundleDetailResponseData|null $bundleDetail This type is used to specify information, such as the tracking numbers and consign preference ID, of a bundle.
+     * @var BundleDetailResponseData|null $bundleDetail This container returns information about the retrieved bundle, such as its tracking numbers and consign preference ID.
     */
     private ?BundleDetailResponseData $bundleDetail = null;
     
@@ -61,7 +61,7 @@ class BundleDetailResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bundleDetail property value. This type is used to specify information, such as the tracking numbers and consign preference ID, of a bundle.
+     * Gets the bundleDetail property value. This container returns information about the retrieved bundle, such as its tracking numbers and consign preference ID.
      * @return BundleDetailResponseData|null
     */
     public function getBundleDetail(): ?BundleDetailResponseData {
@@ -97,7 +97,7 @@ class BundleDetailResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bundleDetail property value. This type is used to specify information, such as the tracking numbers and consign preference ID, of a bundle.
+     * Sets the bundleDetail property value. This container returns information about the retrieved bundle, such as its tracking numbers and consign preference ID.
      * @param BundleDetailResponseData|null $value Value to set for the bundleDetail property.
     */
     public function setBundleDetail(?BundleDetailResponseData $value): void {

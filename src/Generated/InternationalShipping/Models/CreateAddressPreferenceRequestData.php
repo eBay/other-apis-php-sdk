@@ -32,7 +32,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $city The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * @var string|null $city The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
     */
     private ?string $city = null;
     
@@ -52,7 +52,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     private ?string $countryCode = null;
     
     /**
-     * @var string|null $district The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * @var string|null $district The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
     */
     private ?string $district = null;
     
@@ -72,7 +72,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     private ?string $postcode = null;
     
     /**
-     * @var string|null $province The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * @var string|null $province The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
     */
     private ?string $province = null;
     
@@ -92,9 +92,9 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     private ?string $street3 = null;
     
     /**
-     * @var string|null $type The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:AddressTypeEnum'>eBay API documentation</a>
+     * @var AddressTypeEnum|null $type The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul>
     */
-    private ?string $type = null;
+    private ?AddressTypeEnum $type = null;
     
     /**
      * Instantiates a new CreateAddressPreferenceRequestData and sets the default values.
@@ -121,7 +121,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the city property value. The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * Gets the city property value. The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
      * @return string|null
     */
     public function getCity(): ?string {
@@ -153,7 +153,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the district property value. The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * Gets the district property value. The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
      * @return string|null
     */
     public function getDistrict(): ?string {
@@ -179,7 +179,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
             'street1' => fn(ParseNode $n) => $o->setStreet1($n->getStringValue()),
             'street2' => fn(ParseNode $n) => $o->setStreet2($n->getStringValue()),
             'street3' => fn(ParseNode $n) => $o->setStreet3($n->getStringValue()),
-            'type' => fn(ParseNode $n) => $o->setType($n->getStringValue()),
+            'type' => fn(ParseNode $n) => $o->setType($n->getEnumValue(AddressTypeEnum::class)),
         ];
     }
 
@@ -208,7 +208,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the province property value. The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * Gets the province property value. The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
      * @return string|null
     */
     public function getProvince(): ?string {
@@ -240,10 +240,10 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the type property value. The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:AddressTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the type property value. The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul>
+     * @return AddressTypeEnum|null
     */
-    public function getType(): ?string {
+    public function getType(): ?AddressTypeEnum {
         return $this->type;
     }
 
@@ -264,7 +264,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
         $writer->writeStringValue('street1', $this->getStreet1());
         $writer->writeStringValue('street2', $this->getStreet2());
         $writer->writeStringValue('street3', $this->getStreet3());
-        $writer->writeStringValue('type', $this->getType());
+        $writer->writeEnumValue('type', $this->getType());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -277,7 +277,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the city property value. The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid city codes.
+     * Sets the city property value. The city code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid city codes.
      * @param string|null $value Value to set for the city property.
     */
     public function setCity(?string $value): void {
@@ -309,7 +309,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the district property value. The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid district codes.
+     * Sets the district property value. The district code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid district codes.
      * @param string|null $value Value to set for the district property.
     */
     public function setDistrict(?string $value): void {
@@ -341,7 +341,7 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the province property value. The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">商户API地址编码主数据</a> for valid province codes.
+     * Sets the province property value. The province code of the address.<br><br>See <a href="https://www.edisebay.com/open/development-guide-detail?id=36" target="_blank">eDIS Address Code Reference Data</a> for valid province codes.
      * @param string|null $value Value to set for the province property.
     */
     public function setProvince(?string $value): void {
@@ -373,10 +373,10 @@ class CreateAddressPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the type property value. The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul> For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:AddressTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the type property.
+     * Sets the type property value. The address type of the address being created.<br><br><b>Valid values</b>:<ul><li><code>SHIP_FROM_ADDRESS</code></li><li><code>RETURN_ADRESS</code></li></ul>
+     * @param AddressTypeEnum|null $value Value to set for the type property.
     */
-    public function setType(?string $value): void {
+    public function setType(?AddressTypeEnum $value): void {
         $this->type = $value;
     }
 

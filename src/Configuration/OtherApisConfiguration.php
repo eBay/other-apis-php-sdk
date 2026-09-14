@@ -26,6 +26,7 @@ final class OtherApisConfiguration
         public readonly string $identityBaseUrl = 'https://apiz.ebay.com/commerce/identity/v1',
         public readonly string $internationalShippingBaseUrl = 'https://api.ebay.com/sell/edelivery_international_shipping/v1',
         public readonly string $translationBaseUrl = 'https://api.ebay.com/commerce/translation/v1_beta',
+        public readonly string $veroApiV2BaseUrl = 'https://api.ebay.com/commerce/vero/v2',
         public readonly string $veroBaseUrl = 'https://api.ebay.com/commerce/vero/v1',
         public readonly ?string $accessToken = null,
         public readonly bool $diagnosticLogging = false,
@@ -53,6 +54,7 @@ final class OtherApisConfiguration
                 $this->identityBaseUrl,
                 $this->internationalShippingBaseUrl,
                 $this->translationBaseUrl,
+                $this->veroApiV2BaseUrl,
                 $this->veroBaseUrl,
             ]
         ), 'is_string')));

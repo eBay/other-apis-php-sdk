@@ -32,9 +32,9 @@ class BatteryQualResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $batteryType The type of the battery. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
+     * @var LiBatteryTypeEnum|null $batteryType The type of the battery.
     */
-    private ?string $batteryType = null;
+    private ?LiBatteryTypeEnum $batteryType = null;
     
     /**
      * @var string|null $elecQualificationId The unique identifier of the battery's electric qualification, which indicates that the battery has a certificate of approval for global shipping.
@@ -81,10 +81,10 @@ class BatteryQualResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the batteryType property value. The type of the battery. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
-     * @return string|null
+     * Gets the batteryType property value. The type of the battery.
+     * @return LiBatteryTypeEnum|null
     */
-    public function getBatteryType(): ?string {
+    public function getBatteryType(): ?LiBatteryTypeEnum {
         return $this->batteryType;
     }
 
@@ -119,7 +119,7 @@ class BatteryQualResponses implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'batteryType' => fn(ParseNode $n) => $o->setBatteryType($n->getStringValue()),
+            'batteryType' => fn(ParseNode $n) => $o->setBatteryType($n->getEnumValue(LiBatteryTypeEnum::class)),
             'elecQualificationId' => fn(ParseNode $n) => $o->setElecQualificationId($n->getStringValue()),
             'elecQualificationName' => fn(ParseNode $n) => $o->setElecQualificationName($n->getStringValue()),
             'expireDate' => fn(ParseNode $n) => $o->setExpireDate($n->getStringValue()),
@@ -140,7 +140,7 @@ class BatteryQualResponses implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeStringValue('batteryType', $this->getBatteryType());
+        $writer->writeEnumValue('batteryType', $this->getBatteryType());
         $writer->writeStringValue('elecQualificationId', $this->getElecQualificationId());
         $writer->writeStringValue('elecQualificationName', $this->getElecQualificationName());
         $writer->writeStringValue('expireDate', $this->getExpireDate());
@@ -157,10 +157,10 @@ class BatteryQualResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the batteryType property value. The type of the battery. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/edelivery_international_shipping/types/api:LiBatteryTypeEnum'>eBay API documentation</a>
-     * @param string|null $value Value to set for the batteryType property.
+     * Sets the batteryType property value. The type of the battery.
+     * @param LiBatteryTypeEnum|null $value Value to set for the batteryType property.
     */
-    public function setBatteryType(?string $value): void {
+    public function setBatteryType(?LiBatteryTypeEnum $value): void {
         $this->batteryType = $value;
     }
 

@@ -32,7 +32,7 @@ class GetPackageDetailResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var GetPackageDetailResponsesData|null $packageDetail This type specifies the details returned for the specified package.
+     * @var GetPackageDetailResponsesData|null $packageDetail This container returns the details for the specified package.
     */
     private ?GetPackageDetailResponsesData $packageDetail = null;
     
@@ -72,7 +72,7 @@ class GetPackageDetailResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the packageDetail property value. This type specifies the details returned for the specified package.
+     * Gets the packageDetail property value. This container returns the details for the specified package.
      * @return GetPackageDetailResponsesData|null
     */
     public function getPackageDetail(): ?GetPackageDetailResponsesData {
@@ -97,7 +97,7 @@ class GetPackageDetailResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the packageDetail property value. This type specifies the details returned for the specified package.
+     * Sets the packageDetail property value. This container returns the details for the specified package.
      * @param GetPackageDetailResponsesData|null $value Value to set for the packageDetail property.
     */
     public function setPackageDetail(?GetPackageDetailResponsesData $value): void {

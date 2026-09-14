@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\Vero\Vero_report;
 
+use EBay\OtherApis\Generated\Vero\Models\Error;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsRequest;
 use EBay\OtherApis\Generated\Vero\Models\VeroReportItemsResponse;
 use EBay\OtherApis\Generated\Vero\Vero_report\Item\WithVero_report_ItemRequestBuilder;
@@ -33,7 +34,7 @@ class Vero_reportRequestBuilder extends BaseRequestBuilder
 {
     /**
      * Gets an item from the EBay/OtherApis/Generated/Vero.vero_report.item collection
-     * @param string $vero_report_id This path parameter specifies the unique identifier of the VeRO report being retrieved.<br><br>This value is returned when creating a VeRO report through the <a href="/api-docs/commerce/vero/resources/vero_report/methods/createVeroReport" target="_blank ">createVeroReport</a> method.
+     * @param string $vero_report_id This path parameter specifies the unique identifier of the VeRO report being retrieved.<br><br>This value is returned when creating a VeRO report through the <a href="/develop/api/sell/vero_public_apis#sell-vero_public_apis-vero_report-createveroreport">createVeroReport</a> method.
      * @return WithVero_report_ItemRequestBuilder
     */
     public function byVero_report_id(string $vero_report_id): WithVero_report_ItemRequestBuilder {
@@ -57,7 +58,7 @@ class Vero_reportRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method can be used to create a VeRO report for a listing. VeRO reports can be used to report items that your copyright, trademark, or other intellectual property rights.<br><br>The <b>itemId</b> of the item being reported must be provided in the request, as well as the <b>veroReasonCodeId</b> of the claimed infringement.<br><br>You can report one or more items at a time using this method. A maximum of 150 items can be reported using this method.
+     * <span class="tablenote"><b>Note:</b> All methods of the <b>VeRO API</b> have been deprecated, and will be decommissioned on September 30th, 2026.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method can be used to create a VeRO report for a listing. VeRO reports can be used to report items that your copyright, trademark, or other intellectual property rights.<br><br>The <b>itemId</b> of the item being reported must be provided in the request, as well as the <b>veroReasonCodeId</b> of the claimed infringement.<br><br>You can report one or more items at a time using this method. A maximum of 150 items can be reported using this method.
      * @param VeroReportItemsRequest $body This type defines the request fields used in the <b>createVeroReport</b> method.
      * @param Vero_reportRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<VeroReportItemsResponse|null>
@@ -65,11 +66,15 @@ class Vero_reportRequestBuilder extends BaseRequestBuilder
     */
     public function post(VeroReportItemsRequest $body, ?Vero_reportRequestBuilderPostRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toPostRequestInformation($body, $requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [VeroReportItemsResponse::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [VeroReportItemsResponse::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method can be used to create a VeRO report for a listing. VeRO reports can be used to report items that your copyright, trademark, or other intellectual property rights.<br><br>The <b>itemId</b> of the item being reported must be provided in the request, as well as the <b>veroReasonCodeId</b> of the claimed infringement.<br><br>You can report one or more items at a time using this method. A maximum of 150 items can be reported using this method.
+     * <span class="tablenote"><b>Note:</b> All methods of the <b>VeRO API</b> have been deprecated, and will be decommissioned on September 30th, 2026.</span><br><div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> You must be a member of the Verified Rights Owner (VeRO) Program to use this call.</p></div><br>This method can be used to create a VeRO report for a listing. VeRO reports can be used to report items that your copyright, trademark, or other intellectual property rights.<br><br>The <b>itemId</b> of the item being reported must be provided in the request, as well as the <b>veroReasonCodeId</b> of the claimed infringement.<br><br>You can report one or more items at a time using this method. A maximum of 150 items can be reported using this method.
      * @param VeroReportItemsRequest $body This type defines the request fields used in the <b>createVeroReport</b> method.
      * @param Vero_reportRequestBuilderPostRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation

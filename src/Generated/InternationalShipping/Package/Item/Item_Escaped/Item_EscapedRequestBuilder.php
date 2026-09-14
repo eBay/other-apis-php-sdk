@@ -16,6 +16,7 @@
 
 namespace EBay\OtherApis\Generated\InternationalShipping\Package\Item\Item_Escaped;
 
+use EBay\OtherApis\Generated\InternationalShipping\Models\Error;
 use EBay\OtherApis\Generated\InternationalShipping\Models\GetItemPackageIdResponses;
 use Exception;
 use Http\Promise\Promise;
@@ -44,18 +45,24 @@ class Item_EscapedRequestBuilder extends BaseRequestBuilder
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This method is only available for Greater-China based sellers with an active eDIS account.</p></div><br>This method can be used to retrieve one or more packages based on the provided order line item ID.<br><br>This method can be followed up with <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/getPackage" target="_blank">getPackage</a> call to retrieve more detailed information about a specific package.
+     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This method is only available for Greater-China based sellers with an active eDIS account.</p></div><br>This method can be used to retrieve one or more packages based on the provided order line item ID.<br><br>This method can be followed up with <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-getpackage">getPackage</a> call to retrieve more detailed information about a specific package.
      * @param Item_EscapedRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return Promise<GetItemPackageIdResponses|null>
      * @throws Exception
     */
     public function get(?Item_EscapedRequestBuilderGetRequestConfiguration $requestConfiguration = null): Promise {
         $requestInfo = $this->toGetRequestInformation($requestConfiguration);
-        return $this->requestAdapter->sendAsync($requestInfo, [GetItemPackageIdResponses::class, 'createFromDiscriminatorValue'], null);
+        $errorMappings = [
+                '400' => [Error::class, 'createFromDiscriminatorValue'],
+                '401' => [Error::class, 'createFromDiscriminatorValue'],
+                '404' => [Error::class, 'createFromDiscriminatorValue'],
+                '500' => [Error::class, 'createFromDiscriminatorValue'],
+        ];
+        return $this->requestAdapter->sendAsync($requestInfo, [GetItemPackageIdResponses::class, 'createFromDiscriminatorValue'], $errorMappings);
     }
 
     /**
-     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This method is only available for Greater-China based sellers with an active eDIS account.</p></div><br>This method can be used to retrieve one or more packages based on the provided order line item ID.<br><br>This method can be followed up with <a href="/api-docs/sell/edelivery_international_shipping/resources/package/methods/getPackage" target="_blank">getPackage</a> call to retrieve more detailed information about a specific package.
+     * <div class="msgbox_important"><p class="msgbox_importantInDiv" data-mc-autonum="&lt;b&gt;&lt;span style=&quot;color: #dd1e31;&quot; class=&quot;mcFormatColor&quot;&gt;Important! &lt;/span&gt;&lt;/b&gt;"><span class="autonumber"><span><b><span style="color: #dd1e31;" class="mcFormatColor">Important!</span></b></span></span> This method is only available for Greater-China based sellers with an active eDIS account.</p></div><br>This method can be used to retrieve one or more packages based on the provided order line item ID.<br><br>This method can be followed up with <a href="/develop/api/sell/edelivery_international_shipping_api#sell-edelivery_international_shipping_api-package-getpackage">getPackage</a> call to retrieve more detailed information about a specific package.
      * @param Item_EscapedRequestBuilderGetRequestConfiguration|null $requestConfiguration Configuration for the request such as headers, query parameters, and middleware options.
      * @return RequestInformation
     */

@@ -32,7 +32,7 @@ class AddComplaintRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var AddComplaintRequestData|null $complaintRequest This type specifies the information included in a complaint request.
+     * @var AddComplaintRequestData|null $complaintRequest This container is used to specify the information included in a complaint request, such as the complaint reason, date, and type.
     */
     private ?AddComplaintRequestData $complaintRequest = null;
     
@@ -61,7 +61,7 @@ class AddComplaintRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the complaintRequest property value. This type specifies the information included in a complaint request.
+     * Gets the complaintRequest property value. This container is used to specify the information included in a complaint request, such as the complaint reason, date, and type.
      * @return AddComplaintRequestData|null
     */
     public function getComplaintRequest(): ?AddComplaintRequestData {
@@ -97,7 +97,7 @@ class AddComplaintRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the complaintRequest property value. This type specifies the information included in a complaint request.
+     * Sets the complaintRequest property value. This container is used to specify the information included in a complaint request, such as the complaint reason, date, and type.
      * @param AddComplaintRequestData|null $value Value to set for the complaintRequest property.
     */
     public function setComplaintRequest(?AddComplaintRequestData $value): void {

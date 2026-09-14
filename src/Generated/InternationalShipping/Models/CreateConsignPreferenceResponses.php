@@ -32,7 +32,7 @@ class CreateConsignPreferenceResponses implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateConsignPreferenceResponsesData|null $consignAddressId This type defines the unique identifier of the newly created consign address.
+     * @var CreateConsignPreferenceResponsesData|null $consignAddressId This container specifies the unique identifier of the newly created consign address.
     */
     private ?CreateConsignPreferenceResponsesData $consignAddressId = null;
     
@@ -61,7 +61,7 @@ class CreateConsignPreferenceResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the consignAddressId property value. This type defines the unique identifier of the newly created consign address.
+     * Gets the consignAddressId property value. This container specifies the unique identifier of the newly created consign address.
      * @return CreateConsignPreferenceResponsesData|null
     */
     public function getConsignAddressId(): ?CreateConsignPreferenceResponsesData {
@@ -97,7 +97,7 @@ class CreateConsignPreferenceResponses implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the consignAddressId property value. This type defines the unique identifier of the newly created consign address.
+     * Sets the consignAddressId property value. This container specifies the unique identifier of the newly created consign address.
      * @param CreateConsignPreferenceResponsesData|null $value Value to set for the consignAddressId property.
     */
     public function setConsignAddressId(?CreateConsignPreferenceResponsesData $value): void {

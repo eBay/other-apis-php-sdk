@@ -22,7 +22,7 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This container specifies information about the items being included in a package.
+ * This type specifies information about the items being included in a package.
 */
 class ItemRequest implements AdditionalDataHolder, Parsable 
 {
@@ -32,7 +32,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var string|null $buyerId The buyer's eBay user ID.
+     * @var string|null $buyerId The buyer's eBay user ID.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
     */
     private ?string $buyerId = null;
     
@@ -112,7 +112,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     private ?int $siteId = null;
     
     /**
-     * @var SkuRequest|null $sku This type specifies information relating to the SKU item in a package.
+     * @var SkuRequest|null $sku This container specifies information relating to the item being shipped in the package.
     */
     private ?SkuRequest $sku = null;
     
@@ -122,7 +122,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     private ?string $soldDate = null;
     
     /**
-     * @var Amount|null $soldPrice This type defines the monetary value of an amount. 
+     * @var Amount|null $soldPrice The price for which the item was sold.
     */
     private ?Amount $soldPrice = null;
     
@@ -161,7 +161,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the buyerId property value. The buyer's eBay user ID.
+     * Gets the buyerId property value. The buyer's eBay user ID.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @return string|null
     */
     public function getBuyerId(): ?string {
@@ -320,7 +320,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the sku property value. This type specifies information relating to the SKU item in a package.
+     * Gets the sku property value. This container specifies information relating to the item being shipped in the package.
      * @return SkuRequest|null
     */
     public function getSku(): ?SkuRequest {
@@ -336,7 +336,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the soldPrice property value. This type defines the monetary value of an amount. 
+     * Gets the soldPrice property value. The price for which the item was sold.
      * @return Amount|null
     */
     public function getSoldPrice(): ?Amount {
@@ -397,7 +397,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the buyerId property value. The buyer's eBay user ID.
+     * Sets the buyerId property value. The buyer's eBay user ID.<br><br><span class="tablenote"><b>Note:</b> Effective September 26, 2025, both usernames and public user IDs will be accepted in this field. For more information, please refer to <a href="/api-docs/static/data-handling-update.html" target="_blank">Data Handling Compliance</a>.</span>
      * @param string|null $value Value to set for the buyerId property.
     */
     public function setBuyerId(?string $value): void {
@@ -525,7 +525,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the sku property value. This type specifies information relating to the SKU item in a package.
+     * Sets the sku property value. This container specifies information relating to the item being shipped in the package.
      * @param SkuRequest|null $value Value to set for the sku property.
     */
     public function setSku(?SkuRequest $value): void {
@@ -541,7 +541,7 @@ class ItemRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the soldPrice property value. This type defines the monetary value of an amount. 
+     * Sets the soldPrice property value. The price for which the item was sold.
      * @param Amount|null $value Value to set for the soldPrice property.
     */
     public function setSoldPrice(?Amount $value): void {

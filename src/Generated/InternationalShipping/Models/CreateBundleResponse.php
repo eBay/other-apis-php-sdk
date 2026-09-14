@@ -32,7 +32,7 @@ class CreateBundleResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var CreateBundleResponseData|null $bundle This type defines the unique identifier of the newly-created bundle.
+     * @var CreateBundleResponseData|null $bundle This container returns information about the newly created bundle, such as its <b>bundleId</b> value.
     */
     private ?CreateBundleResponseData $bundle = null;
     
@@ -61,7 +61,7 @@ class CreateBundleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the bundle property value. This type defines the unique identifier of the newly-created bundle.
+     * Gets the bundle property value. This container returns information about the newly created bundle, such as its <b>bundleId</b> value.
      * @return CreateBundleResponseData|null
     */
     public function getBundle(): ?CreateBundleResponseData {
@@ -97,7 +97,7 @@ class CreateBundleResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the bundle property value. This type defines the unique identifier of the newly-created bundle.
+     * Sets the bundle property value. This container returns information about the newly created bundle, such as its <b>bundleId</b> value.
      * @param CreateBundleResponseData|null $value Value to set for the bundle property.
     */
     public function setBundle(?CreateBundleResponseData $value): void {
