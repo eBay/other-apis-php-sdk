@@ -1,25 +1,27 @@
 # ChangeLog
 
-## 1.1.0 (09/14/2026)
+## 0.2.0 (09/14/2026)
 
-- The following clients were added:
-  - `VeroApiV2Client`
-- The following operations were added to `InternationalShippingClient`:
-  - `getCpscProfiles`
-- The following members were added to `OtherApisClient`:
-  - `$veroApiV2`
+### Breaking changes
 
-## 1.0.0 (09/14/2026)
+#### Renamed clients and members
 
-**Breaking changes**
-- The following clients were removed:
-  - `EdeliveryInternationalShippingClient`
-- The following members were removed from `OtherApisClient`:
-  - `$edeliveryInternationalShipping`
-- The following operations changed signature on `VeroClient`:
-  - `getVeroReasonCodes`: `(?string, ?RequestOptions)` → `(?string, ?string, ?RequestOptions)`
+| Surface | Previous | Current |
+| --- | --- | --- |
+| REST client | `EdeliveryInternationalShippingClient` | `InternationalShippingClient` |
+| `OtherApisClient` member | `$edeliveryInternationalShipping` | `$internationalShipping` |
 
-- The following clients were added:
-  - `InternationalShippingClient`
-- The following members were added to `OtherApisClient`:
-  - `$internationalShipping`
+#### Changed signatures
+
+`VeroClient`:
+
+| Operation | Previous parameters | Current parameters |
+| --- | --- | --- |
+| `getVeroReasonCodes` | `(?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
+
+### Added
+
+- REST client `VeroApiV2Client` and its `OtherApisClient::$veroApiV2` member.
+#### `InternationalShippingClient`
+
+- `getCpscProfiles`
