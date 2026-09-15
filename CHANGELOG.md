@@ -17,7 +17,7 @@
 
 | Operation | Previous parameters | Current parameters |
 | --- | --- | --- |
-| `getVeroReasonCodes` | `(?string, ?RequestOptions)` | `(?string, ?string, ?RequestOptions)` |
+| `getVeroReasonCodes` | `(?string $accessToken, ?RequestOptions $requestOptions)` | `(?string $xEBAYCMARKETPLACEID, ?string $accessToken, ?RequestOptions $requestOptions)` |
 
 ### Added
 
