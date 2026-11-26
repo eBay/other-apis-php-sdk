@@ -20,5 +20,6 @@ use Microsoft\Kiota\Abstractions\Enum;
 
 class ComplaintTypeEnum extends Enum {
     public const A_B_N_O_R_M_A_L__C_O_L_L_E_C_T_I_O_N__C_O_M_P_L_A_I_N_T = "ABNORMAL_COLLECTION_COMPLAINT";
+    public const A_B_N_O_R_M_A_L__P_I_C_K_U_P__C_O_M_P_L_A_I_N_T = "ABNORMAL_PICKUP_COMPLAINT";
     public const L_O_S_T__P_A_C_K_A_G_E__C_O_M_P_L_A_I_N_T = "LOST_PACKAGE_COMPLAINT";
 }

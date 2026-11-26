@@ -32,6 +32,11 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
+     * @var array<AdditionalSkuInfo>|null $additionalSkuInfo Additional SKU information.
+    */
+    private ?array $additionalSkuInfo = null;
+    
+    /**
      * @var string|null $cpscProfileId The unique identifier of a CPSC profile.
     */
     private ?string $cpscProfileId = null;
@@ -141,6 +146,14 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     }
 
     /**
+     * Gets the additionalSkuInfo property value. Additional SKU information.
+     * @return array<AdditionalSkuInfo>|null
+    */
+    public function getAdditionalSkuInfo(): ?array {
+        return $this->additionalSkuInfo;
+    }
+
+    /**
      * Gets the cpscProfileId property value. The unique identifier of a CPSC profile.
      * @return string|null
     */
@@ -179,6 +192,7 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
+            'additionalSkuInfo' => fn(ParseNode $n) => $o->setAdditionalSkuInfo($n->getCollectionOfObjectValues([AdditionalSkuInfo::class, 'createFromDiscriminatorValue'])),
             'cpscProfileId' => fn(ParseNode $n) => $o->setCpscProfileId($n->getStringValue()),
             'elecQualificationId' => fn(ParseNode $n) => $o->setElecQualificationId($n->getStringValue()),
             'exemptionType' => fn(ParseNode $n) => $o->setExemptionType($n->getEnumValue(ExemptionTypeEnum::class)),
@@ -308,6 +322,7 @@ class SkuRequest implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
+        $writer->writeCollectionOfObjectValues('additionalSkuInfo', $this->getAdditionalSkuInfo());
         $writer->writeStringValue('cpscProfileId', $this->getCpscProfileId());
         $writer->writeStringValue('elecQualificationId', $this->getElecQualificationId());
         $writer->writeEnumValue('exemptionType', $this->getExemptionType());
@@ -334,6 +349,14 @@ class SkuRequest implements AdditionalDataHolder, Parsable
     */
     public function setAdditionalData(?array $value): void {
         $this->additionalData = $value;
+    }
+
+    /**
+     * Sets the additionalSkuInfo property value. Additional SKU information.
+     * @param array<AdditionalSkuInfo>|null $value Value to set for the additionalSkuInfo property.
+    */
+    public function setAdditionalSkuInfo(?array $value): void {
+        $this->additionalSkuInfo = $value;
     }
 
     /**
