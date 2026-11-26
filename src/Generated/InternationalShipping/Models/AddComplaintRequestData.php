@@ -48,7 +48,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     private ?string $complaintReason = null;
     
     /**
-     * @var ComplaintTypeEnum|null $complaintType The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
+     * @var ComplaintTypeEnum|null $complaintType The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>ABNORMAL_PICKUP_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
     */
     private ?ComplaintTypeEnum $complaintType = null;
     
@@ -111,7 +111,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Gets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
+     * Gets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>ABNORMAL_PICKUP_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
      * @return ComplaintTypeEnum|null
     */
     public function getComplaintType(): ?ComplaintTypeEnum {
@@ -204,7 +204,7 @@ class AddComplaintRequestData implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
+     * Sets the complaintType property value. The type of complaint being filed.<br><br><b>Valid values</b>:<ul><li><code>ABNORMAL_COLLECTION_COMPLAINT</code></li><li><code>ABNORMAL_PICKUP_COMPLAINT</code></li><li><code>LOST_PACKAGE_COMPLAINT</code></li></ul>
      * @param ComplaintTypeEnum|null $value Value to set for the complaintType property.
     */
     public function setComplaintType(?ComplaintTypeEnum $value): void {

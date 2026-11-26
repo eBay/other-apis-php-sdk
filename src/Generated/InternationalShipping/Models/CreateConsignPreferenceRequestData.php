@@ -52,7 +52,7 @@ class CreateConsignPreferenceRequestData implements AdditionalDataHolder, Parsab
     private ?PickUpTimeTypeEnum $pickupTime = null;
     
     /**
-     * @var ConsignTypeEnum|null $type The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
+     * @var ConsignTypeEnum|null $type The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>RDC_DROP_OFF</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
     */
     private ?ConsignTypeEnum $type = null;
     
@@ -128,7 +128,7 @@ class CreateConsignPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Gets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
+     * Gets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>RDC_DROP_OFF</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
      * @return ConsignTypeEnum|null
     */
     public function getType(): ?ConsignTypeEnum {
@@ -189,7 +189,7 @@ class CreateConsignPreferenceRequestData implements AdditionalDataHolder, Parsab
     }
 
     /**
-     * Sets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
+     * Sets the type property value. The address type of the consign address.<br><br><b>Valid values</b>:<ul><li><code>PICK_UP</code></li><li><code>DROP_OFF</code></li><li><code>FORWARD_DEPLOYMENT</code></li><li><code>RDC</code></li><li><code>RDC_DROP_OFF</code></li><li><code>CN_POST_DROP_OFF</code></li><li><code>CN_POST_PICK_UP</code></li><li><code>HK_POST_DROP_OFF</code></li></ul>
      * @param ConsignTypeEnum|null $value Value to set for the type property.
     */
     public function setType(?ConsignTypeEnum $value): void {

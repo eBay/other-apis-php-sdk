@@ -25,5 +25,6 @@ class LiBatteryTypeEnum extends Enum {
     public const L_I_T_H_I_U_M__M_E_T_A_L__B_A_T_T_E_R_Y__P_A_C_K_E_D__W_I_T_H__E_Q_U_I_P_M_E_N_T = "LITHIUM_METAL_BATTERY_PACKED_WITH_EQUIPMENT";
     public const L_I_T_H_I_U_M__M_E_T_A_L__B_A_T_T_E_R_Y__C_O_N_T_A_I_N_E_D__I_N__E_Q_U_I_P_M_E_N_T = "LITHIUM_METAL_BATTERY_CONTAINED_IN_EQUIPMENT";
     public const D_R_Y__P_A_C_K_E_D__W_I_T_H__E_Q_U_I_P_M_E_N_T = "DRY_PACKED_WITH_EQUIPMENT";
+    public const D_R_Y__B_A_T_T_E_R_Y__P_A_C_K_E_D__W_I_T_H__E_Q_U_I_P_M_E_N_T = "DRY_BATTERY_PACKED_WITH_EQUIPMENT";
     public const S_P_E_C_I_A_L__G_O_O_D_S__W_I_T_H__N_O__B_A_T_T_E_R_Y = "SPECIAL_GOODS_WITH_NO_BATTERY";
 }

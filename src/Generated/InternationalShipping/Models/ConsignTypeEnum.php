@@ -23,6 +23,7 @@ class ConsignTypeEnum extends Enum {
     public const D_R_O_P__O_F_F = "DROP_OFF";
     public const F_O_R_W_A_R_D__D_E_P_L_O_Y_M_E_N_T = "FORWARD_DEPLOYMENT";
     public const R_D_C = "RDC";
+    public const R_D_C__D_R_O_P__O_F_F = "RDC_DROP_OFF";
     public const C_N__P_O_S_T__D_R_O_P__O_F_F = "CN_POST_DROP_OFF";
     public const C_N__P_O_S_T__P_I_C_K__U_P = "CN_POST_PICK_UP";
     public const H_K__P_O_S_T__D_R_O_P__O_F_F = "HK_POST_DROP_OFF";

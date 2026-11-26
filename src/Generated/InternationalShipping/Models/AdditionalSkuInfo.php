@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-namespace EBay\OtherApis\Generated\Vero\Models;
+namespace EBay\OtherApis\Generated\InternationalShipping\Models;
 
 use Microsoft\Kiota\Abstractions\Serialization\AdditionalDataHolder;
 use Microsoft\Kiota\Abstractions\Serialization\Parsable;
@@ -22,9 +22,9 @@ use Microsoft\Kiota\Abstractions\Serialization\ParseNode;
 use Microsoft\Kiota\Abstractions\Serialization\SerializationWriter;
 
 /**
- * This type defines the response fields returned in the <b>getCeroReasonCodes</b> method.
+ * This array is used if one or more products in the package requires additional SKU-related name-value pairs.
 */
-class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable 
+class AdditionalSkuInfo implements AdditionalDataHolder, Parsable 
 {
     /**
      * @var array<string, mixed>|null $additionalData Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
@@ -32,12 +32,17 @@ class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable
     private ?array $additionalData = null;
     
     /**
-     * @var array<VeroReasonCode>|null $veroReasonCodes This array provides a list of VeRO reason codes, as well as the ID and details of each code, based on the input criteria.<br><br>If a <b>X-EBAY-C-MARKETPLACE-ID</b> header is used, only VeRO reason codes for that specific site will be returned. If this header is not included, all reason codes for all sites are returned.  
+     * @var string|null $name The name of the additional SKU information attribute.
     */
-    private ?array $veroReasonCodes = null;
+    private ?string $name = null;
     
     /**
-     * Instantiates a new VeroReasonCodeDetailResponse and sets the default values.
+     * @var string|null $value The value of the additional SKU information attribute.
+    */
+    private ?string $value = null;
+    
+    /**
+     * Instantiates a new AdditionalSkuInfo and sets the default values.
     */
     public function __construct() {
         $this->setAdditionalData([]);
@@ -46,10 +51,10 @@ class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable
     /**
      * Creates a new instance of the appropriate class based on discriminator value
      * @param ParseNode $parseNode The parse node to use to read the discriminator value and create the object
-     * @return VeroReasonCodeDetailResponse
+     * @return AdditionalSkuInfo
     */
-    public static function createFromDiscriminatorValue(ParseNode $parseNode): VeroReasonCodeDetailResponse {
-        return new VeroReasonCodeDetailResponse();
+    public static function createFromDiscriminatorValue(ParseNode $parseNode): AdditionalSkuInfo {
+        return new AdditionalSkuInfo();
     }
 
     /**
@@ -67,16 +72,25 @@ class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable
     public function getFieldDeserializers(): array {
         $o = $this;
         return  [
-            'veroReasonCodes' => fn(ParseNode $n) => $o->setVeroReasonCodes($n->getCollectionOfObjectValues([VeroReasonCode::class, 'createFromDiscriminatorValue'])),
+            'name' => fn(ParseNode $n) => $o->setName($n->getStringValue()),
+            'value' => fn(ParseNode $n) => $o->setValue($n->getStringValue()),
         ];
     }
 
     /**
-     * Gets the veroReasonCodes property value. This array provides a list of VeRO reason codes, as well as the ID and details of each code, based on the input criteria.<br><br>If a <b>X-EBAY-C-MARKETPLACE-ID</b> header is used, only VeRO reason codes for that specific site will be returned. If this header is not included, all reason codes for all sites are returned.  
-     * @return array<VeroReasonCode>|null
+     * Gets the name property value. The name of the additional SKU information attribute.
+     * @return string|null
     */
-    public function getVeroReasonCodes(): ?array {
-        return $this->veroReasonCodes;
+    public function getName(): ?string {
+        return $this->name;
+    }
+
+    /**
+     * Gets the value property value. The value of the additional SKU information attribute.
+     * @return string|null
+    */
+    public function getValue(): ?string {
+        return $this->value;
     }
 
     /**
@@ -84,7 +98,8 @@ class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable
      * @param SerializationWriter $writer Serialization writer to use to serialize this model
     */
     public function serialize(SerializationWriter $writer): void {
-        $writer->writeCollectionOfObjectValues('veroReasonCodes', $this->getVeroReasonCodes());
+        $writer->writeStringValue('name', $this->getName());
+        $writer->writeStringValue('value', $this->getValue());
         $writer->writeAdditionalData($this->getAdditionalData());
     }
 
@@ -97,11 +112,19 @@ class VeroReasonCodeDetailResponse implements AdditionalDataHolder, Parsable
     }
 
     /**
-     * Sets the veroReasonCodes property value. This array provides a list of VeRO reason codes, as well as the ID and details of each code, based on the input criteria.<br><br>If a <b>X-EBAY-C-MARKETPLACE-ID</b> header is used, only VeRO reason codes for that specific site will be returned. If this header is not included, all reason codes for all sites are returned.  
-     * @param array<VeroReasonCode>|null $value Value to set for the veroReasonCodes property.
+     * Sets the name property value. The name of the additional SKU information attribute.
+     * @param string|null $value Value to set for the name property.
     */
-    public function setVeroReasonCodes(?array $value): void {
-        $this->veroReasonCodes = $value;
+    public function setName(?string $value): void {
+        $this->name = $value;
+    }
+
+    /**
+     * Sets the value property value. The value of the additional SKU information attribute.
+     * @param string|null $value Value to set for the value property.
+    */
+    public function setValue(?string $value): void {
+        $this->value = $value;
     }
 
 }

@@ -20,20 +20,32 @@ use Microsoft\Kiota\Abstractions\Enum;
 
 class PackageStatusEnum extends Enum {
     public const D_E_C_L_A_R_E_D__F_A_I_L_E_D = "DECLARED_FAILED";
+    public const P_R_E_D_E_C_L_A_R_A_T_I_O_N__F_A_I_L_E_D = "PREDECLARATION_FAILED";
     public const P_A_C_K_A_G_E__I_N_F_O__L_A_C_K = "PACKAGE_INFO_LACK";
+    public const I_N_C_O_M_P_L_E_T_E__P_A_C_K_A_G_E__I_N_F_O = "INCOMPLETE_PACKAGE_INFO";
     public const N_O__U_S_E_F_U_L__S_H_I_P_P_I_N_G = "NO_USEFUL_SHIPPING";
+    public const N_O__A_V_A_I_L_A_B_L_E__S_H_I_P_P_I_N_G = "NO_AVAILABLE_SHIPPING";
     public const S_E_L_E_C_T_E_D__S_H_I_P_P_I_N_G = "SELECTED_SHIPPING";
+    public const P_E_N_D_I_N_G__S_H_I_P_P_I_N_G__S_E_L_E_C_T_I_O_N = "PENDING_SHIPPING_SELECTION";
     public const A_P_P_L_I_E_D__T_R_A_C_K_I_N_G__C_O_D_E = "APPLIED_TRACKING_CODE";
+    public const P_E_N_D_I_N_G__T_R_A_C_K_I_N_G__N_U_M_B_E_R = "PENDING_TRACKING_NUMBER";
     public const T_O__B_E__S_H_I_P_P_E_D = "TO_BE_SHIPPED";
+    public const P_E_N_D_I_N_G__C_O_N_F_I_R_M = "PENDING_CONFIRM";
     public const T_O__B_E__R_E_C_E_I_V_E_D = "TO_BE_RECEIVED";
+    public const A_W_A_I_T_I_N_G__P_I_C_K_U_P = "AWAITING_PICKUP";
     public const D_E_L_I_V_E_R_E_D = "DELIVERED";
     public const O_N__S_H_I_P_P_I_N_G = "ON_SHIPPING";
+    public const I_N__T_R_A_N_S_I_T = "IN_TRANSIT";
     public const D_E_L_E_T_E_D = "DELETED";
     public const S_H_I_P_P_E_D__E_R_R_O_R = "SHIPPED_ERROR";
+    public const S_H_I_P_P_I_N_G__E_X_C_E_P_T_I_O_N = "SHIPPING_EXCEPTION";
     public const D_E_L_I_V_E_R_Y__E_R_R_O_R = "DELIVERY_ERROR";
+    public const D_E_L_I_V_E_R_Y__F_A_I_L_E_D = "DELIVERY_FAILED";
     public const R_E_T_U_R_N_E_D = "RETURNED";
     public const E_X_C_E_P_T_I_O_N = "EXCEPTION";
     public const F_D_C_V_A_L_I_D_A_T_I_O_N_F_A_I_L_E_D = "FDCVALIDATIONFAILED";
+    public const F_D_C__V_A_L_I_D_A_T_I_O_N__F_A_I_L_E_D = "FDC_VALIDATION_FAILED";
     public const F_D_C_V_A_L_I_D_A_T_I_O_N_I_N_P_R_O_G_R_E_S_S = "FDCVALIDATIONINPROGRESS";
+    public const F_D_C__V_A_L_I_D_A_T_I_O_N__I_N__P_R_O_G_R_E_S_S = "FDC_VALIDATION_IN_PROGRESS";
     public const D_E_L_I_V_E_R_Y__E_X_C_E_P_T_I_O_N = "DELIVERY_EXCEPTION";
 }
